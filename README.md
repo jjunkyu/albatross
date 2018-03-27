@@ -1,5 +1,14 @@
 # Project Albatross
 
+## Members
+   * JJS
+   * GWJ
+   * PJS
+   * CSK
+   * LJK
+   * LHJ
+   
+## Project Directory
 ```
 src/                - java source files / backend
    controller/      
@@ -7,9 +16,15 @@ src/                - java source files / backend
    vo/
 WebContent/         - frontend
    templates/       - jsp templates
-   assets/          - static resource files
+   static/          - static resource files
       js/           - javascript
       css/          - css
       media/        - static media files
+   index.jsp        - index page
       
 ```
+
+## URL Mapping
+
+`home` : ...
+`booklist` : ...

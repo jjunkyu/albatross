@@ -8,46 +8,21 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
-import kosta.albatross.vo.DepartmentVO;
-
-public class DepartmentDAO {
+public class BookDAO {
 	
-	private static DepartmentDAO instance = new DepartmentDAO();
+	private static BookDAO instance = new BookDAO();
 	private Connection con;
 	private String sql;
 	private ResultSet rs;
 	private DataSource ds;
 	private PreparedStatement pstmt;
 	
-	private DepartmentDAO() {
+	private BookDAO() {
 		ds = DataSourceManager.getInstance().getDataSource();
 	}
 	
-	public static DepartmentDAO getInstance() {
+	public static BookDAO getInstance() {
 		return instance;
-	}
-	
-	public ArrayList<DepartmentVO> getDepartmentList() {
-		ArrayList<DepartmentVO> list = new ArrayList<>();
-		
-		try {
-			con = ds.getConnection();
-			sql = "SELECT deptno, dname FROM department";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while(!rs.next()) {
-				DepartmentVO vo = new DepartmentVO();
-				vo.setDeptno(rs.getInt(1));
-				vo.setDname(rs.getString(2));
-				list.add(vo);
-			}
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeAll();
-		}
-		
-		return list;
 	}
 	
 	private void closeAll() {
@@ -57,25 +32,6 @@ public class DepartmentDAO {
 			if(rs != null) rs.close();			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	public void registerDepartment(String dno, String dname, String loc, String tel) {
-		try {
-			con = ds.getConnection();
-			sql = "INSERT INTO "
-					+ "department (deptno, dname, loc, tel) "
-					+ "VALUES (?, ?, ?, ?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,  dno);
-			pstmt.setString(2, dname);
-			pstmt.setString(3, loc);
-			pstmt.setString(4, tel);
-			pstmt.executeUpdate();
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeAll();
 		}
 	}
 }	

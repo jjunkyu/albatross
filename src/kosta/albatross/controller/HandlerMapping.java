@@ -11,14 +11,8 @@ public class HandlerMapping {
 	
 	public Controller create(String command) {
 		Controller ctrl = null;
-		if(command.equals("home")) {
-			ctrl = new HomeController();
-		} else if(command.equals("registerEmployee")) {
-			ctrl = new RegisterEmployeeController();
-		} else if(command.equals("employeeList")) {
-			ctrl = new EmployeeListController();
-		} else if(command.equals("registerDepartment")) {
-			ctrl = new RegisterDepartmentController();
+		if(command.equals("")) {
+			//ctrl = new Controller();
 		}
 		return ctrl;
 	}

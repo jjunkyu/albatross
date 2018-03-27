@@ -1,0 +1,71 @@
+body {
+  font-weight: 300;
+}
+
+a {
+  color: black;
+}
+a:visited, a:focus, a:active, a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+header .header-panel {
+  border-bottom: 1px solid #eee;
+}
+header .header-panel .login-panel .nav-link {
+  font-size: 12px;
+  padding: 3px 5px;
+}
+header .header-panel .login-panel .nav-link:last-child {
+  padding-right: 15px;
+}
+header .header-links {
+  padding: 20px 0;
+}
+header .header-links > .logo {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+header .header-links > .nav-menu {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+header .header-links > .nav-menu .nav-item:last-child .nav-link {
+  padding-right: 0;
+}
+
+main {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+main .main-image {
+  width: 100%;
+}
+main .search-jumbotron {
+  position: relative;
+}
+main .search-jumbotron .search-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+footer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+footer .internal-links {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+footer .library-info-wrap {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+nav .nav-item .nav-link {
+  font-weight: 600;
+}

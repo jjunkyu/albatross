@@ -11,8 +11,8 @@ public class HandlerMapping {
 	
 	public Controller create(String command) {
 		Controller ctrl = null;
-		if(command.equals("")) {
-			//ctrl = new Controller();
+		if(command.equals("home")) {
+			ctrl = new HomeController();
 		}
 		return ctrl;
 	}

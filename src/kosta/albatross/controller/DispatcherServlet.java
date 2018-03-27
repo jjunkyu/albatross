@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/DispatcherServlet")
+@WebServlet("/dispatcher")
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,7 +25,11 @@ public class DispatcherServlet extends HttpServlet {
 	}
 	
 	public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HandlerMapping.getInstance().create(request.getParameter("command")).execute(request, response);
+		String url = HandlerMapping.getInstance().create(request.getParameter("command")).execute(request, response);
+		if(url.startsWith(Controller.REDIRECT_PREFIX)) {
+			response.sendRedirect(url.substring(Controller.REDIRECT_PREFIX.length()));
+		} else {
+			request.getRequestDispatcher(url).forward(request, response);
+		}
 	}
-
 }

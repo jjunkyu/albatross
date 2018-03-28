@@ -2,8 +2,11 @@ create table UserCategory(
 cId number primary key,
 cName varchar2(100) not null
 )
+
 select * from UserCategory
 insert into UserCategory(cId,cName) values(0,'일반회원')
+
+
 
 create table semi_member(
 id varchar2(100) primary key,
@@ -13,8 +16,9 @@ name varchar2(100) not null,
 cId number default 0,
 constraint fk_cId foreign key(cId) references UserCategory(cId)
 )
-select * from semi_member
-drop table semi_member
+
+select * from semi_member;
+drop table semi_member;
 
 create table semi_book(
 bNo number primary key,
@@ -24,6 +28,7 @@ content clob not null,
 publisher varchar2(100) not null,
 isRented number default 0
 )
+select *from SEMI_BOOK
 drop table semi_book
 create sequence semi_book_seq;
 drop sequence semi_book_seq;
@@ -42,23 +47,22 @@ select *from semi_rent_book
 
 
 create table semi_post(
-pNo number primary key,
-title varchar2(100) not null,
-content clob not null,
-hits number default 0,
-
-timeposted date not null,
-id varchar2(100) not null,
-constraint fk_pid foreign key(id) references semi_member(id)
+	pNo number primary key,
+	title varchar2(100) not null,
+	content clob not null,
+	hits number default 0,
+	timeposted date not null,
+	id varchar2(100) not null,
+	constraint fk_pid foreign key(id) references semi_member(id)
 )
-create sequence semi_post_seq
-drop sequence semi_post_seq
-drop table semi_post
+create sequence semi_post_seq;
+drop sequence semi_post_seq;
+drop table semi_post;
+select *from SEMI_POST;
 
 
-
-insert into semi_member(id,password,name,address) values('java','1','아이유','판교')
-insert into semi_member(id,password,name,address) values('spring','1','공유','성남')
+insert into semi_member(id,password,name,address) values('java','1','아이유','판교');
+insert into semi_member(id,password,name,address) values('spring','1','공유','성남');
 select *from semi_member;
 
 insert into semi_book(bNo,title,content,author,publisher) values(semi_book_seq.nextval,'반지의제왕','반지이야기','모름','캐나다');
@@ -75,4 +79,11 @@ insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.next
 insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'창의력','스케치노트',sysdate,'java');
 select *from semi_post;
 
+
 select pNo,title,content,timeposted from SEMI_POST;
+
+insert into SEMI_RENT_BOOK(id,bNo,rentdate,returndate) values('java',1,sysdate,sysdate+7);
+select *from SEMI_RENT_BOOK;
+delete from SEMI_RENT_BOOK where bNo = 1;
+select returndate-sysdate from SEMI_RENT_BOOK where bNo = 1;
+

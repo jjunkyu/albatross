@@ -16,15 +16,23 @@ public class DispatcherServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		handleRequest(request, response);
+		try {
+			handleRequest(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		handleRequest(request, response);
+		try {
+			handleRequest(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = HandlerMapping.getInstance().create(request.getParameter("command")).execute(request, response);
 		if(url.startsWith(Controller.REDIRECT_PREFIX)) {
 			response.sendRedirect(url.substring(Controller.REDIRECT_PREFIX.length()));

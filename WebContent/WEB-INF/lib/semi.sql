@@ -2,6 +2,7 @@ create table UserCategory(
 cId number primary key,
 cName varchar2(100) not null
 )
+select * from UserCategory
 insert into UserCategory(cId,cName) values(0,'일반회원')
 
 create table semi_member(
@@ -60,16 +61,18 @@ insert into semi_member(id,password,name,address) values('java','1','아이유',
 insert into semi_member(id,password,name,address) values('spring','1','공유','성남')
 select *from semi_member;
 
-insert into semi_book(bNo,title,content,author,publisher,id) values(semi_book_seq.nextval,'반지의제왕','반지이야기','모름','캐나다','spring');
-insert into semi_book(bNo,title,content,author,publisher,id) values(semi_book_seq.nextval,'해리포터','마법사이야기','롤링','영국','spring');
-insert into semi_book(bNo,title,content,author,publisher,id) values(semi_book_seq.nextval,'하얀고양이','고양이가있다','아작','학산','java');
-insert into semi_book(bNo,title,content,author,publisher,id) values(semi_book_seq.nextval,'까만고양이','고양이가없다','아작','학산','java');
-insert into semi_book(bNo,title,content,author,publisher,id) values(semi_book_seq.nextval,'창의력','스케치노트','김충원','우리집','java');
+insert into semi_book(bNo,title,content,author,publisher) values(semi_book_seq.nextval,'반지의제왕','반지이야기','모름','캐나다');
+insert into semi_book(bNo,title,content,author,publisher) values(semi_book_seq.nextval,'해리포터','마법사이야기','롤링','영국');
+insert into semi_book(bNo,title,content,author,publisher) values(semi_book_seq.nextval,'하얀고양이','고양이가있다','아작','학산');
+insert into semi_book(bNo,title,content,author,publisher) values(semi_book_seq.nextval,'까만고양이','고양이가없다','아작','학산');
+insert into semi_book(bNo,title,content,author,publisher) values(semi_book_seq.nextval,'창의력','스케치노트','김충원','우리집');
 select *from semi_book;
 
 insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'반지의제왕','반지이야기',sysdate,'spring');
 insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'해리포터','마법사이야기',sysdate,'spring');
-insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'하얀고양이','고양이가있다',sysdate'java');
-insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'까만고양이','고양이가없다',sysdate'java');
+insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'하얀고양이','고양이가있다',sysdate,'java');
+insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'까만고양이','고양이가없다',sysdate,'java');
 insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'창의력','스케치노트',sysdate,'java');
 select *from semi_post;
+
+select pNo,title,content,timeposted from SEMI_POST;

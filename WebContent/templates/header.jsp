@@ -16,7 +16,7 @@
         <nav class="nav-menu">
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link" href="#!">도서관</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">자유게시판</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dispatcher?command=PostList">자유게시판</a></li>
             </ul>
         </nav>
     </div>

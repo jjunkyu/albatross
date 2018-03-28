@@ -13,6 +13,9 @@ public class HandlerMapping {
 		Controller ctrl = null;
 		if(command.equals("home")) {
 			ctrl = new HomeController();
+		}else if(command.equals("PostList")) {
+			System.out.println("test");
+			ctrl = new PostListController();
 		}
 		return ctrl;
 	}

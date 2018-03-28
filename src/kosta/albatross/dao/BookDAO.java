@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import kosta.albatross.vo.BookVO;
+
 public class BookDAO {
 	
 	private static BookDAO instance = new BookDAO();
@@ -33,5 +35,21 @@ public class BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<BookVO> getBookList() throws SQLException{
+		ArrayList<BookVO> list= new ArrayList<BookVO>();
+		try {
+		con = (Connection) DataSourceManager.getInstance().getDataSource();
+		sql="SELECT bNo,title,content,author,publisher FROM semi_book";
+		pstmt=con.prepareStatement(sql);
+		rs=pstmt.executeQuery();
+		while(rs.next()) {
+			list.add(new BookVO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+		}
+		}finally {
+			closeAll();
+		}
+		return list;
 	}
 }	

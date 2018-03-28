@@ -2,15 +2,17 @@ create table UserCategory(
 cId number primary key,
 cName varchar2(100) not null
 )
+insert into UserCategory(cId,cName) values(0,'일반회원')
 
 create table semi_member(
 id varchar2(100) primary key,
 password varchar2(100) not null,
 address varchar2(100) not null,
 name varchar2(100) not null,
-cId number not null,
+cId number default 0,
 constraint fk_cId foreign key(cId) references UserCategory(cId)
 )
+select * from semi_member
 drop table semi_member
 
 create table semi_book(
@@ -43,6 +45,7 @@ pNo number primary key,
 title varchar2(100) not null,
 content clob not null,
 hits number default 0,
+
 timeposted date not null,
 id varchar2(100) not null,
 constraint fk_pid foreign key(id) references semi_member(id)
@@ -50,6 +53,8 @@ constraint fk_pid foreign key(id) references semi_member(id)
 create sequence semi_post_seq
 drop sequence semi_post_seq
 drop table semi_post
+
+
 
 insert into semi_member(id,password,name,address) values('java','1','아이유','판교')
 insert into semi_member(id,password,name,address) values('spring','1','공유','성남')

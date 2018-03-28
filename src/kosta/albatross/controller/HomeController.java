@@ -7,7 +7,9 @@ public class HomeController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		return REDIRECT_PREFIX + TEMPLATE_PATH + "home.jsp";
+		String url = "main.jsp";
+		request.setAttribute("url",url);
+		return TEMPLATE_PATH + "home.jsp";
 	}
 
 }

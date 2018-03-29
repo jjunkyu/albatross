@@ -1,6 +1,5 @@
 package kosta.albatross.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;

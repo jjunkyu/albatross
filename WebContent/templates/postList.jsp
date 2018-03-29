@@ -30,7 +30,7 @@
 			<div class="pagingInfo">
 				<c:set var="pb" value="${requestScope.listVO.pagingBean}"></c:set>
 		
-				<ul class="pagingGroup">
+				<ul class="pagination">
 					<c:if test="${pb.previousPageGroup}">
 						<li><a href="dispatcher?command=postList&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:if>

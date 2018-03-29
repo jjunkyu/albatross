@@ -27,6 +27,8 @@ public class HandlerMapping {
 			ctrl = new RentBookController();
 		}else if(command.equals("returnBook")) {
 			ctrl = new returnBookController();
+		}else if(command.equals("bookList")) {
+			ctrl = new BookListController();
 		}
 		return ctrl;
 	}

@@ -74,9 +74,9 @@ public class PagingBean {
 
 	public boolean isPreviousPageGroup() {
 		boolean flag = false;
-		if (getNowPageGroup() > 1)
+		if (this.getNowPageGroup() > 1) {
 			flag = true;
-
+		}
 		return flag;
 	}
 

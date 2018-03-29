@@ -17,6 +17,10 @@ public class HandlerMapping {
 			ctrl = new PostListController();
 		}else if(command.equals("search")) {
 			ctrl = new SearchController();
+		}else if(command.equals("rentBook")) {
+			ctrl = new RentBookController();
+		}else if(command.equals("returnBook")) {
+			ctrl = new returnBookController();
 		}
 		return ctrl;
 	}

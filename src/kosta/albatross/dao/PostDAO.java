@@ -85,8 +85,8 @@ public class PostDAO {
 				PostVO vo = new PostVO();
 				vo.setpNo(rs.getInt(1));
 				vo.setTitle(rs.getString(2));
-				vo.setContent(rs.getString(3));
-				vo.setTimePosted(rs.getString(4));
+				vo.setTimePosted(rs.getString(3));
+				vo.setHits(rs.getInt(4));
 				list.add(vo);
 			}
 		} finally {

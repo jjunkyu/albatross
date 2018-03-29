@@ -18,7 +18,10 @@ public class LoginCheckController implements Controller {
 		MemberVO memberVO = MemberDAO.getInstance().login(id, password);
 		HttpSession session = request.getSession();
 		if (memberVO != null) {
+<<<<<<< HEAD
 			
+=======
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 			session.setAttribute("loginVO", memberVO);
 			//조회수 조회를 위해 배열 선언
 			session.setAttribute("pNoList", new ArrayList<Integer>());

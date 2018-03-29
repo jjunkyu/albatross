@@ -1,7 +1,6 @@
 package kosta.albatross.vo;
 
 public class RentVO {
-	private MemberVO memberVO;
 	private BookVO bookVO;
 	private String rentDate;
 	private String returnDate;
@@ -11,30 +10,21 @@ public class RentVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RentVO(MemberVO memberVO, BookVO bookVO, String rentDate, String returnDate) {
+	public RentVO(BookVO bookVO, String rentDate, String returnDate) {
 		super();
-		this.memberVO = memberVO;
 		this.bookVO = bookVO;
 		this.rentDate = rentDate;
 		this.returnDate = returnDate;
 	}
-
-	public MemberVO getMemberVO() {
-		return memberVO;
-	}
-
-	public void setMemberVO(MemberVO memberVO) {
-		this.memberVO = memberVO;
-	}
-
+	
 	public BookVO getBookVO() {
 		return bookVO;
 	}
-
+	
 	public void setBookVO(BookVO bookVO) {
 		this.bookVO = bookVO;
 	}
-
+	
 	public String getRentDate() {
 		return rentDate;
 	}

@@ -67,8 +67,6 @@ public class PostDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-	
-			//String sql = "select pNo,title,content,to_char(timeposted, 'yyyy.mm.dd') from SEMI_POST";
 			StringBuilder sql = new StringBuilder();
 			sql.append(" SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM( " );
 			sql.append(" SELECT row_number() over(order by pNo desc) as rnum, pNo,title,hits, " );

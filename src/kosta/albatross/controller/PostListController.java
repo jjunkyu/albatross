@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kosta.albatross.dao.PagingBean;
 import kosta.albatross.dao.PostDAO;
@@ -22,6 +23,7 @@ public class PostListController implements Controller {
 		} else {
 			pagingBean = new PagingBean(totalCount, Integer.parseInt(pno));
 		}
+		
 		ArrayList<PostVO> list = PostDAO.getInstance().getPostList(pagingBean);
 		ListVO listVO = new ListVO(list, pagingBean);
 		request.setAttribute("list", list);

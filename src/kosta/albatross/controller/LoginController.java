@@ -1,5 +1,7 @@
 package kosta.albatross.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ public class LoginController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session.getAttribute("loginVO") != null) {
+			
 			return REDIRECT_PREFIX + "index.jsp";
 		} else {
 			session.setAttribute("failLogin", "true");

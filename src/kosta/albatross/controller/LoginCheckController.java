@@ -1,5 +1,7 @@
 package kosta.albatross.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,8 +18,13 @@ public class LoginCheckController implements Controller {
 		MemberVO memberVO = MemberDAO.getInstance().login(id, password);
 		HttpSession session = request.getSession();
 		if (memberVO != null) {
-			System.out.println(memberVO.toString());
+<<<<<<< HEAD
+			
+=======
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 			session.setAttribute("loginVO", memberVO);
+			//조회수 조회를 위해 배열 선언
+			session.setAttribute("pNoList", new ArrayList<Integer>());
 			return "index.jsp";
 		} else {
 			String logincheck=null;

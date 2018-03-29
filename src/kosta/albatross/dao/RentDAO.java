@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
+
+import kosta.albatross.vo.BookVO;
 
 public class RentDAO {
 	private static RentDAO instance = new RentDAO();
@@ -30,6 +33,31 @@ public class RentDAO {
 			if(rs != null) rs.close();			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<BookVO> rentList(String id) throws SQLException {
+		try {
+			ArrayList<BookVO> rentList = new ArrayList<BookVO>();
+			BookVO bookVO = null;
+			con = ds.getConnection();
+			sql = "SELECT b.bNo,b.title,b.author,b.publisher\r\n" + 
+					"FROM SEMI_BOOK b, SEMI_RENT_BOOK rb\r\n" + 
+					"WHERE rb.id = ? and b.bNo = rb.bNo";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				bookVO = new BookVO();
+				bookVO.setbNo(rs.getInt(1));
+				bookVO.setTitle(rs.getString(2));
+				bookVO.setAuthor(rs.getString(3));
+				bookVO.setPublisher(rs.getString(4));
+				rentList.add(bookVO);
+			}
+			return rentList;
+		} finally {
+			closeAll();
 		}
 	}
 	

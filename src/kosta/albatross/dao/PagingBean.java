@@ -74,17 +74,17 @@ public class PagingBean {
 
 	public boolean isPreviousPageGroup() {
 		boolean flag = false;
-		if (getNowPageGroup() > 1)
+		if (this.getNowPageGroup() > 1) {
 			flag = true;
-
+		}
 		return flag;
 	}
 
 	public boolean isNextPageGroup() {
 		boolean flag = false;
-		if (getEndPageOfPageGroup() == getTotalPageGroup())
+		if (this.getNowPageGroup() < this.getTotalPageGroup()) {
 			flag = true;
-
+		}
 		return flag;
 	}
 

@@ -1,12 +1,15 @@
 package kosta.albatross.vo;
 
+import java.util.ArrayList;
+
 public class MemberVO {
 	private String id;
 	private String password;
 	private String name;
 	private String address;
 	private String cId;
-	
+	private ArrayList<RentVO> rentList;
+
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -50,5 +53,11 @@ public class MemberVO {
 	}
 	public void setcId(String cId) {
 		this.cId = cId;
+	}
+	public ArrayList<RentVO> getRentList() {
+		return rentList;
+	}
+	public void setRentList(ArrayList<RentVO> rentList) {
+		this.rentList = rentList;
 	}
 }

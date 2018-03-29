@@ -13,8 +13,8 @@
 						<tr>
 							<td>${book.getbNo()}</td>
 							<td>${book.getTitle()}</td>
-							<td>${book.getAuthor() }</td>
-							<td>${book.getPublisher() }</td>
+							<td>${book.getAuthor()}</td>
+							<td>${book.getPublisher()}</td>
 						</tr>
 					</c:forEach>
 					<tr></tr>

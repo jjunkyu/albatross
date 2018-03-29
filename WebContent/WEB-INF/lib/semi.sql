@@ -93,4 +93,8 @@ select returndate-sysdate from SEMI_RENT_BOOK where bNo = 1;
 -- Search by author - containing authorString
 select * from semi_book where author like '%아작%';
 
+--login check
+select * from semi_member where id=? and password=?
+
+
 

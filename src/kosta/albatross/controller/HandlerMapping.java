@@ -17,6 +17,12 @@ public class HandlerMapping {
 			ctrl = new PostListController();
 		}else if(command.equals("search")) {
 			ctrl = new SearchController();
+		}else if(command.equals("login")) {
+			ctrl=new LoginController();
+		}else if(command.equals("loginCheck")) {
+			ctrl=new LoginCheckController();
+		}else if(command.equals("logout")) {
+			ctrl=new LogoutController();
 		}
 		return ctrl;
 	}

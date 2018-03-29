@@ -12,7 +12,7 @@ public class MemberVO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public MemberVO(String id, String password, String name, String address, String cId) {
+	public MemberVO(String id, String password, String address, String name, String cId) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -51,4 +51,11 @@ public class MemberVO {
 	public void setcId(String cId) {
 		this.cId = cId;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", password=" + password + ", name=" + name + ", address=" + address + ", cId="
+				+ cId + "]";
+	}
+	
 }

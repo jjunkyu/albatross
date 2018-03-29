@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css"/>
 </head>
 <body>
-	<div id="wrap">
+	<div id="wrap" class="page ${requestScope.page}">
 		<jsp:include page="header.jsp"></jsp:include>	
 		<jsp:include page="${requestScope.url}"></jsp:include>
 		<jsp:include page="footer.jsp"></jsp:include>	

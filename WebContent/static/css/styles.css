@@ -35,7 +35,7 @@ header .header-links > .nav-menu .nav-item:last-child .nav-link {
   padding-right: 0;
 }
 
-main {
+.home main {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }

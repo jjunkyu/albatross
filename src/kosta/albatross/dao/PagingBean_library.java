@@ -41,7 +41,8 @@ public class PagingBean_library {
 	 * @return
 	 */
 	public int getStartRowNumber() {
-		return 0;
+			
+		return ((nowPage-1)*postCountPerPage)+1;
 	}
 
 	/**
@@ -56,7 +57,11 @@ public class PagingBean_library {
 	 * @return
 	 */
 	public int getEndRowNumber() {
-		return 0;
+		if(nowPage*postCountPerPage>totalPostCount) {
+			return totalPostCount;
+		}else {
+			return nowPage*postCountPerPage;
+		}
 	}
 
 	/**
@@ -74,7 +79,11 @@ public class PagingBean_library {
 	 * @return
 	 */
 	private int getTotalPage() {
-		return 0;
+		if(totalPostCount%postCountPerPage==0) {
+			return totalPostCount/postCountPerPage;
+		}else {
+			return totalPostCount/postCountPerPage+1;
+		}
 	}
 
 	/**
@@ -90,7 +99,11 @@ public class PagingBean_library {
 	 * 
 	 */
 	private int getTotalPageGroup() {
-		return 0;
+		if(getTotalPage()%pageCountPerPageGroup==0) {
+			return getTotalPage()/pageCountPerPageGroup;
+		}else {
+			return (getTotalPage()/pageCountPerPageGroup)+1;
+		}
 	}
 
 	/**
@@ -104,7 +117,11 @@ public class PagingBean_library {
 	 * @return
 	 */
 	private int getNowPageGroup() {
-		return 0;
+		if(nowPage%pageCountPerPageGroup==0) {
+			return nowPage/pageCountPerPageGroup;
+		}else {
+			return (nowPage/pageCountPerPageGroup)+1;
+		}
 	}
 
 	/**
@@ -117,7 +134,7 @@ public class PagingBean_library {
 	 * @return
 	 */
 	public int getStartPageOfPageGroup() {
-		return 0;
+		return (pageCountPerPageGroup*(getNowPageGroup()-1))+1;
 	}
 
 	/**
@@ -130,7 +147,11 @@ public class PagingBean_library {
 	 * @return
 	 */
 	public int getEndPageOfPageGroup() {
-		return 0;
+		if(getTotalPageGroup()<getNowPageGroup()*pageCountPerPageGroup) {
+			return getTotalPageGroup();
+		}else {
+			return getNowPageGroup()*pageCountPerPageGroup;
+		}
 	}
 
 	/**
@@ -142,6 +163,9 @@ public class PagingBean_library {
 	 * @return
 	 */
 	public boolean isPreviousPageGroup() {
+		if(getNowPageGroup()>1) {
+			return true;
+		}
 		return false;
 	}
 
@@ -156,6 +180,9 @@ public class PagingBean_library {
 	 * @return
 	 */
 	public boolean isNextPageGroup() {
+		if(getNowPageGroup()< getTotalPageGroup()) {
+			return true;
+		}
 		return false;
 	}
 }

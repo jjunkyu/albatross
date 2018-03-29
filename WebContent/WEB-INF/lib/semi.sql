@@ -55,7 +55,8 @@ create table semi_post(
 	id varchar2(100) not null,
 	constraint fk_pid foreign key(id) references semi_member(id)
 )
-create sequence semi_post_seq;
+create sequence semi_post_seq
+
 drop sequence semi_post_seq;
 drop table semi_post;
 select *from SEMI_POST;
@@ -79,11 +80,17 @@ insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.next
 insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'창의력','스케치노트',sysdate,'java');
 select *from semi_post;
 
-
+SELECT bNo,title,content,author,publisher FROM semi_book
 select pNo,title,content,timeposted from SEMI_POST;
 
 insert into SEMI_RENT_BOOK(id,bNo,rentdate,returndate) values('java',1,sysdate,sysdate+7);
 select *from SEMI_RENT_BOOK;
 delete from SEMI_RENT_BOOK where bNo = 1;
 select returndate-sysdate from SEMI_RENT_BOOK where bNo = 1;
+
+
+
+-- Search by author - containing authorString
+select * from semi_book where author like '%아작%';
+
 

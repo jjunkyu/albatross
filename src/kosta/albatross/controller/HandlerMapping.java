@@ -23,6 +23,10 @@ public class HandlerMapping {
 			ctrl=new LoginCheckController();
 		}else if(command.equals("logout")) {
 			ctrl=new LogoutController();
+		}else if(command.equals("rentBook")) {
+			ctrl = new RentBookController();
+		}else if(command.equals("returnBook")) {
+			ctrl = new returnBookController();
 		}
 		return ctrl;
 	}

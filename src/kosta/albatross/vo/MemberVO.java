@@ -1,12 +1,15 @@
 package kosta.albatross.vo;
 
+import java.util.ArrayList;
+
 public class MemberVO {
 	private String id;
 	private String password;
 	private String name;
 	private String address;
 	private String cId;
-	
+	private ArrayList<RentVO> rentList;
+
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -51,6 +54,7 @@ public class MemberVO {
 	public void setcId(String cId) {
 		this.cId = cId;
 	}
+<<<<<<< HEAD
 
 	@Override
 	public String toString() {
@@ -58,4 +62,12 @@ public class MemberVO {
 				+ cId + "]";
 	}
 	
+=======
+	public ArrayList<RentVO> getRentList() {
+		return rentList;
+	}
+	public void setRentList(ArrayList<RentVO> rentList) {
+		this.rentList = rentList;
+	}
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 }

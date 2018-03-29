@@ -16,7 +16,6 @@ public class LoginCheckController implements Controller {
 		MemberVO memberVO = MemberDAO.getInstance().login(id, password);
 		HttpSession session = request.getSession();
 		if (memberVO != null) {
-			System.out.println(memberVO.toString());
 			session.setAttribute("loginVO", memberVO);
 			return "index.jsp";
 		} else {

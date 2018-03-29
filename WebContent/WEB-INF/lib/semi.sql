@@ -109,3 +109,7 @@ SELECT b.bNo,b.title,b.author,b.content,b.publisher
 FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher
 FROM semi_book)b WHERE rnum BETWEEN 1 AND 3
 ORDER BY bNo DESC
+
+SELECT b.bNo,b.title,b.author,b.content,b.publisher
+FROM SEMI_BOOK b, SEMI_RENT_BOOK rb
+WHERE rb.id = 'java' and b.bNo = rb.bNo

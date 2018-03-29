@@ -7,7 +7,6 @@ public class returnBookController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		return null;
 	}
 }

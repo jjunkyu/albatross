@@ -13,7 +13,7 @@ public class HandlerMapping {
 		Controller ctrl = null;
 		if(command.equals("home")) {
 			ctrl = new HomeController();
-		}else if(command.equals("PostList")) {
+		}else if(command.equals("postList")) {
 			ctrl = new PostListController();
 		}else if(command.equals("search")) {
 			ctrl = new SearchController();

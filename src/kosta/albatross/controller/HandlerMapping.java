@@ -29,6 +29,8 @@ public class HandlerMapping {
 			ctrl = new returnBookController();
 		}else if(command.equals("bookList")) {
 			ctrl = new BookListController();
+		}else if(command.equals("showDetailContent")) {
+			ctrl = new showDetailContentController();
 		}
 		return ctrl;
 	}

@@ -11,19 +11,32 @@
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
-						<th>조회수</th>
+						<th>작성자</th>
 						<th>작성일</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${requestScope.list}" var="list">
 						<tr>
 							<td>${list.pNo}</td>
-							<td>${list.title}</td>
-							<td>${list.hits}</td>
+							<td>
+							<c:choose>
+							<c:when test="${sessionScope.loginVO!=null }">
+							<a href="${pageContext.request.contextPath}/dispatcher?command=showDetailContent&pNo=${list.pNo }">
+							${list.title}</a>
+							</c:when>
+							<c:otherwise>
+							${list.title }
+							</c:otherwise>
+							</c:choose>
+							</td>
+							<td>${list.memberVO.id }</td>
 							<td>${list.timePosted}</td>
+							<td>${list.hits}</td>
 						</tr>
 					</c:forEach>
+					
 				</tbody>
 			</table>
 			

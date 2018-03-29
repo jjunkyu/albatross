@@ -16,7 +16,8 @@ src/                - java source files / backend
    vo/
 WebContent/         - frontend
    templates/       - jsp templates
-   static/          - static resource files
+      - home.jsp        
+   static/         - static resource files
       js/           - javascript
       css/          - css
       media/        - static media files

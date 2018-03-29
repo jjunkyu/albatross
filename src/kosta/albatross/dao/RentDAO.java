@@ -35,7 +35,7 @@ public class RentDAO {
 	
 	public void addRentItem(String id,int bNo) throws SQLException {
 		try {
-			con = (Connection) DataSourceManager.getInstance().getDataSource();
+			con = ds.getConnection();
 			sql = "insert into SEMI_RENT_BOOK(id,bNo,rentdate,returndate) values(?,?,sysdate,sysdate+7)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,id);
@@ -47,25 +47,34 @@ public class RentDAO {
 	}
 	
 	public void deleteRentItem(int bNo) throws SQLException {
-		con = (Connection) DataSourceManager.getInstance().getDataSource();
-		sql = "delete from SEMI_RENT_BOOK where bNo = 1;";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, bNo);
-		pstmt.executeQuery();
+		try {
+			con = (Connection) DataSourceManager.getInstance().getDataSource();
+			sql = "delete from SEMI_RENT_BOOK where bNo = 1;";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			pstmt.executeQuery();
+		} finally {
+			closeAll();
+		}
+
 	}
 	
 	public boolean isRentLate(int bNo) throws SQLException {
 		int remainDate = 0;
-		con = (Connection) DataSourceManager.getInstance().getDataSource();
-		sql = "select returndate-sysdate from SEMI_RENT_BOOK where bNo = ?";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, bNo);
-		rs = pstmt.executeQuery();
-		if(rs.next())
-			remainDate = rs.getInt(1);
-		if(remainDate<0)
-			return true;
-		else
-			return false;
+		try {
+			con = (Connection) DataSourceManager.getInstance().getDataSource();
+			sql = "select returndate-sysdate from SEMI_RENT_BOOK where bNo = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				remainDate = rs.getInt(1);
+			if(remainDate<0)
+				return true;
+			else
+				return false;
+		} finally {
+			closeAll();
+		}
 	}
 }

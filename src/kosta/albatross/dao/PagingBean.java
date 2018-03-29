@@ -1,23 +1,20 @@
 package kosta.albatross.dao;
 
-public class PagingBean_post {
+public class PagingBean {
 
 	private int nowPage = 1;
-
 	private int postCountPerPage = 10;
-
 	private int pageCountPerPageGroup = 5;
-
 	private int totalPostCount;
 
-	public PagingBean_post() {
+	public PagingBean() {
 	}
 
-	public PagingBean_post(int totalPostCount) {
+	public PagingBean(int totalPostCount) {
 		this.totalPostCount = totalPostCount;
 	}
 
-	public PagingBean_post(int totalPostCount, int nowPage) {
+	public PagingBean(int totalPostCount, int nowPage) {
 		this.totalPostCount = totalPostCount;
 		this.nowPage = nowPage;
 	}

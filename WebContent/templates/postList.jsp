@@ -16,7 +16,14 @@
 						</tr>
 					</thead>
 					<tbody>
-					
+					<c:forEach items="${requestScope.list}" var="list">
+						<tr>
+							<td>${list.pNo }</td>
+							<td>${list.title }</td>
+							<td>${list.hits }</td>
+							<td>${list.timePosted }</td>
+						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>		

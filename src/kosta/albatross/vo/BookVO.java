@@ -20,6 +20,10 @@ public class BookVO {
 		this.author = author;
 		this.publisher = publisher;
 	}
+	public BookVO(int bNo, String title, String content, String author, String publisher, boolean isRented) {
+		this(bNo, title, content, author, publisher);
+		this.isRented = isRented;
+	}
 	public int getbNo() {
 		return bNo;
 	}

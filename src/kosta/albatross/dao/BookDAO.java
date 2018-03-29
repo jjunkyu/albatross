@@ -52,4 +52,93 @@ public class BookDAO {
 		}
 		return list;
 	}
+	
+	public BookVO getBookDetail(int bNo) throws SQLException {
+		BookVO bvo = null;
+		try {
+			con = ds.getConnection();
+			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where bNo = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bvo = new BookVO();
+				bvo.setbNo(rs.getInt(1));
+				bvo.setTitle(rs.getString(2));
+				bvo.setAuthor(rs.getString(3));
+				bvo.setContent(rs.getString(4));
+				bvo.setPublisher(rs.getString(5));
+				bvo.setRented(rs.getInt(6) == 0 ? false : true);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		return bvo;
+	}
+	
+	public ArrayList<BookVO> searchByAuthor(String author) throws SQLException {
+		ArrayList<BookVO> list = null;
+		
+		try {
+			con = ds.getConnection();
+			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where author like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + author + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				if(list == null) {
+					list = new ArrayList<>();
+				}
+				list.add(new BookVO(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getInt(6) == 0 ? false : true
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<BookVO> searchByTitle(String title) throws SQLException {
+		ArrayList<BookVO> list = null;
+		
+		try {
+			con = ds.getConnection();
+			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + title + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				if(list == null) {
+					list = new ArrayList<>();
+				}
+				list.add(new BookVO(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getInt(6) == 0 ? false : true
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return list;
+	}
+	
+	
 }	

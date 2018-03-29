@@ -9,6 +9,7 @@ public class HomeController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		String url = "main.jsp";
 		request.setAttribute("url",url);
+		request.setAttribute("page", "home");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 

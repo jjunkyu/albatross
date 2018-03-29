@@ -102,3 +102,8 @@ to_char(timeposted,'YYYY.MM.DD') as timeposted,id
 FROM semi_post
 ) p,semi_member m where p.id=m.id and rnum between '1' and '5' 
 order by pNo desc
+
+SELECT b.bNo,b.title,b.author,b.content,b.publisher
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher
+FROM semi_book)b WHERE rnum BETWEEN 1 AND 3
+ORDER BY bNo DESC

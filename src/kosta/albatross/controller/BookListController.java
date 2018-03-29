@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.albatross.dao.BookDAO;
 import kosta.albatross.dao.PagingBean;
 import kosta.albatross.vo.BookVO;
+import kosta.albatross.vo.ListVO;
 
 public class BookListController implements Controller {
 
@@ -25,7 +26,7 @@ public class BookListController implements Controller {
 		ListVO listVO = new ListVO();
 		listVO.setBookList(bookList);
 		listVO.setPagingBean(pagingBean);
-		request.setAttribute("bookList", listVO);
+		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", "bookListView.jsp");
 		request.setAttribute("page", "library-page");
 		return TEMPLATE_PATH + "home.jsp";

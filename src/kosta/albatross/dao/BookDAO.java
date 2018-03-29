@@ -44,17 +44,23 @@ public class BookDAO {
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
 			BookVO vo = null;
 		try {
-			con = (Connection) DataSourceManager.getInstance().getDataSource();
-			sql = "SELECT bNo,title,content,author,publisher FROM semi_book";
-			pstmt = con.prepareStatement(sql);
+			con = ds.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher ");
+			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher ");
+			sql.append("FROM semi_book) b WHERE rnum BETWEEN ? AND ? ");
+			sql.append("ORDER BY bNo DESC");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, pagingBean.getStartRowNumber());
+			pstmt.setInt(2, pagingBean.getEndRowNumber());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 						vo = new BookVO();
 						vo.setbNo(rs.getInt(1));
 						vo.setTitle(rs.getString(2));
 						vo.setContent(rs.getString(3));
-						vo.setAuthor( rs.getString(4));
-						vo.setPublisher( rs.getString(5));
+						vo.setAuthor(rs.getString(4));
+						vo.setPublisher(rs.getString(5));
 						list.add(vo);
 			}
 		} finally {
@@ -143,7 +149,7 @@ public class BookDAO {
 		int count = 0;
 		try {
 			con = ds.getConnection();
-			String sql = "SELECT count(*) FROM board_inst";
+			String sql = "SELECT count(*) FROM semi_book";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next())

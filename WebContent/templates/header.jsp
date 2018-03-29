@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="container-fluid">
-<<<<<<< HEAD
     <div class="header-panel row justify-content-end">
         <ul class="nav login-panel">
             <li class="nav-item"><a class="nav-link" href="dispatcher?command=login">로그인</a></li>
@@ -21,7 +20,6 @@
             </ul>
         </nav>
     </div>
-=======
 	<div class="header-panel row justify-content-end">
 		<ul class="nav login-panel">
 			<c:choose>

@@ -18,10 +18,10 @@
 					<tbody>
 					<c:forEach items="${requestScope.list}" var="list">
 						<tr>
-							<td>${list.pNo }</td>
-							<td>${list.title }</td>
-							<td>${list.hits }</td>
-							<td>${list.timePosted }</td>
+							<td>${book.bNo}</td>
+							<td><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
+							<td>${book.author}</td>
+							<td>${book.publisher}</td>
 						</tr>
 						</c:forEach>
 					</tbody>

@@ -82,7 +82,7 @@ public class PagingBean {
 
 	public boolean isNextPageGroup() {
 		boolean flag = false;
-		if (getEndPageOfPageGroup() == getTotalPageGroup())
+		if (getNowPageGroup() < getTotalPageGroup())
 			flag = true;
 
 		return flag;

@@ -49,6 +49,8 @@ public class HandlerMapping {
 			ctrl = new PostWriteViewController();
 		} else if (command.equals("registerView")) { //레지스터 뷰
 			ctrl = new RegisterViewController();
+		}else if (command.equals("write")) { //레지스터 뷰
+			ctrl = new WriteController();
 		}
 		return ctrl;
 	}

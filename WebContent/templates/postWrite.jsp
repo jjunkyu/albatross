@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <main class="container-fluid">
 <div class="row justify-content-md-center">
-	<form action="${pageContext.request.contextPath}/DispatcherServlet"
-		method="post">
+	<form action="dispatcher" method="post">
 		<input type="hidden" name="command" value="write">
 		<table class="table">
 			<tr>

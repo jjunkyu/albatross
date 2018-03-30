@@ -193,15 +193,51 @@ public class PostDAO {
 	public void deletePosting(int pNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		con=dataSource.getConnection();
-		String sql="delete from semi_post where pNo=?";
-		pstmt=con.prepareStatement(sql);
-		pstmt.setInt(1, pNo);
-		pstmt.executeUpdate();
+		
 		try {
-			
+			con=dataSource.getConnection();
+			String sql="delete from semi_post where pNo=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, pNo);
+			pstmt.executeUpdate();
 		} finally {
 			closeAll(pstmt, con);
 		}
+	}
+	/**
+	 * 글쓰기 DB 넣고 출력
+	 * @param id
+	 * @param title
+	 * @param content
+	 * @return
+	 * @throws SQLException
+	 */
+	public PostVO writeContent(String id, String title, String content) throws SQLException {
+		PostVO resultVO=null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			con = dataSource.getConnection();
+			String sql = "insert into semi_post(pNo,title,content,timeposted,id)" + 
+					" values(semi_post_seq.nextval,?,?,sysdate,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, id);
+			pstmt.executeQuery();
+			pstmt.close();
+			String sql2="select semi_post_seq.currval from dual";
+			pstmt=con.prepareStatement(sql2);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				resultVO = getPostByNo(rs.getInt(1));
+			}
+			
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return resultVO;
 	}
 }

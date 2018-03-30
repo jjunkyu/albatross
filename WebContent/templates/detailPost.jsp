@@ -2,12 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
+	
+
 	function sendList() {
 		location.href = "${pageContext.request.contextPath}/index.jsp";
 	}
 	function updatePost() {
 		if (confirm("게시글을 수정하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/dispatcher?command=updateContent&pNo=${requestScope.pvo.pNo}";
+			location.href = "${pageContext.request.contextPath}/dispatcher?command=postUpdate&&pNo=${requestScope.pvo.pNo}&&title=${requestScope.pvo.title}&&content=${requestScope.pvo.content}";
+
 		}
 	}
 	function deletePost() {
@@ -32,6 +35,7 @@
 			</td>
 		</tr>
 	</tbody>
+	
 	<tr>
 		<td colspan="5" class="btnArea"><c:if
 				test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id}">

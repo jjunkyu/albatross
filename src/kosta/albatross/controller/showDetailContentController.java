@@ -21,7 +21,6 @@ public class showDetailContentController implements Controller {
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Integer> pNoList = (ArrayList<Integer>) session.getAttribute("pNoList");
-		System.out.println(pNoList);
 		if(pNoList.contains(pNo) == false) {
 			PostDAO.getInstance().updateHit(pNo);
 			pNoList.add(pNo);

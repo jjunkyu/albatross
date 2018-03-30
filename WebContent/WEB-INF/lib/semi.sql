@@ -110,7 +110,6 @@ FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,conten
 FROM semi_book)b WHERE rnum BETWEEN 1 AND 3
 ORDER BY bNo DESC
 
-<<<<<<< HEAD
 select p.title,to_char(p.timeposted,'YYYY.MM.DD  HH24:MI:SS') as timeposted
 		,p.content,p.hits,p.id,m.name
 from semi_post p, semi_member m
@@ -121,6 +120,9 @@ where p.id=m.id and p.pNo=3
 SELECT b.bNo,b.title,b.author,b.content,b.publisher
 FROM SEMI_BOOK b, SEMI_RENT_BOOK rb
 WHERE rb.id = 'java' and b.bNo = rb.bNo
+
+delete from semi_post where pNo=67;
+select * from semi_post where pNo=66
 
 
 

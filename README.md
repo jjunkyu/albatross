@@ -1,13 +1,25 @@
 # Project Albatross
 
 ## Members
+
    * JJS
    * GWJ
    * PJS
    * CSK
    * LJK
-   * LHJ
+   * KHJ
+
+
+## Commit Rules
+
+   * Commit message + committer 
+   * Unit by Unit
+
+## Coding Rules
    
+   * Do not capitalize filename except for class and interface files
+   * Add whitespace before and after an operator
+
 ## Project Directory
 ```
 src/                - java source files / backend

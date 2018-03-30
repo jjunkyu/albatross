@@ -46,6 +46,7 @@ drop table semi_rent_book
 select *from semi_rent_book
 
 
+
 create table semi_post(
 	pNo number primary key,
 	title varchar2(100) not null,
@@ -87,6 +88,8 @@ insert into SEMI_RENT_BOOK(id,bNo,rentdate,returndate) values('java',1,sysdate,s
 select *from SEMI_RENT_BOOK;
 delete from SEMI_RENT_BOOK where bNo = 1;
 select returndate-sysdate from SEMI_RENT_BOOK where bNo = 1;
+
+
 
 
 

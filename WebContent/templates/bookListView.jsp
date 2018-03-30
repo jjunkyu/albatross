@@ -16,6 +16,7 @@
 					<th>제목</th>
 					<th>저자</th>
 					<th>출판사</th>
+					<th>대여상태<th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,6 +26,16 @@
 						<td><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
 						<td>${book.author}</td>
 						<td>${book.publisher}</td>
+						<td>
+						<c:choose>
+							<c:when test="${book.rented==false}">
+							대여가능
+							</c:when>
+							<c:otherwise>
+							대여중
+							</c:otherwise>
+						</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

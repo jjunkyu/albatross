@@ -55,16 +55,19 @@ public class MemberVO {
 		this.cId = cId;
 	}
 
+
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", password=" + password + ", name=" + name + ", address=" + address + ", cId="
 				+ cId + "]";
 	}
 	
+
 	public ArrayList<RentVO> getRentList() {
 		return rentList;
 	}
 	public void setRentList(ArrayList<RentVO> rentList) {
 		this.rentList = rentList;
 	}
+
 }

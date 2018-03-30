@@ -60,8 +60,8 @@ public class BookDAO {
 						rented = rs.getInt(6);
 						vo.setbNo(rs.getInt(1));
 						vo.setTitle(rs.getString(2));
-						vo.setContent(rs.getString(3));
-						vo.setAuthor(rs.getString(4));
+						vo.setAuthor(rs.getString(3));
+						vo.setContent(rs.getString(4));
 						vo.setPublisher(rs.getString(5));
 						if(rented==0)
 							vo.setRented(false);

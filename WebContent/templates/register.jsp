@@ -1,103 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script type="text/javascript">
-var idCheck = 0;
-var pwdCheck = 0;
-/*
- * 패스워드 체크
- */
-function checkPwd() {
-	var pw=$("#pw").val();
-	var rpw=$("#rpw").val();
-	if(rpw=="" && (pw != rpw || pw == rpw)){
-        $("#btn").prop("disabled", true);
-        $("#btn").css("background-color", "#aaaaaa");
-    }else if (pw == rpw) {
-        pwdCheck = 1;
-        if(idCheck==1 && pwdCheck == 1) {
-            $("#btn").prop("disabled", false);
-            $("#btn").css("background-color", "#4CAF50");
-            signupCheck();
-        }
-    } else if (pw != rpw) {
-        pwdCheck = 0;
-        $("#btn").prop("disabled", true);
-        $("#btn").css("background-color", "#aaaaaa");
-    }
-}
-function checkId() {
-	
-}
-/*
- * 이름과 주소 입력안했을 때 가입버튼 비활성화
- */
-function signupCheck() {
-    var name = $("#name").val();
-    var address = $("#address").val();
-    if(name=="" || address=="") {
-    	$("#btn").prop("disabled", true);
-        $("#btn").css("background-color", "#aaaaaa");
-    } else {
-    }
-}
-
+	function checkForm() {
+		var f = document.registerForm;
+		if (f.password.value != f.repeatPassword.value) {
+			alert("패스워드와 패스워드 확인이 일치하지 않습니다");
+			return false;
+		}
+		if (f.flag.value != f.id.value) {
+			alert("인증받은 아이디가 아닙니다\n아이디 중복확인을 하세요");
+			return false;
+		}
+	}
+	function checkId() {
+		var str = document.registerForm.id.value;
+		if (str == "") {
+			alert("아이디를 입력하세요!");
+		} else {
+			window.open("dispatcher?command=idcheck&id=" + str, "popup",
+					"width=200,height=200,top=150,left=400");
+		}
+	}
 </script>
+<main class="container-fluid">
+	<div class="row justify-content-md-center">
+		<div class="col-sm-9">
 
-<div class="container">
-	<form class="form-horizontal" role="form" action="dispatcher"
-		method="post" name="joinForm" onsubmit="return checkAll()">
-		<input type="hidden" name="command" value="registerSubmit">
-
-		<h2>Registration</h2>
-		<%--아이디--%>
-		<div class="form-group">
-			<label for="inputID" class="col-sm-3 control-label">ID</label>
-			<div class="col-sm-9">
-				<input type="text" name="inputID" placeholder="ID"
-					class="form-control" oninput="checkId()" autofocus>
+		<form class="form-horizontal" role="form" method="post"
+			name="registerForm" action="dispatcher" onsubmit="return checkForm()">
+			<input type="hidden" name="command" value="register">
+			<h3>회원가입</h3>
+			<hr>
+			<div class="form-group">
+				<label class="col-sm-6 control-label">아이디 :</label>
+				<div class="col-sm-9">
+					<input type="text" name="id" required="required"> <input
+						type="button" value="중복확인" onclick="checkId()">
+				</div>
 			</div>
-		</div>
-		<%--이름--%>
-		<div class="form-group">
-			<label for="inputID" class="col-sm-3 control-label">Full Name</label>
-			<div class="col-sm-9">
-				<input type="text" name="inputName" id="name" placeholder="Full Name"
-					class="form-control">
+			<div class="form-group">
+				<label class="control-label col-sm-6">패스워드 :</label>
+				<div class="col-sm-9">
+					<input type="password" name="password" required="required">
+					</div>
 			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-6">패스워드 확인 : </label>
+				<div class="col-sm-9">
+				<input type="password" name="repeatPassword" required="required">
+				</div>
+			</div> 
+			<div class="form-group">
+				<label class="control-label col-sm-6">이름 : </label>
+				<div class="col-sm-9">
+				<input type="text" name="name" required="required"> 
+				</div>
+			</div> 
+			<div class="form-group">
+				<label class="control-label col-sm-6">주소 : </label>
+				<div class="col-sm-9">
+				<input type="text" name="address" required="required"> 
+				<input type="hidden" name="flag" value="">
+				</div>
+			</div> 
+			<div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                </div>
+		</form>
 		</div>
-		<%--패스워드--%>
-		<div class="form-group">
-			<label for="password" class="col-sm-3 control-label">Password</label>
-			<div class="col-sm-9">
-				<input type="password" name="inputPW" id="pw" placeholder="Password"
-					class="form-control" oninput="checkPwd()">
-			</div>
-		</div>
-		<%--패스워드확인--%>
-		<div class="form-group">
-			<label for="passwordCheck" class="col-sm-3 control-label">Repeat
-				Password</label>
-			<div class="col-sm-9">
-				<input type="password" name="inputPWC" id="rpw" placeholder="Repeat Password" 
-				class="form-control" oninput="checkPwd()">
-			</div>
-			<span id="passwordCheck"></span>
-		</div>
-		<%--주소--%>
-		<div class="form-group">
-			<label for="passwordCheck" class="col-sm-3 control-label">Address</label>
-			<div class="col-sm-9">
-				<input type="text" name="inputAdd" id="address" placeholder="Apartment, studio, or floor"
-					class="form-control">
-			</div>
-		</div>
-		<%--가입버튼--%>
-		<div class="form-group">
-			<div class="col-sm-9 col-sm-offset-3">
-				<button type="submit" class="btn btn-primary btn-block" id="btn" disabled="disabled">Register</button>
-			</div>
-		</div>
-	</form>
-	<!-- /form -->
-</div>
-<!-- ./container -->
+	</div>
+</main>

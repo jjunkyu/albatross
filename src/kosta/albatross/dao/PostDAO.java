@@ -60,8 +60,10 @@ public class PostDAO {
 				e.printStackTrace();
 			}
 	}
+
 	/**
 	 * 페이징을 처리하는 메소드
+	 * 
 	 * @param pagingBean
 	 * @return
 	 * @throws SQLException
@@ -102,8 +104,10 @@ public class PostDAO {
 		}
 		return list;
 	}
+
 	/**
 	 * 조회수 업데이트 하는 메소드
+	 * 
 	 * @param pNo
 	 * @throws SQLException
 	 */
@@ -120,8 +124,10 @@ public class PostDAO {
 			closeAll(pstmt, con);
 		}
 	}
+
 	/**
 	 * 총 게시물의 수를 체크하는 메서드
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -142,29 +148,31 @@ public class PostDAO {
 		}
 		return count;
 	}
+
 	/**
 	 * 게시글의 번호로 상세정보를 반환받는 메소드
+	 * 
 	 * @param pNo
 	 * @return
 	 * @throws SQLException
 	 */
 	public PostVO getPostByNo(int pNo) throws SQLException {
-		PostVO pvo=null;
-		Connection con= null;
+		PostVO pvo = null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con=dataSource.getConnection();
+			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append(" select p.title,to_char(p.timeposted,'YYYY.MM.DD  HH24:MI:SS') as timeposted ");
 			sql.append(" ,p.content,p.hits,p.id,m.name ");
 			sql.append(" from semi_post p, semi_member m ");
 			sql.append(" where p.id=m.id and p.pNo=? ");
-			pstmt=con.prepareStatement(sql.toString());
+			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pNo);
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
 				pvo = new PostVO();
 				pvo.setpNo(pNo);
 				pvo.setTitle(rs.getString("title"));
@@ -177,8 +185,23 @@ public class PostDAO {
 				pvo.setMemberVO(mvo);
 			}
 		} finally {
-			closeAll(rs,pstmt,con);
+			closeAll(rs, pstmt, con);
 		}
 		return pvo;
+	}
+
+	public void deletePosting(int pNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		con=dataSource.getConnection();
+		String sql="delete from semi_post where pNo=?";
+		pstmt=con.prepareStatement(sql);
+		pstmt.setInt(1, pNo);
+		pstmt.executeUpdate();
+		try {
+			
+		} finally {
+			closeAll(pstmt, con);
+		}
 	}
 }

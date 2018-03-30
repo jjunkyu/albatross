@@ -9,7 +9,11 @@ function rentBook(){
 		location.href="dispatcher?command=home";
 	}else{
 		if(confirm("책 빌릴꺼??")){
-			document.rentForm.submit();
+			if(${bookVO.rented}){
+				alert("대여중이라고 써있는데 누르네ㅡㅡ");
+			}else{
+				document.rentForm.submit();		
+			}
 		}
 	}
 }

@@ -35,6 +35,9 @@ public class HandlerMapping {
 			ctrl = new BookDetail_jjsController();
 		}else if(command.equals("rentList")) {
 			ctrl = new RentListController();
+		}else if(command.equals("postUpdate")) {
+			System.out.println("update입장");
+			ctrl = new postUpdateController();
 		}
 		return ctrl;
 	}

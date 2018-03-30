@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript">
+function updatePost(){
+	location.href="${pageContext.request.contextPath}/dispatcher?command=postUpdate&&pNo=${requestScope.pvo.pNo}&&title=${requestScope.pvo.title}&&content=${requestScope.pvo.content}";
+
+}
+</script>
 
 <table class="table">
 	<thead>
@@ -26,8 +32,8 @@
 			 	<input type="hidden" name="command" value="deletePosting">
 			 	<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
 			 </form>
-			 <button type="button" class="btn" onclick="deleteBoard()">삭제</button>
-			 <button type="button" class="btn" onclick="updateBoard()">수정</button>
+			 <button type="button" class="btn" onclick="deletePost()">삭제</button>
+			 <button type="button" class="btn" onclick="updatePost()">수정</button>
 			 </c:if>
 			 </td>
 		</tr>

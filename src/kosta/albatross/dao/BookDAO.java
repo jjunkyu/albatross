@@ -46,8 +46,8 @@ public class BookDAO {
 		try {
 			con = ds.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher ");
-			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher ");
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
+			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented ");
 			sql.append("FROM semi_book) b WHERE rnum BETWEEN ? AND ? ");
 			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());
@@ -56,11 +56,17 @@ public class BookDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 						vo = new BookVO();
+						int rented = 0;
+						rented = rs.getInt(6);
 						vo.setbNo(rs.getInt(1));
 						vo.setTitle(rs.getString(2));
 						vo.setContent(rs.getString(3));
 						vo.setAuthor(rs.getString(4));
 						vo.setPublisher(rs.getString(5));
+						if(rented==0)
+							vo.setRented(false);
+						else
+							vo.setRented(true);
 						list.add(vo);
 			}
 		} finally {
@@ -158,5 +164,17 @@ public class BookDAO {
 			closeAll();
 		}
 		return count;
+	}
+	
+	public void changeOfRented(int bNo) throws SQLException {
+		try {
+			con = ds.getConnection();
+			String sql = "update semi_book set isRented = 1 where bNo = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,bNo);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll();
+		}
 	}
 }

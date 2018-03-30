@@ -26,7 +26,7 @@
 	<div class="row justify-content-md-center">
 		<div class="col-sm-9">
 
-		<form class="form-horizontal" role="form" method="post"
+		<form class="form-horizontal" id="registerForm" role="form" method="post"
 			name="registerForm" action="dispatcher" onsubmit="return checkForm()">
 			<input type="hidden" name="command" value="register">
 			<h3>회원가입</h3>

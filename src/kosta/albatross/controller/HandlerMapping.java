@@ -38,7 +38,9 @@ public class HandlerMapping {
 			ctrl = new RentListController();
 		} else if (command.equals("postUpdate")) {
 			ctrl = new postUpdateController();
-		} else if (command.equals("deletePost")) {
+		}else if (command.equals("postUpdateView")) {
+			ctrl = new postUpdateViewController();
+		}else if(command.equals("deletePost")) {
 			ctrl = new deletePostController();
 		} else if (command.equals("register")) {
 			ctrl = new RegisterController();

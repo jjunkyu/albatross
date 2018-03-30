@@ -37,7 +37,6 @@ function returnBook(){
 						</form>
 						<button type="button" class="btn" onclick="returnBook()">반납</button>
 					</td>
-					<td>${bookVO.rented}</td>
 				</tr>
 				</c:forEach>
 			</tbody>

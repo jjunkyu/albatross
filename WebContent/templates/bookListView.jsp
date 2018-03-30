@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <main class="container-fluid">
 <div class="row">
 	<div class="col-sm-12">
@@ -42,26 +37,26 @@
 		</table>
 	</div>
 </div>
-<div class="pagingInfo">
+<div class="row pagingInfo justify-content-center">
 	<c:set var="pb" value="${requestScope.listVO.pagingBean}"></c:set>
 	<ul class="pagination">
 		<c:if test="${pb.previousPageGroup}">
-			<li><a
+			<li class="page-item"><a class="page-link"
 				href="dispatcher?command=bookList&bNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 		</c:if>
 		<c:forEach begin="${pb.startPageOfPageGroup}"
 			end="${pb.endPageOfPageGroup}" var="pop">
 			<c:choose>
 				<c:when test="${pb.nowPage != pop}">
-					<li><a href="dispatcher?command=bookList&bNo=${pop}">${pop}</a></li>
+					<li class="page-item"><a class="page-link" href="dispatcher?command=bookList&bNo=${pop}">${pop}</a></li>
 				</c:when>
 				<c:otherwise>
-					<li class="active"><a href="#">${pop}</a></li>
+					<li class="page-item active"><a class="page-link" class="page-link" href="#">${pop}</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${pb.nextPageGroup}">
-			<li><a
+			<li class="page-item"><a class="page-link"
 				href="dispatcher?command=bookList&bNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 		</c:if>
 	</ul>

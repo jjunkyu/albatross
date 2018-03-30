@@ -2,12 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-function updatePost(){
-	location.href="${pageContext.request.contextPath}/dispatcher?command=postUpdate&&pNo=${requestScope.pvo.pNo}&&title=${requestScope.pvo.title}&&content=${requestScope.pvo.content}";
-
-}
-</script>
-
+	function updatePost() {
+		location.href = "${pageContext.request.contextPath}/dispatcher?command=postUpdate&&pNo=${requestScope.pvo.pNo}&&title=${requestScope.pvo.title}&&content=${requestScope.pvo.content}";
+	}
 	function sendList() {
 		location.href = "${pageContext.request.contextPath}/index.jsp";
 	}
@@ -22,6 +19,7 @@ function updatePost(){
 		}
 	}
 </script>
+
 <table class="table">
 	<thead>
 		<tr>
@@ -38,26 +36,14 @@ function updatePost(){
 			</td>
 		</tr>
 	</tbody>
-		<tr>
-			<td colspan="5" class="btnArea">
-			 <c:if test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id}">
-			 <form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher" method="post">
-			 	<input type="hidden" name="command" value="deletePosting">
-			 	<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
-			 </form>
-			 <button type="button" class="btn" onclick="deletePost()">삭제</button>
-			 <button type="button" class="btn" onclick="updatePost()">수정</button>
-			 </c:if>
-			 </td>
-		</tr>
 	<tr>
 		<td colspan="5" class="btnArea"><c:if
 				test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id}">
 				<form name="deleteForm"
 					action="${pageContext.request.contextPath}/dispatcher"
 					method="post">
-					<input type="hidden" name="command" value="deletePost">
-					<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
+					<input type="hidden" name="command" value="deletePost"> <input
+						type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
 				</form>
 				<button type="button" class="btn" onclick="deletePost()">삭제</button>
 				<button type="button" class="btn" onclick="updatePost()">수정</button>

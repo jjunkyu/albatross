@@ -18,7 +18,7 @@ public class LoginCheckController implements Controller {
 		if (memberVO != null) {
 			System.out.println(memberVO.toString());
 			session.setAttribute("loginVO", memberVO);
-			return "index.jsp";
+			return REDIRECT_PREFIX + "index.jsp";
 		} else {
 			String logincheck=null;
 			session.setAttribute("failLogin", logincheck);

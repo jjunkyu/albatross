@@ -18,15 +18,27 @@ public class HandlerMapping {
 		}else if(command.equals("search")) {
 			ctrl = new SearchController();
 		}else if(command.equals("login")) {
-			ctrl=new LoginController();
+			ctrl = new LoginController();
 		}else if(command.equals("loginCheck")) {
-			ctrl=new LoginCheckController();
+			ctrl = new LoginCheckController();
 		}else if(command.equals("logout")) {
-			ctrl=new LogoutController();
+			ctrl = new LogoutController();
 		}else if(command.equals("rentBook")) {
 			ctrl = new RentBookController();
 		}else if(command.equals("returnBook")) {
 			ctrl = new returnBookController();
+		}else if(command.equals("bookList")) {
+			ctrl = new BookListController();
+		}else if(command.equals("showDetailContent")) {
+			ctrl = new showDetailContentController();
+		}else if(command.equals("bookDetail")) {
+			ctrl = new BookDetail_jjsController();
+		}else if(command.equals("rentList")) {
+			ctrl = new RentListController();
+		}else if(command.equals("register")) {
+			ctrl = new RegisterController();
+		}else if(command.equals("registerSubmit")) {
+			ctrl = new RegisterSubmitController();
 		}
 		return ctrl;
 	}

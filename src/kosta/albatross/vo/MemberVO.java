@@ -54,7 +54,10 @@ public class MemberVO {
 	public void setcId(String cId) {
 		this.cId = cId;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 
 	@Override
 	public String toString() {
@@ -62,12 +65,18 @@ public class MemberVO {
 				+ cId + "]";
 	}
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 	public ArrayList<RentVO> getRentList() {
 		return rentList;
 	}
 	public void setRentList(ArrayList<RentVO> rentList) {
 		this.rentList = rentList;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 }

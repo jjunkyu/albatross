@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import kosta.albatross.vo.MemberVO;
 import kosta.albatross.vo.PostVO;
 
 public class PostDAO {
@@ -59,7 +60,12 @@ public class PostDAO {
 				e.printStackTrace();
 			}
 	}
-
+	/**
+	 * 페이징을 처리하는 메소드
+	 * @param pagingBean
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<PostVO> getPostList(PagingBean pagingBean) throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		Connection con = null;
@@ -67,16 +73,14 @@ public class PostDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-	
-			//String sql = "select pNo,title,content,to_char(timeposted, 'yyyy.mm.dd') from SEMI_POST";
 			StringBuilder sql = new StringBuilder();
-			sql.append(" SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM( " );
-			sql.append(" SELECT row_number() over(order by pNo desc) as rnum, pNo,title,hits, " );
-			sql.append(" to_char(timeposted,'YYYY.MM.DD') as timeposted,id " );
-			sql.append(" FROM semi_post " );
-			sql.append(" ) p,semi_member m where p.id=m.id and rnum between ? and ? " );
-			sql.append(" order by pNo desc " );
-			
+			sql.append(" SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM( ");
+			sql.append(" SELECT row_number() over(order by pNo desc) as rnum, pNo,title,hits, ");
+			sql.append(" to_char(timeposted,'YYYY.MM.DD') as timeposted,id ");
+			sql.append(" FROM semi_post ");
+			sql.append(" ) p,semi_member m where p.id=m.id and rnum between ? and ? ");
+			sql.append(" order by pNo desc ");
+
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pagingBean.getStartRowNumber());
 			pstmt.setInt(2, pagingBean.getEndRowNumber());
@@ -87,6 +91,10 @@ public class PostDAO {
 				vo.setTitle(rs.getString(2));
 				vo.setTimePosted(rs.getString(3));
 				vo.setHits(rs.getInt(4));
+				MemberVO mvo = new MemberVO();
+				mvo.setId(rs.getString(5));
+				mvo.setName(rs.getString(6));
+				vo.setMemberVO(mvo);
 				list.add(vo);
 			}
 		} finally {
@@ -94,22 +102,83 @@ public class PostDAO {
 		}
 		return list;
 	}
-
-	public int getTotalPostCount() throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int count=0;
+	/**
+	 * 조회수 업데이트 하는 메소드
+	 * @param pNo
+	 * @throws SQLException
+	 */
+	public void updateHit(int pNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
-			con=dataSource.getConnection();
-			String sql="select count(*) from semi_post";
-			pstmt=con.prepareStatement(sql);
-			rs= pstmt.executeQuery();
-			while(rs.next())
+			con = dataSource.getConnection();
+			String sql = "update semi_post set hits=hits+1 where pNo=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pNo);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
+	/**
+	 * 총 게시물의 수를 체크하는 메서드
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getTotalPostCount() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			con = dataSource.getConnection();
+			String sql = "select count(*) from semi_post";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next())
 				count = rs.getInt(1);
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
 		return count;
+	}
+	/**
+	 * 게시글의 번호로 상세정보를 반환받는 메소드
+	 * @param pNo
+	 * @return
+	 * @throws SQLException
+	 */
+	public PostVO getPostByNo(int pNo) throws SQLException {
+		PostVO pvo=null;
+		Connection con= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con=dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select p.title,to_char(p.timeposted,'YYYY.MM.DD  HH24:MI:SS') as timeposted ");
+			sql.append(" ,p.content,p.hits,p.id,m.name ");
+			sql.append(" from semi_post p, semi_member m ");
+			sql.append(" where p.id=m.id and p.pNo=? ");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setInt(1, pNo);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pvo = new PostVO();
+				pvo.setpNo(pNo);
+				pvo.setTitle(rs.getString("title"));
+				pvo.setContent(rs.getString("content"));
+				pvo.setHits(rs.getInt("hits"));
+				pvo.setTimePosted(rs.getString("timeposted"));
+				MemberVO mvo = new MemberVO();
+				mvo.setId(rs.getString("id"));
+				mvo.setName(rs.getString("name"));
+				pvo.setMemberVO(mvo);
+			}
+		} finally {
+			closeAll(rs,pstmt,con);
+		}
+		return pvo;
 	}
 }

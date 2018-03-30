@@ -13,7 +13,7 @@ public class HandlerMapping {
 		Controller ctrl = null;
 		if(command.equals("home")) {
 			ctrl = new HomeController();
-		}else if(command.equals("PostList")) {
+		}else if(command.equals("postList")) {
 			ctrl = new PostListController();
 		}else if(command.equals("search")) {
 			ctrl = new SearchController();
@@ -35,10 +35,13 @@ public class HandlerMapping {
 			ctrl = new BookDetail_jjsController();
 		}else if(command.equals("rentList")) {
 			ctrl = new RentListController();
+<<<<<<< HEAD
 		}else if(command.equals("register")) {
 			ctrl = new RegisterController();
 		}else if(command.equals("registerSubmit")) {
 			ctrl = new RegisterSubmitController();
+=======
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 		}
 		return ctrl;
 	}

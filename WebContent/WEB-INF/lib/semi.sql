@@ -90,22 +90,38 @@ select returndate-sysdate from SEMI_RENT_BOOK where bNo = 1;
 
 
 
--- Search by author - containing authorString
 select * from semi_book where author like '%아작%';
 
-<<<<<<< HEAD
---login check
 select * from semi_member where id=? and password=?
 
 
-=======
 select pNo,title,content,to_char(timeposted, 'yyyy.mm.dd') from SEMI_POST
->>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 
 
 SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM( 
 SELECT row_number() over(order by pNo desc) as rnum, pNo,title,hits, 
 to_char(timeposted,'YYYY.MM.DD') as timeposted,id 
 FROM semi_post
-) p,semi_member m where p.id=m.id and rnum between '1' and '5' 
+) p,semi_member m where p.id=m.id and rnum between '1' and '10' 
 order by pNo desc
+
+SELECT b.bNo,b.title,b.author,b.content,b.publisher,b.isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented
+FROM semi_book)b WHERE rnum BETWEEN 1 AND 3
+ORDER BY bNo DESC
+
+<<<<<<< HEAD
+select p.title,to_char(p.timeposted,'YYYY.MM.DD  HH24:MI:SS') as timeposted
+		,p.content,p.hits,p.id,m.name
+from semi_post p, semi_member m
+where p.id=m.id and p.pNo=3
+
+
+
+SELECT b.bNo,b.title,b.author,b.content,b.publisher
+FROM SEMI_BOOK b, SEMI_RENT_BOOK rb
+WHERE rb.id = 'java' and b.bNo = rb.bNo
+
+
+
+select *from SEMI_BOOK

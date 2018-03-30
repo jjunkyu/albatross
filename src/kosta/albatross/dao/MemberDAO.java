@@ -36,9 +36,6 @@ public class MemberDAO {
 		}
 	}
 	
-	public boolean register(MemberVO memberVO) {
-		return true;
-	}
 	/**
 	 * 로그인 메소드
 	 * @param id
@@ -64,5 +61,43 @@ public class MemberDAO {
 		}
 		return memberVO;
 	}
-	
+	/**
+	 * 회원가입 메서드
+	 * @param memberVO
+	 * @throws SQLException
+	 */
+	public void register(MemberVO memberVO) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try{
+			con=dataSource.getConnection();
+			String sql="insert into semi_member(id,password,name,address) values(?,?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, memberVO.getId());
+			pstmt.setString(2, memberVO.getPassword());
+			pstmt.setString(3, memberVO.getName());
+			pstmt.setString(4, memberVO.getAddress());
+			pstmt.executeUpdate();
+		}finally{
+			closeAll();
+		}
+	}
+	public boolean idcheck(String id) throws SQLException{
+		boolean flag=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=dataSource.getConnection();
+			String sql="select count(*) from semi_member where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			if(rs.next()&&(rs.getInt(1)>0))
+			flag=true;			
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
 }

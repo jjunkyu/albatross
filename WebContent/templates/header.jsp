@@ -9,7 +9,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="dispatcher?command=login">로그인</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="dispatcher?command=register">회원가입</a></li>
+						href="dispatcher?command=registerView">회원가입</a></li>
 				</c:when>
 				<c:otherwise>
 					<li class="nav-item"><a class="nav-link">${sessionScope.loginVO.name}님</a></li>

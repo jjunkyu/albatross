@@ -19,15 +19,12 @@ public class LoginCheckController implements Controller {
 		HttpSession session = request.getSession();
 		if (memberVO != null) {
 			session.setAttribute("loginVO", memberVO);
-<<<<<<< HEAD
-			return REDIRECT_PREFIX + "index.jsp";
-		} else {
-=======
+			
 			//조회수 조회를 위해 배열 선언
 			session.setAttribute("pNoList", new ArrayList<Integer>());
-			return "index.jsp";
-		}else {
->>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
+			
+			return REDIRECT_PREFIX + "index.jsp";
+		} else {		
 			String logincheck=null;
 			session.setAttribute("failLogin", logincheck);
 			request.setAttribute("url", "login.jsp");

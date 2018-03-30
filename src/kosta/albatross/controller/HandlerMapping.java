@@ -17,11 +17,11 @@ public class HandlerMapping {
 			ctrl = new PostListController();
 		}else if(command.equals("search")) {
 			ctrl = new SearchController();
-		}else if(command.equals("login")) {
+		}else if(command.equals("login")) {//로그인 페이지
 			ctrl = new LoginController();
-		}else if(command.equals("loginCheck")) {
+		}else if(command.equals("loginCheck")) {//로그인 성공&실패
 			ctrl = new LoginCheckController();
-		}else if(command.equals("logout")) {
+		}else if(command.equals("logout")) {//로그아웃
 			ctrl = new LogoutController();
 		}else if(command.equals("rentBook")) {
 			ctrl = new RentBookController();
@@ -45,8 +45,8 @@ public class HandlerMapping {
 			ctrl = new RegisterController();
 		}else if(command.equals("idcheck")) {
 			ctrl = new IdCheckController();
-		}else if(command.equals("registerSubmit")) {
-			ctrl = new RegisterSubmitController();
+		}else if(command.equals("postWriteView")) {//게시판글쓰기
+			ctrl = new PostWriteViewController();
 		}
 		return ctrl;
 	}

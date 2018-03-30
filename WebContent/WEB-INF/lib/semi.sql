@@ -2,7 +2,8 @@ create table UserCategory(
 cId number primary key,
 cName varchar2(100) not null
 )
-
+update  semi_post set title='코난' , content='범인은 이안에있다' where pNo='1'
+select * from semi_post where pNo='51'
 select * from UserCategory
 insert into UserCategory(cId,cName) values(0,'일반회원')
 

@@ -240,4 +240,48 @@ public class PostDAO {
 		}
 		return resultVO;
 	}
+
+	public PostVO getPostUpdate(int pNo, String title, String content) throws SQLException {
+		PostVO pvo=null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = dataSource.getConnection();
+			String sql="update  semi_post set title=? , content=? where pNo=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, pNo);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			StringBuilder sql1 = new StringBuilder();
+			sql1.append(" select p.title,to_char(p.timeposted,'YYYY.MM.DD  HH24:MI:SS') as timeposted ");
+			sql1.append(" ,p.content,p.hits,p.id,m.name ");
+			sql1.append(" from semi_post p, semi_member m ");
+			sql1.append(" where p.id=m.id and p.pNo=? ");
+			pstmt = con.prepareStatement(sql1.toString());
+			pstmt.setInt(1, pNo);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				pvo = new PostVO();
+				pvo.setpNo(pNo);
+				pvo.setTitle(rs.getString("title"));
+				pvo.setContent(rs.getString("content"));
+				pvo.setHits(rs.getInt("hits"));
+				pvo.setTimePosted(rs.getString("timeposted"));
+				MemberVO mvo = new MemberVO();
+				mvo.setId(rs.getString("id"));
+				mvo.setName(rs.getString("name"));
+				pvo.setMemberVO(mvo);
+			}
+		} finally {
+			closeAll(pstmt, con);
+		}
+		return pvo;
+	}
 }

@@ -37,7 +37,6 @@ public class HandlerMapping {
 		} else if (command.equals("rentList")) {
 			ctrl = new RentListController();
 		} else if (command.equals("postUpdate")) {
-			System.out.println("update입장");
 			ctrl = new postUpdateController();
 		}else if(command.equals("deletePost")) {
 			ctrl = new deletePostController();

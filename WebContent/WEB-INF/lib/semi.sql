@@ -133,6 +133,6 @@ select * from semi_post where pNo=66
 select *from SEMI_BOOK
 select *from semi_rent_book
 
-update semi_book set isrented=0 where bNo = 1
+update semi_book set isrented=0 where bNo = 72
 
 select *from SEMI_BOOK

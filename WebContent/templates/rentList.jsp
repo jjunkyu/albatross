@@ -5,7 +5,7 @@
 <script type="text/javascript">
 function returnBook(){
 	if(confirm("책 반납함??")){
-		document.returnForm.submit();
+		document.getElementById("returnForm").submit();
 	}
 }
 </script>
@@ -30,12 +30,14 @@ function returnBook(){
 					<td>${bookVO.author}</td>
 					<td>${bookVO.publisher}</td>
 					<td class="btnArea">
-						<form name="returnForm" action="dispatcher">
+						<form id="returnForm" action="${pageContext.request.contextPath}/dispatcher">
 						<input type="hidden" name="command" value="returnBook">
 						<input type="hidden" name="bNo" value="${bookVO.bNo}">
+						<input type="hidden" name="isRented" value="${bookVO.rented}">
 						</form>
 						<button type="button" class="btn" onclick="returnBook()">반납</button>
 					</td>
+					<td>${bookVO.rented}</td>
 				</tr>
 				</c:forEach>
 			</tbody>

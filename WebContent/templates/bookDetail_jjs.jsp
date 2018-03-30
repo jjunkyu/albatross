@@ -46,10 +46,12 @@ function rentBook(){
 						<form name="rentForm" action="dispatcher">
 						<input type="hidden" name="command" value="rentBook">
 						<input type="hidden" name="bNo" value="${bookVO.bNo}">
+						<input type="hidden" name="isRented" value="${bookVO.rented}">
 						</form>
 						<button type="button" class="btn" onclick="rentBook()">대여</button>
 					</td>
 				</tr>
+				
 			</tbody>
 		</table>
 	</div>

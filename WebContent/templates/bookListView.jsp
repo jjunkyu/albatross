@@ -51,7 +51,7 @@
 					<li class="page-item"><a class="page-link" href="dispatcher?command=bookList&bNo=${pop}">${pop}</a></li>
 				</c:when>
 				<c:otherwise>
-					<li class="page-item active"><a class="page-link" class="page-link" href="#">${pop}</a></li>
+					<li class="page-item active"><a class="page-link" href="#">${pop}</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

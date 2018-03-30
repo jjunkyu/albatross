@@ -18,8 +18,9 @@ public class RentBookController implements Controller {
 			return "index.jsp";
 		}else {
 			int bNo = Integer.parseInt(request.getParameter("bNo"));
-			BookDAO.getInstance().changeOfRented(bNo);
-			RentDAO.getInstance().addRentItem(memberVO.getId(), bNo);
+			String isRented = request.getParameter("isRented");
+			BookDAO.getInstance().changeOfRented(bNo,isRented);
+			RentDAO.getInstance().addRentItem(memberVO.getId(),bNo);
 			return REDIRECT_PREFIX + TEMPLATE_PATH + "rent_ok.jsp";
 		}
 	}

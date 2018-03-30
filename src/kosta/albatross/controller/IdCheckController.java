@@ -13,9 +13,9 @@ public class IdCheckController implements Controller {
 		String id=request.getParameter("id");				
 		boolean flag=MemberDAO.getInstance().idcheck(id);		
 		if(flag)
-			return "idcheck_fail.jsp";
+			return TEMPLATE_PATH + "idcheck_fail.jsp";
 		else
-			return "idcheck_ok.jsp";
+			return TEMPLATE_PATH + "idcheck_ok.jsp";
 	}
 
 }

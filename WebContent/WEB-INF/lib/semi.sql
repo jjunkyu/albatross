@@ -123,3 +123,6 @@ SELECT b.bNo,b.title,b.author,b.content,b.publisher
 FROM SEMI_BOOK b, SEMI_RENT_BOOK rb
 WHERE rb.id = 'java' and b.bNo = rb.bNo
 >>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
+
+delete from semi_post where pNo=67;
+select * from semi_post where pNo=66

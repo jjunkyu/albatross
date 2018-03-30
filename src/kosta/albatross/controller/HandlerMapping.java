@@ -35,6 +35,10 @@ public class HandlerMapping {
 			ctrl = new BookDetail_jjsController();
 		}else if(command.equals("rentList")) {
 			ctrl = new RentListController();
+		}else if(command.equals("updateContent")) {
+			ctrl = new UpdateContentController();
+		}else if(command.equals("deletePost")) {
+			ctrl = new deletePostController();
 		}
 		return ctrl;
 	}

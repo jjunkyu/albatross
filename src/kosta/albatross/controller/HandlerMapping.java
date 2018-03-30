@@ -18,11 +18,11 @@ public class HandlerMapping {
 		}else if(command.equals("search")) {
 			ctrl = new SearchController();
 		}else if(command.equals("login")) {
-			ctrl=new LoginController();
+			ctrl = new LoginController();
 		}else if(command.equals("loginCheck")) {
-			ctrl=new LoginCheckController();
+			ctrl = new LoginCheckController();
 		}else if(command.equals("logout")) {
-			ctrl=new LogoutController();
+			ctrl = new LogoutController();
 		}else if(command.equals("rentBook")) {
 			ctrl = new RentBookController();
 		}else if(command.equals("returnBook")) {
@@ -35,9 +35,23 @@ public class HandlerMapping {
 			ctrl = new BookDetail_jjsController();
 		}else if(command.equals("rentList")) {
 			ctrl = new RentListController();
+<<<<<<< HEAD
 		}else if(command.equals("postUpdate")) {
 			System.out.println("update입장");
 			ctrl = new postUpdateController();
+=======
+
+		}else if(command.equals("updateContent")) {
+			ctrl = new UpdateContentController();
+		}else if(command.equals("deletePost")) {
+			ctrl = new deletePostController();
+
+		}else if(command.equals("register")) {
+			ctrl = new RegisterController();
+		}else if(command.equals("registerSubmit")) {
+			ctrl = new RegisterSubmitController();
+
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 		}
 		return ctrl;
 	}

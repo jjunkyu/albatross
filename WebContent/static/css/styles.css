@@ -69,3 +69,13 @@ footer .library-info-wrap {
 nav .nav-item .nav-link {
   font-weight: 600;
 }
+
+.pagingInfo{
+	align-content: center;
+}
+form-group{
+	margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}

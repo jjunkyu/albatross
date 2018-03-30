@@ -8,7 +8,8 @@
 	}
 	function updatePost() {
 		if (confirm("게시글을 수정하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/dispatcher?command=updateContent&pNo=${requestScope.pvo.pNo}";
+			location.href = "${pageContext.request.contextPath}/dispatcher?command=postUpdate&&pNo=${requestScope.pvo.pNo}&&title=${requestScope.pvo.title}&&content=${requestScope.pvo.content}";
+
 		}
 	}
 	function deletePost() {
@@ -33,6 +34,7 @@
 			</td>
 		</tr>
 	</tbody>
+<<<<<<< HEAD
 		<tr>
 			<td colspan="5" class="btnArea">
 			 <c:if test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id}">
@@ -45,4 +47,18 @@
 			 </c:if>
 			 </td>
 		</tr>
+	
+	<tr>
+		<td colspan="5" class="btnArea"><c:if
+				test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id}">
+				<form name="deleteForm"
+					action="${pageContext.request.contextPath}/dispatcher"
+					method="post">
+					<input type="hidden" name="command" value="deletePost">
+					<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
+				</form>
+				<button type="button" class="btn" onclick="deletePost()">삭제</button>
+				<button type="button" class="btn" onclick="updatePost()">수정</button>
+			</c:if></td>
+	</tr>
 </table>

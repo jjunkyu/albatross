@@ -6,6 +6,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="board-wrapper">
+		<form action="dispatcher">
 			<table class="table">
 				<thead>
 					<tr>
@@ -36,10 +37,22 @@
 							<td>${list.hits}</td>
 						</tr>
 					</c:forEach>
-					
+					<c:choose>
+					<c:when test="${sessionScope.loginVO!=null }">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><input type="submit" class="btn btn-primary btn-xs" value="글쓰기">
+							<input type="hidden" name="command" value="postWriteView">
+							</td>
+						</tr>
+					</c:when>
+					</c:choose>
 				</tbody>
 			</table>
-			
+			</form>
 			<div class="pagingInfo">
 				<c:set var="pb" value="${requestScope.listVO.pagingBean}"></c:set>
 		

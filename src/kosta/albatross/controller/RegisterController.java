@@ -19,6 +19,7 @@ public class RegisterController implements Controller {
 		MemberDAO.getInstance().register(memberVO);
 		
 		request.setAttribute("url", "login.jsp");
+		request.setAttribute("page", "login");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 

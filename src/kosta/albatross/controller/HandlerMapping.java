@@ -38,8 +38,6 @@ public class HandlerMapping {
 		}else if(command.equals("postUpdate")) {
 			System.out.println("update입장");
 			ctrl = new postUpdateController();
-		}else if(command.equals("updateContent")) {
-			ctrl = new UpdateContentController();
 		}else if(command.equals("deletePost")) {
 			ctrl = new deletePostController();
 		}else if(command.equals("register")) {

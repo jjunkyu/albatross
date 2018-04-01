@@ -2,14 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-
 	function sendList() {
 		location.href = "${pageContext.request.contextPath}/index.jsp";
 	}
 	function updatePost() {
 		if (confirm("게시글을 수정하시겠습니까?")) {
 			location.href = "${pageContext.request.contextPath}/dispatcher?command=postUpdate&&pNo=${requestScope.pvo.pNo}&&title=${requestScope.pvo.title}&&content=${requestScope.pvo.content}";
-
 		}
 	}
 	function deletePost() {
@@ -18,6 +16,7 @@
 		}
 	}
 </script>
+
 <table class="table">
 	<thead>
 		<tr>
@@ -46,5 +45,4 @@
 			 </c:if>
 			 </td>
 		</tr>
-	
 </table>

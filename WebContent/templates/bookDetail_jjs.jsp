@@ -9,7 +9,11 @@ function rentBook(){
 		location.href="dispatcher?command=home";
 	}else{
 		if(confirm("책 빌릴꺼??")){
-			document.rentForm.submit();
+			if(${bookVO.rented}){
+				alert("대여중이라고 써있는데 누르네ㅡㅡ");
+			}else{
+				document.rentForm.submit();		
+			}
 		}
 	}
 }
@@ -42,10 +46,12 @@ function rentBook(){
 						<form name="rentForm" action="dispatcher">
 						<input type="hidden" name="command" value="rentBook">
 						<input type="hidden" name="bNo" value="${bookVO.bNo}">
+						<input type="hidden" name="isRented" value="${bookVO.rented}">
 						</form>
 						<button type="button" class="btn" onclick="rentBook()">대여</button>
 					</td>
 				</tr>
+				
 			</tbody>
 		</table>
 	</div>

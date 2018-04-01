@@ -119,15 +119,21 @@ select p.title,to_char(p.timeposted,'YYYY.MM.DD  HH24:MI:SS') as timeposted
 from semi_post p, semi_member m
 where p.id=m.id and p.pNo=3
 
-
+delete from semi_rent_book
+select *from semi_rent_book
 
 SELECT b.bNo,b.title,b.author,b.content,b.publisher
 FROM SEMI_BOOK b, SEMI_RENT_BOOK rb
 WHERE rb.id = 'java' and b.bNo = rb.bNo
 
+select b.bNo,b.isRented 
+from semi_book b, semi_rent_book rb where b.bNo=rb.bNo
 delete from semi_post where pNo=67;
 select * from semi_post where pNo=66
 
+select *from SEMI_BOOK
+select *from semi_rent_book
 
+update semi_book set isrented=0 where bNo = 72
 
 select *from SEMI_BOOK

@@ -27,7 +27,7 @@ public class HandlerMapping {
 		} else if (command.equals("rentBook")) {
 			ctrl = new RentBookController();
 		} else if (command.equals("returnBook")) {
-			ctrl = new returnBookController();
+			ctrl = new ReturnBookController();
 		} else if (command.equals("bookList")) {
 			ctrl = new BookListController();
 		} else if (command.equals("showDetailContent")) {
@@ -48,9 +48,9 @@ public class HandlerMapping {
 			ctrl = new IdCheckController();
 		} else if (command.equals("postWriteView")) {// 게시판글쓰기
 			ctrl = new PostWriteViewController();
-		} else if (command.equals("registerView")) { //레지스터 뷰
+		} else if (command.equals("registerView")) { // 레지스터 뷰
 			ctrl = new RegisterViewController();
-		}else if (command.equals("write")) { //레지스터 뷰
+		} else if (command.equals("write")) { // 레지스터 뷰
 			ctrl = new WriteController();
 		}
 		return ctrl;

@@ -57,12 +57,12 @@ public class BookDAO {
 			while (rs.next()) {
 						vo = new BookVO();
 						int rented = 0;
-						rented = rs.getInt(6);
 						vo.setbNo(rs.getInt(1));
 						vo.setTitle(rs.getString(2));
-						vo.setContent(rs.getString(3));
-						vo.setAuthor(rs.getString(4));
+						vo.setAuthor(rs.getString(3));
+						vo.setContent(rs.getString(4));
 						vo.setPublisher(rs.getString(5));
+						rented = rs.getInt(6);
 						if(rented==0)
 							vo.setRented(false);
 						else
@@ -84,20 +84,23 @@ public class BookDAO {
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
+				int rented = 0;
 				bvo = new BookVO();
 				bvo.setbNo(rs.getInt(1));
 				bvo.setTitle(rs.getString(2));
 				bvo.setAuthor(rs.getString(3));
 				bvo.setContent(rs.getString(4));
 				bvo.setPublisher(rs.getString(5));
-				bvo.setRented(rs.getInt(6) == 0 ? false : true);
+				rented = rs.getInt(6);
+				if(rented==0)
+					bvo.setRented(false);
+				else
+					bvo.setRented(true);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+			return bvo;
+		}finally {
 			closeAll();
 		}
-		return bvo;
 	}
 
 	public ArrayList<BookVO> searchByAuthor(String author) throws SQLException {
@@ -166,10 +169,13 @@ public class BookDAO {
 		return count;
 	}
 	
-	public void changeOfRented(int bNo) throws SQLException {
+	public void changeOfRented(int bNo,String isRented) throws SQLException {
 		try {
 			con = ds.getConnection();
-			String sql = "update semi_book set isRented = 1 where bNo = ?";
+			if(isRented.equals("false"))
+				sql = "update semi_book set isRented = 1 where bNo = ?";
+			else
+				sql = "update semi_book set isRented = 0 where bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,bNo);
 			pstmt.executeUpdate();

@@ -1,4 +1,18 @@
+@font-face {
+	font-family: barunpen;
+	src: url(../font/NanumBarunpenR.ttf) format('truetype');
+	font-style:normal;
+	font-weight:normal;
+}
+@font-face {
+	font-family: barunpen;
+	src: url(../font/NanumBarunpenB.ttf) format('truetype');
+	font-weight:bold;
+}
+
+
 body {
+  font-family: barunpen, sans-serif;
   font-weight: 300;
 }
 
@@ -10,8 +24,14 @@ a:visited, a:focus, a:active, a:hover {
   text-decoration: none;
 }
 
+header {
+	position: relative;
+}
+header .logo {
+	position: absolute;
+	top: 20px;
+}
 header .header-panel {
-  border-bottom: 1px solid #eee;
 }
 header .header-panel .login-panel .nav-link {
   font-size: 12px;
@@ -21,7 +41,7 @@ header .header-panel .login-panel .nav-link:last-child {
   padding-right: 15px;
 }
 header .header-links {
-  padding: 20px 0;
+  padding: 10px 0;
 }
 header .header-links > .logo {
   padding-left: 15px;

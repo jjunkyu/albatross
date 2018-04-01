@@ -136,4 +136,8 @@ select *from semi_rent_book
 
 update semi_book set isrented=0 where bNo = 72
 
-select *from SEMI_BOOK
+select *from SEMI_BOOK;
+
+SELECT bNo, title
+FROM SEMI_BOOK
+WHERE title LIKE '%의%' OR AUTHOR LIKE '%의%';

@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="container-fluid">
+	<h3 class="logo">
+	    <a href="dispatcher?command=home"><strong>Kosta 도서관</strong></a>
+	</h3>
 	<div class="header-panel row justify-content-end">
 		<ul class="nav login-panel">
 			<c:choose>
@@ -21,10 +24,7 @@
 			</c:choose>
 		</ul>
 	</div>
-	<div class="header-links row justify-content-between">
-		<h3 class="logo">
-			<a href="dispatcher?command=home"><strong>Kosta 도서관</strong></a>
-		</h3>
+	<div class="header-links row justify-content-end">
 		<nav class="nav-menu">
 			<ul class="nav">
 				<li class="nav-item"><a class="nav-link" href="dispatcher?command=bookList">도서관</a></li>

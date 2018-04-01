@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kosta.albatross.dao.BookDAO;
+import kosta.albatross.dao.PagingBean;
 import kosta.albatross.vo.BookVO;
+import kosta.albatross.vo.ListVO;
 
 public class SearchController implements Controller {
 
@@ -16,17 +18,19 @@ public class SearchController implements Controller {
 		String searchStr = request.getParameter("value");
 		BookDAO dao = BookDAO.getInstance();
 		ArrayList<BookVO> list = null;
+		ListVO listVO = new ListVO();
 		if(searchBy.equals("author")) {
 			list = dao.searchByAuthor(searchStr);
 		} else if(searchBy.equals("title")) {
 			list = dao.searchByTitle(searchStr);
 		} else if(searchBy.equals("mixed")) {
-			
+			list = dao.searchByTitleAndAuthor(searchStr);
 		}
-		request.setAttribute("list", list);
+		listVO.setBookList(list);
+		listVO.setPagingBean(new PagingBean(dao.getTotalBookCount()));
+		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", "bookListView.jsp");
 		request.setAttribute("page", "search-result");
 		return TEMPLATE_PATH + "home.jsp";
 	}
-
 }

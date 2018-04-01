@@ -6,8 +6,8 @@
 <head>
 	<meta content="charset=UTF-8">
 	<title>Home</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/styles.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/styles.css" />
 </head>
 <body>
 	<div id="wrap" class="page ${requestScope.page}">

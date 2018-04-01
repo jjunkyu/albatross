@@ -152,9 +152,52 @@ public class BookDAO {
 
 		return list;
 	}
+	
+	public ArrayList<BookVO> searchByTitleAndAuthor(String pattern) throws SQLException {
+		ArrayList<BookVO> list = null;
+		StringBuilder sql = new StringBuilder();
+		try {
+			con = ds.getConnection();
+			sql.append(" SELECT bNo, title, author, content, publisher, isRented ");
+			sql.append(" WHERE title LIKE ? ");
+			sql.append(" OR author LIKE ? ");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, pattern);
+			pstmt.setString(2, pattern);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				if(list == null) {
+					list = new ArrayList<>();
+				}
+				list.add(new BookVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getInt(6) == 0 ? false : true));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return list;
+	}
 
 
 	public int getTotalPostCount() throws SQLException {
+		int count = 0;
+		try {
+			con = ds.getConnection();
+			String sql = "SELECT count(*) FROM semi_book";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				count = rs.getInt(1);
+		} finally {
+			closeAll();
+		}
+		return count;
+	}
+
+	public int getTotalBookCount() throws SQLException {
 		int count = 0;
 		try {
 			con = ds.getConnection();

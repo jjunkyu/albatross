@@ -14,7 +14,6 @@ public class MemberVO {
 	private String qId;
 	public MemberVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public MemberVO(String id, String password, String address, String name, String cId) {

@@ -7,7 +7,6 @@ public class RentVO {
 	
 	public RentVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RentVO(BookVO bookVO, String rentDate, String returnDate) {

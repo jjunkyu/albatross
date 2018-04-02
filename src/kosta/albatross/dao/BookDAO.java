@@ -159,11 +159,12 @@ public class BookDAO {
 		try {
 			con = ds.getConnection();
 			sql.append(" SELECT bNo, title, author, content, publisher, isRented ");
+			sql.append(" FROM semi_book ");
 			sql.append(" WHERE title LIKE ? ");
 			sql.append(" OR author LIKE ? ");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, pattern);
-			pstmt.setString(2, pattern);
+			pstmt.setString(1, "%" + pattern + "%");
+			pstmt.setString(2, "%" + pattern + "%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				if(list == null) {

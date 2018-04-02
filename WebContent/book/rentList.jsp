@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
 function returnBook(){
-	if(confirm("책 반납함??")){
+	if(confirm("선택한 책을 반납 하시겠습니까???")){
 		document.getElementById("returnForm").submit();
 	}
 }

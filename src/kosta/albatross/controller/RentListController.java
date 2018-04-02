@@ -21,7 +21,7 @@ public class RentListController implements Controller {
 		}else {
 			ArrayList<BookVO> rentList =
 					RentDAO.getInstance().rentList(memberVO.getId());
-			String url = "rentList.jsp";
+			String url = "/book/rentList.jsp";
 			request.setAttribute("rentList", rentList);
 			request.setAttribute("url",url);
 			request.setAttribute("page", "rentList");

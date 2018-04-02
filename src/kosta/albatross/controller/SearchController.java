@@ -26,10 +26,11 @@ public class SearchController implements Controller {
 		} else if(searchBy.equals("mixed")) {
 			list = dao.searchByTitleAndAuthor(searchStr);
 		}
+		String url = "/book/bookListView.jsp";
 		listVO.setBookList(list);
 		listVO.setPagingBean(new PagingBean(dao.getTotalBookCount()));
 		request.setAttribute("listVO", listVO);
-		request.setAttribute("url", "bookListView.jsp");
+		request.setAttribute("url", url);
 		request.setAttribute("page", "search-result");
 		return TEMPLATE_PATH + "home.jsp";
 	}

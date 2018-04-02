@@ -33,7 +33,7 @@ public class HandlerMapping {
 		} else if (command.equals("showDetailContent")) {
 			ctrl = new showDetailContentController();
 		} else if (command.equals("bookDetail")) {
-			ctrl = new BookDetail_jjsController();
+			ctrl = new BookDetailController();
 		} else if (command.equals("rentList")) {
 			ctrl = new RentListController();
 		} else if (command.equals("postUpdate")) {

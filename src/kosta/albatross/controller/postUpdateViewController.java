@@ -18,10 +18,10 @@ public class postUpdateViewController implements Controller {
 		int pNo=Integer.parseInt(request.getParameter("pNo"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		String url = "/post/detailPost.jsp";
 		PostVO pvo = PostDAO.getInstance().getPostUpdate(pNo,title,content);
-
 		request.setAttribute("pvo", pvo);
-		request.setAttribute("url", "detailPost.jsp");
+		request.setAttribute("url", url);
 		request.setAttribute("page", "post-update");
 		return TEMPLATE_PATH + "home.jsp";		
 	}

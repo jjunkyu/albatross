@@ -7,7 +7,8 @@ public class PostWriteViewController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("url", "postWrite.jsp");
+		String url = "/post/postWrite.jsp";
+		request.setAttribute("url", url);
 		request.setAttribute("page", "postWrite");
 		return TEMPLATE_PATH + "home.jsp";
 	}

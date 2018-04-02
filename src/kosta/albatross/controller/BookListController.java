@@ -24,10 +24,11 @@ public class BookListController implements Controller {
 		}
 		ArrayList<BookVO> bookList = BookDAO.getInstance().getBookList(pagingBean);
 		ListVO listVO = new ListVO();
+		String url = "/book/bookListView.jsp";
 		listVO.setBookList(bookList);
 		listVO.setPagingBean(pagingBean);
 		request.setAttribute("listVO", listVO);
-		request.setAttribute("url", "bookListView.jsp");
+		request.setAttribute("url", url);
 		request.setAttribute("page", "library-page");
 		return TEMPLATE_PATH + "home.jsp";
 	}

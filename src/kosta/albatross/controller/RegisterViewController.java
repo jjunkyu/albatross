@@ -7,7 +7,8 @@ public class RegisterViewController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("url", "register.jsp");
+		String url = "/member/register.jsp";
+		request.setAttribute("url", url);
 		request.setAttribute("page", "registerView");
 		return TEMPLATE_PATH + "home.jsp";
 	}

@@ -21,9 +21,9 @@ public class WriteController implements Controller {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			PostVO postVO = PostDAO.getInstance().writeContent(id, title, content);
-			
+			String url = "/post/detailPost.jsp";
 			request.setAttribute("pvo", postVO);
-			request.setAttribute("url", "detailPost.jsp");
+			request.setAttribute("url", url);
 			return TEMPLATE_PATH + "home.jsp";
 		}
 	}

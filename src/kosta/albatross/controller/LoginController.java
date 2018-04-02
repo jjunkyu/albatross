@@ -12,11 +12,11 @@ public class LoginController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session.getAttribute("loginVO") != null) {
-			
 			return REDIRECT_PREFIX + "index.jsp";
 		} else {
+			String url = "/member/login.jsp";
 			session.setAttribute("failLogin", "true");
-			request.setAttribute("url", "login.jsp");
+			request.setAttribute("url", url);
 			request.setAttribute("page", "login");
 			return TEMPLATE_PATH + "home.jsp";
 		}

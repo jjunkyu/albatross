@@ -25,10 +25,10 @@ public class showDetailContentController implements Controller {
 			PostDAO.getInstance().updateHit(pNo);
 			pNoList.add(pNo);
 		}
-		
+		String url = "/post/detailPost.jsp";
 		PostVO vo = PostDAO.getInstance().getPostByNo(pNo);
 		request.setAttribute("pvo", vo);
-		request.setAttribute("url", "detailPost.jsp");
+		request.setAttribute("url", url);
 		request.setAttribute("page", "detail-post-page");
 		return TEMPLATE_PATH + "home.jsp";
 	}

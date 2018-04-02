@@ -5,12 +5,12 @@
 <script type="text/javascript">
 function rentBook(){
 	if(${sessionScope.loginVO==null}){
-		alert("로그인만 된단다 ^^");
+		alert("로그인 이용자만 가능합니다");
 		location.href="dispatcher?command=home";
 	}else{
-		if(confirm("책 빌릴꺼??")){
+		if(confirm("책을 대여하겠습니까?")){
 			if(${bookVO.rented}){
-				alert("대여중이라고 써있는데 누르네ㅡㅡ");
+				alert("이미 대여중인 책입니다");
 			}else{
 				document.rentForm.submit();		
 			}

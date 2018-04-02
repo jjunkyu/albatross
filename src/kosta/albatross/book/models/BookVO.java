@@ -12,7 +12,6 @@ public class BookVO {
 	
 	public BookVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public BookVO(int bNo, String title, String content, String author, String publisher) {
 		super();

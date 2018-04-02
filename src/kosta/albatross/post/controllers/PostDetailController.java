@@ -27,7 +27,7 @@ public class PostDetailController implements Controller {
 			pNoList.add(pNo);
 		}
 		String url = "/post/postDetail.jsp";
-		PostVO vo = PostDAO.getInstance().getPostByNo(pNo);
+		PostVO vo = PostDAO.getInstance().getPostDetail(pNo);
 		request.setAttribute("pvo", vo);
 		request.setAttribute("url", url);
 		request.setAttribute("page", "detail-post-page");

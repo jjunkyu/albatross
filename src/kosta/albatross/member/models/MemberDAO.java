@@ -82,7 +82,7 @@ public class MemberDAO {
 			closeAll();
 		}
 	}
-	public boolean idcheck(String id) throws SQLException{
+	public boolean idCheck(String id) throws SQLException{
 		boolean flag=false;
 		Connection con=null;
 		PreparedStatement pstmt=null;

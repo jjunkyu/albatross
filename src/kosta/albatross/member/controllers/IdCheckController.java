@@ -11,7 +11,7 @@ public class IdCheckController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id=request.getParameter("id");				
-		boolean flag=MemberDAO.getInstance().idcheck(id);		
+		boolean flag=MemberDAO.getInstance().idCheck(id);		
 		if(flag)
 			return "member/idcheck_fail.jsp";
 		else

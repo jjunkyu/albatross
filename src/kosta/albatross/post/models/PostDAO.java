@@ -158,7 +158,7 @@ public class PostDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public PostVO getPostByNo(int pNo) throws SQLException {
+	public PostVO getPostDetail(int pNo) throws SQLException {
 		PostVO pvo = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -214,7 +214,7 @@ public class PostDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public PostVO writeContent(String id, String title, String content) throws SQLException {
+	public PostVO posting(PostVO postVO) throws SQLException {
 		PostVO resultVO=null;
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -225,16 +225,16 @@ public class PostDAO {
 			String sql = "insert into semi_post(pNo,title,content,timeposted,id)" + 
 					" values(semi_post_seq.nextval,?,?,sysdate,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, title);
-			pstmt.setString(2, content);
-			pstmt.setString(3, id);
+			pstmt.setString(1, postVO.getTitle());
+			pstmt.setString(2, postVO.getContent());
+			pstmt.setString(3, postVO.getMemberVO().getId());
 			pstmt.executeQuery();
 			pstmt.close();
 			String sql2="select semi_post_seq.currval from dual";
 			pstmt=con.prepareStatement(sql2);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				resultVO = getPostByNo(rs.getInt(1));
+				resultVO = getPostDetail(rs.getInt(1));
 			}
 			
 		}finally {
@@ -243,20 +243,18 @@ public class PostDAO {
 		return resultVO;
 	}
 
-	public PostVO getPostUpdate(int pNo, String title, String content) throws SQLException {
+	public PostVO getPostUpdate(PostVO postVO) throws SQLException {
 		PostVO pvo=null;
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
-		
 		try {
-
 			con = dataSource.getConnection();
 			String sql="update  semi_post set title=? , content=? where pNo=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, title);
-			pstmt.setString(2, content);
-			pstmt.setInt(3, pNo);
+			pstmt.setString(1, postVO.getTitle());
+			pstmt.setString(2, postVO.getContent());
+			pstmt.setInt(3, postVO.getpNo());
 			pstmt.executeUpdate();
 			pstmt.close();
 			
@@ -266,12 +264,12 @@ public class PostDAO {
 			sql1.append(" from semi_post p, semi_member m ");
 			sql1.append(" where p.id=m.id and p.pNo=? ");
 			pstmt = con.prepareStatement(sql1.toString());
-			pstmt.setInt(1, pNo);
+			pstmt.setInt(1, postVO.getpNo());
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				pvo = new PostVO();
-				pvo.setpNo(pNo);
+				pvo.setpNo(postVO.getpNo());
 				pvo.setTitle(rs.getString("title"));
 				pvo.setContent(rs.getString("content"));
 				pvo.setHits(rs.getInt("hits"));

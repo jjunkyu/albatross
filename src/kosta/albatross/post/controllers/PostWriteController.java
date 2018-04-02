@@ -18,10 +18,13 @@ public class PostWriteController implements Controller {
 			return "index.jsp";
 		}else {
 			MemberVO memberVO = (MemberVO)session.getAttribute("loginVO");
-			String id = memberVO.getId();
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			PostVO postVO = PostDAO.getInstance().writeContent(id, title, content);
+			PostVO pVO = new PostVO();
+			MemberVO mVO = new MemberVO();
+			mVO.setId(memberVO.getId());
+			pVO.setTitle(request.getParameter("title"));
+			pVO.setContent(request.getParameter("content"));
+			pVO.setMemberVO(mVO);
+			PostVO postVO = PostDAO.getInstance().posting(pVO);
 			String url = "/post/postDetail.jsp";
 			request.setAttribute("pvo", postVO);
 			request.setAttribute("url", url);

@@ -97,19 +97,19 @@ public class RentDAO {
 	}
 	
 	public boolean isRentLate(int bNo) throws SQLException {
-		int remainDate = 0;
+		int date = 0;
 		try {
 			con = (Connection) DataSourceManager.getInstance().getDataSource();
-			sql = "select returndate-sysdate from SEMI_RENT_BOOK where bNo = ?";
+			sql = "select sysdate-rentdate from SEMI_RENT_BOOK where bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
 			if(rs.next())
-				remainDate = rs.getInt(1);
-			if(remainDate<0)
-				return true;
-			else
+				date = rs.getInt(1);
+			if(date<7)
 				return false;
+			else
+				return true;
 		} finally {
 			closeAll();
 		}

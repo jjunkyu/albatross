@@ -10,10 +10,10 @@ public class MemberVO {
 	private String name;
 	private String address;
 	private String cId;
-	private ArrayList<RentVO> rentList;
 	private String email;
 	private String answer;
 	private String qId;
+	private ArrayList<RentVO> rentList;
 	public MemberVO() {
 		super();
 	}

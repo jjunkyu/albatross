@@ -7,6 +7,8 @@ public class BookVO {
 	private String author;
 	private String publisher;
 	private boolean isRented;
+	private int rentCount;
+	private String imagePath;
 	
 	public BookVO() {
 		super();
@@ -20,6 +22,7 @@ public class BookVO {
 		this.author = author;
 		this.publisher = publisher;
 	}
+	
 	public BookVO(int bNo, String title, String content, String author, String publisher, boolean isRented) {
 		this(bNo, title, content, author, publisher);
 		this.isRented = isRented;
@@ -59,6 +62,18 @@ public class BookVO {
 	}
 	public void setRented(boolean isRented) {
 		this.isRented = isRented;
+	}
+	public int getRentCount() {
+		return rentCount;
+	}
+	public void setRentCount(int rentCount) {
+		this.rentCount = rentCount;
+	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 }

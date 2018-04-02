@@ -9,7 +9,9 @@ public class MemberVO {
 	private String address;
 	private String cId;
 	private ArrayList<RentVO> rentList;
-
+	private String email;
+	private String answer;
+	private String qId;
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -23,6 +25,32 @@ public class MemberVO {
 		this.address = address;
 		this.cId = cId;
 	}
+	
+	
+	public String getqId() {
+		return qId;
+	}
+
+	public void setqId(String qId) {
+		this.qId = qId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 
 	public String getId() {
 		return id;

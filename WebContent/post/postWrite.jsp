@@ -4,7 +4,7 @@
 <main class="container-fluid">
 <div class="row justify-content-md-center">
 	<form action="dispatcher" method="post">
-		<input type="hidden" name="command" value="write">
+		<input type="hidden" name="command" value="postWrite">
 		<table class="table">
 			<tr>
 				<td>제목 &nbsp;&nbsp; <input type="text" name="title"

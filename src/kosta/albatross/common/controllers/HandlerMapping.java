@@ -3,7 +3,6 @@ package kosta.albatross.common.controllers;
 import kosta.albatross.book.controllers.BookDetailController;
 import kosta.albatross.book.controllers.BookListController;
 import kosta.albatross.book.controllers.BookSearchController;
-import kosta.albatross.member.controllers.IdCheckController;
 import kosta.albatross.member.controllers.LoginCheckController;
 import kosta.albatross.member.controllers.LoginController;
 import kosta.albatross.member.controllers.LogoutController;
@@ -64,8 +63,6 @@ public class HandlerMapping {
 			ctrl = new PostDeleteController();
 		} else if (command.equals("register")) {
 			ctrl = new RegisterController();
-		} else if (command.equals("idcheck")) {
-			ctrl = new IdCheckController();
 		} else if (command.equals("postWriteView")) {// 게시판글쓰기
 			ctrl = new PostWriteViewController();
 		} else if (command.equals("registerView")) { // 레지스터 뷰

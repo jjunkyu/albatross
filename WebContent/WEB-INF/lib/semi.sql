@@ -19,7 +19,7 @@ insert into question(qId,query) values(4,'내가 가장 좋아하는 인스턴�
 insert into question(qId,query) values(5,'첫사랑 이름은?');
 insert into question(qId,query) values(6,'첫키스 장소는?');
 select *from question;
-
+select qId from question where query=?
 
 create table semi_member(
 id varchar2(100) primary key,

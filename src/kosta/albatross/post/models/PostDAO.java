@@ -151,6 +151,24 @@ public class PostDAO {
 		return count;
 	}
 
+	public int getTotalPostCountbyId(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			con = dataSource.getConnection();
+			String sql = "SELECT count(*) FROM semi_post WHERE ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next())
+				count = rs.getInt(1);
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return count;
+	}
 	/**
 	 * 게시글의 번호로 상세정보를 반환받는 메소드
 	 * 
@@ -297,27 +315,35 @@ public class PostDAO {
 	 * @return list
 	 * @throws SQLException
 	 */
-	public ArrayList<PostVO> getMyPosting(String id) throws SQLException {
+	public ArrayList<PostVO> getMyPosting(String id,PagingBean pagingBean) throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" SELECT pNo, id, title ");
-			sql.append(" FROM SEMI_POST ");
-			sql.append(" WHERE id = ? ");
-			pstmt=con.prepareStatement(sql.toString());
+			sql.append(" SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM( ");
+			sql.append(" SELECT row_number() over(order by pNo desc) as rnum, pNo,title,hits, ");
+			sql.append(" to_char(timeposted,'YYYY.MM.DD') as timeposted,id ");
+			sql.append(" FROM semi_post where id = ?");
+			sql.append(" ) p,semi_member m where p.id=m.id and rnum between ? and ? ");
+			sql.append(" order by pNo desc ");
+
+			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, id);
+			pstmt.setInt(2, pagingBean.getStartRowNumber());
+			pstmt.setInt(3, pagingBean.getEndRowNumber());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				PostVO vo = new PostVO();
 				vo.setpNo(rs.getInt(1));
-				vo.setTitle(rs.getString(3));
+				vo.setTitle(rs.getString(2));
+				vo.setTimePosted(rs.getString(3));
+				vo.setHits(rs.getInt(4));
 				MemberVO mvo = new MemberVO();
-				mvo.setId(rs.getString(2));
+				mvo.setId(rs.getString(5));
+				mvo.setName(rs.getString(6));
 				vo.setMemberVO(mvo);
 				list.add(vo);
 			}

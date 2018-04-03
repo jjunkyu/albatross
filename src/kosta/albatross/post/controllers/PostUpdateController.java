@@ -19,7 +19,7 @@ public class PostUpdateController implements Controller {
 			int pNo =Integer.parseInt(request.getParameter("pNo"));
 			String pTitle = request.getParameter("title");
 			String content = request.getParameter("content");
-			String url = "/post/postUpdate.jsp";
+			String url = "/post/postDetail.jsp";
 			PostVO pvo = new PostVO(pNo,pTitle,content,0,null,null);
 			request.setAttribute("PostVO", pvo);
 			request.setAttribute("url", url);

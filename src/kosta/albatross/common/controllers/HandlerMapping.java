@@ -99,6 +99,10 @@ public class HandlerMapping {
 			ctrl = new BookDeleteController();
 		} else if (command.equals("myPosting")) {
 			ctrl = new MyPostingController();
+		}else if(command.equals("memberUpdateView")) {//회원정보수정
+			ctrl = new MemberUpdateViewController();
+		}else if(command.equals("memberUpdate")) {//회원정보수정완료 적용
+			ctrl = new MemberUpdateController();
 		}
 		return ctrl;
 	}

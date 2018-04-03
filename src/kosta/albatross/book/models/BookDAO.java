@@ -105,94 +105,156 @@ public class BookDAO {
 		}
 	}
 
-	public ArrayList<BookVO> searchByAuthor(String author) throws SQLException {
-		ArrayList<BookVO> list = null;
-
+	public ArrayList<BookVO> searchByAuthor(String author, PagingBean pagingBean) throws SQLException {
+		ArrayList<BookVO> list = new ArrayList<BookVO>();
+		BookVO bookVO = null;
 		try {
 			con = ds.getConnection();
-			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where author like ?";
-			pstmt = con.prepareStatement(sql);
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
+			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) ");
+			sql.append("AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append("FROM semi_book where author like ?) b WHERE rnum BETWEEN ? AND ? ");
+			sql.append("ORDER BY bNo DESC");
+			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, "%" + author + "%");
+			pstmt.setInt(2, pagingBean.getStartRowNumber());
+			pstmt.setInt(3, pagingBean.getEndRowNumber());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if (list == null) {
-					list = new ArrayList<>();
-				}
-				list.add(new BookVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getInt(6) == 0 ? false : true));
+				bookVO = new BookVO();
+				bookVO.setbNo(rs.getInt(1));
+				bookVO.setTitle(rs.getString(2));
+				bookVO.setAuthor(rs.getString(3));
+				bookVO.setContent(rs.getString(4));
+				bookVO.setPublisher(rs.getString(5));
+				bookVO.setRented(rs.getInt(6) == 0 ? false : true);
+				list.add(bookVO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeAll();
 		}
-
 		return list;
 	}
 	
-	public int searchByAuthorCount() throws SQLException {
+	public int searchByAuthorCount(String author) throws SQLException {
+		int count = 0;
 		try {
 			con = ds.getConnection();
-			String sql = "";
+			String sql = "select count(*) from semi_book where author like ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + author + "%");
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				count = rs.getInt(1);
 		} finally {
 			closeAll();
 		}
-		return 0;
+		return count;
 	}
 
-	public ArrayList<BookVO> searchByTitle(String title) throws SQLException {
-		ArrayList<BookVO> list = null;
-
+	public ArrayList<BookVO> searchByTitle(String title,PagingBean pagingBean) throws SQLException {
+		ArrayList<BookVO> list = new ArrayList<BookVO>();
+		BookVO bookVO = null;
 		try {
 			con = ds.getConnection();
-			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like ?";
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
+			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) ");
+			sql.append("AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append("FROM semi_book where title like ?) b WHERE rnum BETWEEN ? AND ? ");
+			sql.append("ORDER BY bNo DESC");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, "%" + title + "%");
+			pstmt.setInt(2, pagingBean.getStartRowNumber());
+			pstmt.setInt(3, pagingBean.getEndRowNumber());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				bookVO = new BookVO();
+				bookVO.setbNo(rs.getInt(1));
+				bookVO.setTitle(rs.getString(2));
+				bookVO.setAuthor(rs.getString(3));
+				bookVO.setContent(rs.getString(4));
+				bookVO.setPublisher(rs.getString(5));
+				bookVO.setRented(rs.getInt(6) == 0 ? false : true);
+				list.add(bookVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		return list;
+	}
+	
+	public int searchByTitleCount(String title) throws SQLException {
+		int count = 0;
+		try {
+			con = ds.getConnection();
+			String sql = "select count(*) from semi_book where title like ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + title + "%");
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				if (list == null) {
-					list = new ArrayList<>();
-				}
-				list.add(new BookVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getInt(6) == 0 ? false : true));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			if(rs.next())
+				count = rs.getInt(1);
 		} finally {
 			closeAll();
 		}
-
-		return list;
+		return count;
 	}
 
-	public ArrayList<BookVO> searchByTitleAndAuthor(String pattern) throws SQLException {
-		ArrayList<BookVO> list = null;
-		StringBuilder sql = new StringBuilder();
+	public ArrayList<BookVO> searchByTitleAndAuthor(String pattern, PagingBean pagingBean) throws SQLException {
+		ArrayList<BookVO> list = new ArrayList<BookVO>();
+		BookVO bookVO = null;
 		try {
 			con = ds.getConnection();
-			sql.append(" SELECT bNo, title, author, content, publisher, isRented ");
-			sql.append(" FROM semi_book ");
-			sql.append(" WHERE title LIKE ? ");
-			sql.append(" OR author LIKE ? ");
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
+			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) ");
+			sql.append("AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append("FROM semi_book where title like ? or author like ?) b WHERE rnum BETWEEN ? AND ? ");
+			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, "%" + pattern + "%");
 			pstmt.setString(2, "%" + pattern + "%");
+			pstmt.setInt(3, pagingBean.getStartRowNumber());
+			pstmt.setInt(4, pagingBean.getEndRowNumber());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if (list == null) {
-					list = new ArrayList<>();
-				}
-				list.add(new BookVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getInt(6) == 0 ? false : true));
+				bookVO = new BookVO();
+				bookVO.setbNo(rs.getInt(1));
+				bookVO.setTitle(rs.getString(2));
+				bookVO.setAuthor(rs.getString(3));
+				bookVO.setContent(rs.getString(4));
+				bookVO.setPublisher(rs.getString(5));
+				bookVO.setRented(rs.getInt(6) == 0 ? false : true);
+				list.add(bookVO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeAll();
 		}
-
 		return list;
+	}
+	
+	public int searchByTitleAndAuthorCount(String pattern) throws SQLException {
+		int count = 0;
+		try {
+			con = ds.getConnection();
+			String sql = "select count(*) from semi_book where title like ? or author like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + pattern + "%");
+			pstmt.setString(2, "%" + pattern + "%");
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				count = rs.getInt(1);
+		} finally {
+			closeAll();
+		}
+		return count;
 	}
 
 	public int getTotalBookCount() throws SQLException {

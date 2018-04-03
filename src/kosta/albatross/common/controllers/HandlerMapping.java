@@ -12,6 +12,8 @@ import kosta.albatross.member.controllers.LogoutController;
 import kosta.albatross.member.controllers.MyAccountController;
 import kosta.albatross.member.controllers.RegisterController;
 import kosta.albatross.member.controllers.RegisterViewController;
+import kosta.albatross.member.controllers.memberFindController;
+import kosta.albatross.member.controllers.memberFindViewController;
 import kosta.albatross.post.controllers.PostListController;
 import kosta.albatross.post.controllers.PostWriteViewController;
 import kosta.albatross.post.controllers.PostWriteController;
@@ -54,7 +56,7 @@ public class HandlerMapping {
 		} else if (command.equals("logout")) {// 로그아웃
 			ctrl = new LogoutController();
 			//도서관
-		} else if (command.equals("BookSearch")) {
+		} else if (command.equals("bookSearch")) {
 			ctrl = new BookSearchController();
 		} else if (command.equals("rentBook")) {
 			ctrl = new RentBookController();
@@ -87,6 +89,10 @@ public class HandlerMapping {
 			ctrl = new PostWriteViewController();
 		} else if (command.equals("postWrite")) {
 			ctrl = new PostWriteController();
+		}else if (command.equals("memberFindView")) {
+			ctrl = new memberFindViewController();
+		}else if (command.equals("memberFind")) {
+			ctrl = new memberFindController();
 		} else if (command.equals("myAccount")) {
 			ctrl = new MyAccountController();
 		} else if (command.equals("deleteBook")) {

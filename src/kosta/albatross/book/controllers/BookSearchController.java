@@ -17,34 +17,47 @@ public class BookSearchController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String searchBy = request.getParameter("by");
 		String searchStr = request.getParameter("value");
+		String pNo = request.getParameter("pNo");
 		BookDAO dao = BookDAO.getInstance();
 		ArrayList<BookVO> list = null;
 		PagingBean pagingBean = null;
 		ListVO listVO = new ListVO();
-		if(searchBy.equals("author")) {
-			list = dao.searchByAuthor(searchStr);
-		} else if(searchBy.equals("title")) {
-			list = dao.searchByTitle(searchStr);
-		} else if(searchBy.equals("mixed")) {
-			list = dao.searchByTitleAndAuthor(searchStr);
-		}
-		if(list==null) {
-			return "book/bookSearch_fail.jsp";
-		}else {
-			int totalCount = list.size();
-			String pNo = request.getParameter("pNo");
-			if (pNo == null) {
-				pagingBean = new PagingBean(totalCount);
-			}else {
-				pagingBean = new PagingBean(totalCount,Integer.parseInt(pNo));
+		int totalCount = 0;
+		if(searchBy != null && searchStr != null) {
+			if (searchBy.equals("author")) {
+				totalCount = dao.searchByAuthorCount(searchStr);
+				if (pNo == null) {
+					pagingBean = new PagingBean(totalCount);
+				} else {
+					pagingBean = new PagingBean(totalCount, Integer.parseInt(pNo));
+				}
+				list = dao.searchByAuthor(searchStr, pagingBean);
+			} else if (searchBy.equals("title")) {
+				totalCount = dao.searchByTitleCount(searchStr);
+				if (pNo == null) {
+					pagingBean = new PagingBean(totalCount);
+				} else {
+					pagingBean = new PagingBean(totalCount, Integer.parseInt(pNo));
+				}
+				list = dao.searchByTitle(searchStr, pagingBean);
+			} else if (searchBy.equals("mixed")) {
+				totalCount = dao.searchByTitleAndAuthorCount(searchStr);
+				if (pNo == null) {
+					pagingBean = new PagingBean(totalCount);
+				} else {
+					pagingBean = new PagingBean(totalCount, Integer.parseInt(pNo));
+				}
+				list = dao.searchByTitleAndAuthor(searchStr, pagingBean);
 			}
-			String url = "/book/bookList.jsp";
-			listVO.setBookList(list);
-			listVO.setPagingBean(pagingBean);
-			request.setAttribute("listVO", listVO);
-			request.setAttribute("url", url);
-			request.setAttribute("page", "search-result");
-			return TEMPLATE_PATH + "home.jsp";
 		}
+		if(list==null)
+			return "/book/bookSearch_fail.jsp";
+		String url = "/book/bookSearch_ok.jsp";
+		listVO.setBookList(list);
+		listVO.setPagingBean(pagingBean);
+		request.setAttribute("listVO", listVO);
+		request.setAttribute("url", url);
+		request.setAttribute("page", "bookSearch-ok");
+		return TEMPLATE_PATH + "home.jsp";
 	}
 }

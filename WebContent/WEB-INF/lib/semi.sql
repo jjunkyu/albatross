@@ -6,7 +6,6 @@ drop table UserCategory;
 insert into UserCategory(cId,cName) values(0,'일반회원');
 insert into UserCategory(cId,cName) values(1,'관리자');
 select * from UserCategory;
-
 create table question(
 	qId varchar2(100) primary key,
 	query varchar2(100) not null
@@ -20,7 +19,6 @@ insert into question(qId,query) values(4,'내가 가장 좋아하는 인스턴�
 insert into question(qId,query) values(5,'첫사랑 이름은?');
 insert into question(qId,query) values(6,'첫키스 장소는?');
 select *from question;
-select qId from question where query=?
 
 create table semi_member(
 id varchar2(100) primary key,
@@ -38,6 +36,7 @@ drop table semi_member;
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('java','1','판교','송중기','java@naver.com','개발자',0);
 insert into semi_member(id,password,address,name,eMail,answer,cId,qId) values('admin','1','판교','admin','admin@naver.com','admin','1',0);
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('spring','1','성남','아이유','spring@google.com','서정우',1);
+
 delete from semi_member where id='admin';
 select * from semi_member;
 delete from semi_member where id='admin';
@@ -122,7 +121,8 @@ drop sequence semi_post_seq;
 ----------------------------------
 
 SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
-FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC)
+AS rnum,bNo,title,author,content,publisher,isRented
 FROM semi_book where title like '%해리%') b WHERE rnum BETWEEN 1 AND 10
 ORDER BY bNo DESC
 
@@ -130,12 +130,19 @@ SELECT bNo, title, author, content, publisher, isRented FROM semi_book where tit
 
 
 SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM(
-SELECT row_number() over(order by pNo desc) as rnum, pNo,title,hits,
-to_char(timeposted,'YYYY.MM.DD') as timeposted,id
-FROM semi_post where id = 'java') p,semi_member m 
+SELECT row_number() over(order by pNo desc) as bNo, title, author, content, publisher, isRented
+FROM semi_book where author like '') p,semi_member m 
 where p.id=m.id and rnum between 1 and 20
 order by pNo desc
 
 SELECT count(*) FROM semi_post WHERE ID = 'java';
 
-select count(*) from semi_book where title like '%해리%';
+select count(*) from semi_book where title like '2' or author like '1';
+
+SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC)
+AS rnum,bNo,title,author,content,publisher,isRented 
+FROM semi_book where title like '%2%' or author like '%2%') b WHERE rnum BETWEEN 1 AND 10
+ORDER BY bNo DESC
+
+select count(*) from semi_book where title like '%해리%'

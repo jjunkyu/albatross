@@ -1,5 +1,6 @@
 package kosta.albatross.member.models;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,8 +10,6 @@ import javax.sql.DataSource;
 
 import kosta.albatross.common.models.DataSourceManager;
 import kosta.albatross.rent.models.RentVO;
-
-import java.sql.Connection;
 
 public class MemberDAO {
 	private static MemberDAO instance = new MemberDAO();
@@ -142,7 +141,72 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+
+/**
+ * 아이디/패스워드 찾기위해서 해당메일 정보에 있는 qid값 호출메소드.
+ * @param email
+ * @return
+ * @throws SQLException
+ */
+	public String getMemberFindQid(String email) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String qid=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select qid from semi_member where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				qid=rs.getString(1);
+			}
+		} finally {
+			closeAll();
+		}
+		
+		return qid;
+	}
 	
+/**
+ *아이디/패스워드 찾기 메소드
+ * @param email
+ * @param answer
+ * @param qid
+ * @return
+ * @throws SQLException
+ */
+	public MemberVO getMemberFind(String email, String answer, String qid) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		MemberVO mvo = null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select id , password from semi_member where email=? and answer=? and qid=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, answer);
+			pstmt.setString(3, qid);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				mvo=new MemberVO(rs.getString(1),rs.getString(2),null,null,null);
+			}
+		} finally {
+			closeAll();
+		}
+		
+		return mvo;
+	}
+	
+	/**
+	 * 회원가입시 이메일 중복검사 메서드
+	 * @param email
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean emailCheck(String email) throws SQLException{
 		boolean flag=false;
 		Connection con=null;

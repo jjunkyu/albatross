@@ -4,6 +4,7 @@ import kosta.albatross.book.controllers.BookDeleteController;
 import kosta.albatross.book.controllers.BookDetailController;
 import kosta.albatross.book.controllers.BookListController;
 import kosta.albatross.book.controllers.BookRegisterController;
+import kosta.albatross.book.controllers.BookRegisterViewController;
 import kosta.albatross.book.controllers.BookSearchController;
 import kosta.albatross.member.controllers.IdCheckController;
 import kosta.albatross.member.controllers.LoginCheckController;
@@ -70,6 +71,8 @@ public class HandlerMapping {
 			ctrl = new BookRegisterController();
 		} else if (command.equals("rentList")) {
 			ctrl = new RentListController();
+		} else if (command.equals("bookRegisterView")) {
+			ctrl = new BookRegisterViewController();
 			//게시판
 		} else if (command.equals("postList")) {
 			ctrl = new PostListController();

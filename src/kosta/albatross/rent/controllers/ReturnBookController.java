@@ -20,7 +20,7 @@ public class ReturnBookController implements Controller {
 		}else {
 			int bNo = Integer.parseInt(request.getParameter("bNo"));
 			String isRented = request.getParameter("isRented");
-			RentDAO.getInstance().deleteRentItem(bNo);
+			RentDAO.getInstance().returnRentBook(memberVO.getId(), bNo);
 			BookDAO.getInstance().changeOfRented(bNo,isRented);
 			return REDIRECT_PREFIX + "index.jsp";
 		}

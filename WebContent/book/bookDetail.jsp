@@ -36,10 +36,10 @@ function deleteBook(){
 			</thead>
 			<tbody>
 				<tr>
-					<td>${bookVO.bNo}</td>
-					<td>${bookVO.title}</td>
-					<td>${bookVO.author}</td>
-					<td>${bookVO.publisher}</td>
+					<td>${requestScope.bookVO.bNo}</td>
+					<td>${requestScope.bookVO.title}</td>
+					<td>${requestScope.bookVO.author}</td>
+					<td>${requestScope.bookVO.publisher}</td>
 				</tr>
 				<tr>
 					<td colspan="5" class="content"><pre>${bookVO.content}</pre></td>
@@ -75,7 +75,6 @@ function deleteBook(){
 						</c:otherwise>
 					</c:choose>
 				</tr>
-
 			</tbody>
 		</table>
 	</div>

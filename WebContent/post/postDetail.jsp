@@ -35,7 +35,7 @@
 	</tbody>
 	<tr>
 			<td colspan="5" class="btnArea">
-			 <%-- 일반회원 --%> 
+			 <%-- 일반회원이거나 관리자일 경우--%> 
 			 <c:if test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id || sessionScope.loginVO.cId=='1'}">
 			 <form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher" method="post">
 			 	<input type="hidden" name="command" value="deletePost">

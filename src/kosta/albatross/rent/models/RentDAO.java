@@ -38,33 +38,39 @@ public class RentDAO {
 		}
 	}
 	
-	public ArrayList<BookVO> rentList(String id) throws SQLException {
+	public ArrayList<RentVO> rentList(String id) throws SQLException {
+		ArrayList<RentVO> list = new ArrayList<RentVO>();
+		RentVO rentVO = null;
 		try {
-			ArrayList<BookVO> rentList = new ArrayList<BookVO>();
-			BookVO bookVO = null;
 			con = ds.getConnection();
-			sql = "SELECT b.bNo,b.title,b.author,b.publisher,"
-					+ "b.isRented \r\n" + 
-					"FROM SEMI_BOOK b, SEMI_RENT_BOOK rb\r\n" + 
-					"WHERE rb.id = ? and b.bNo = rb.bNo";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,id);
+			StringBuilder sql = new StringBuilder();
+			sql.append(" SELECT b.bNo,b.title,b.author,b.publisher,b.isRented, ");
+			sql.append(" to_char(rentDate,'YYYY/MM/DD HH') , to_char(returnDate,'YYYY/MM/DD HH') ");
+			sql.append(" FROM semi_book b, semi_rent_book rb ");
+			sql.append(" WHERE rb.id = ? AND b.bNo = rb.bNo ");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int isRented = 0;
-				bookVO = new BookVO();
-				bookVO.setbNo(rs.getInt(1));
-				bookVO.setTitle(rs.getString(2));
-				bookVO.setAuthor(rs.getString(3));
-				bookVO.setPublisher(rs.getString(4));
+				rentVO = new RentVO();
+				rentVO.setBookVO(new BookVO());
+				rentVO.getBookVO().setbNo(rs.getInt(1));
+				rentVO.getBookVO().setTitle(rs.getString(2));
+				rentVO.getBookVO().setAuthor(rs.getString(3));
+				rentVO.getBookVO().setPublisher(rs.getString(4));
 				isRented = rs.getInt(5);
-				if(isRented == 0)
-					bookVO.setRented(false);
-				else
-					bookVO.setRented(true);
-				rentList.add(bookVO);
+				rentVO.setRentDate(rs.getString(6));
+				rentVO.setReturnDate(rs.getString(7));
+				if (isRented == 0) {
+					rentVO.getBookVO().setRented(false);
+				}else { 
+					 rentVO.getBookVO().setRented(true);
+				}
+				list.add(rentVO);
 			}
-			return rentList;
+			return list;
+
 		} finally {
 			closeAll();
 		}
@@ -77,23 +83,23 @@ public class RentDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,id);
 			pstmt.setInt(2, bNo);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		} finally {
 			closeAll();
 		}
 	}
-	
-	public void deleteRentItem(int bNo) throws SQLException {
+
+	public void returnRentBook(String id,int bNo) throws SQLException {
 		try {
 			con = ds.getConnection();
-			sql = "delete from SEMI_RENT_BOOK where bNo = ?";
+			sql = " UPDATE semi_rent_book SET returnDate = sysdate WHERE id = ? AND bNo = ? ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, bNo);
-			pstmt.executeQuery();
+			pstmt.setString(1, id);
+			pstmt.setInt(2, bNo);
+			pstmt.executeUpdate();
 		} finally {
 			closeAll();
 		}
-
 	}
 	
 	public boolean isRentLate(int bNo) throws SQLException {

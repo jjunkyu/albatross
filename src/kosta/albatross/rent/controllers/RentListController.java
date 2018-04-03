@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kosta.albatross.book.models.BookVO;
 import kosta.albatross.common.controllers.Controller;
 import kosta.albatross.member.models.MemberVO;
 import kosta.albatross.rent.models.RentDAO;
+import kosta.albatross.rent.models.RentVO;
 
 public class RentListController implements Controller {
 
@@ -20,8 +20,7 @@ public class RentListController implements Controller {
 		if(session==null || memberVO == null) {
 			return "index.jsp";
 		}else {
-			ArrayList<BookVO> rentList =
-					RentDAO.getInstance().rentList(memberVO.getId());
+			ArrayList<RentVO> rentList = RentDAO.getInstance().rentList(memberVO.getId());
 			String url = "/rent/rentList.jsp";
 			request.setAttribute("rentList", rentList);
 			request.setAttribute("url",url);

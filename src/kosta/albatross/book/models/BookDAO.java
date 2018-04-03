@@ -213,14 +213,19 @@ public class BookDAO {
 			closeAll();
 		}
 	}
-
+	/**
+	 * 도서관에 있는 책을 리스트에서 지우는 메서드
+	 * 
+	 * @param bNo
+	 * @throws SQLException
+	 */
 	public void deleteBook(int bNo) throws SQLException {
 		try {
 			con = ds.getConnection();
-			sql = "delete from semi_book where bNo = ?";
+			sql = "DELETE FROM SEMI_BOOK WHERE bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
-			pstmt.executeUpdate();
+			pstmt.executeQuery();
 		} finally {
 			closeAll();
 		}

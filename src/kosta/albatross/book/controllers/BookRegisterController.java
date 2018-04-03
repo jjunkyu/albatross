@@ -20,10 +20,10 @@ public class BookRegisterController implements Controller {
 		vo.setContent(content);
 		vo.setAuthor(author);
 		vo.setPublisher(publisher);
-		BookDAO.getInstance().bookRegister(vo);
+		BookVO bookVO = BookDAO.getInstance().bookRegister(vo);
 		String url = "/book/bookDetail.jsp";
 		request.setAttribute("url", url);
-		request.setAttribute("bookVO", vo);
+		request.setAttribute("bookVO", bookVO);
 		request.setAttribute("page", "library-page");
 		return TEMPLATE_PATH + "home.jsp";
 	}

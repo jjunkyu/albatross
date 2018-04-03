@@ -13,8 +13,7 @@ public class PostDeleteController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session=request.getSession(false);
-		if(session==null||session.getAttribute("loginVO")==null||
-				request.getMethod().equals("POST")==false){
+		if(session==null||session.getAttribute("loginVO")==null){
 			return REDIRECT_PREFIX + "index.jsp";
 		}
 		String pNo=request.getParameter("pNo");

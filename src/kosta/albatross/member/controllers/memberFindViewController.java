@@ -14,7 +14,7 @@ public class memberFindViewController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ArrayList<String>list = new ArrayList<String>();
 		MemberDAO memberDAO =null;
-		list=memberDAO.getInstance().getMemberFindView();	
+		list=memberDAO.getInstance().questionList();
 
 		String url = "/member/memberFindView.jsp";
 		request.setAttribute("list", list);
@@ -22,5 +22,4 @@ public class memberFindViewController implements Controller {
 		request.setAttribute("page", "member-Find-View");
 		return TEMPLATE_PATH + "home.jsp";
 	}
-
 }

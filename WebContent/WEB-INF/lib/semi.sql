@@ -20,9 +20,6 @@ insert into question(qId,query) values(5,'첫사랑 이름은?');
 insert into question(qId,query) values(6,'첫키스 장소는?');
 select *from question;
 
-select * from semi_member
-select id,password from semi_member where email='skch0122@naver.com' and answer='요리사'
-
 create table semi_member(
 id varchar2(100) primary key,
 password varchar2(100) not null,

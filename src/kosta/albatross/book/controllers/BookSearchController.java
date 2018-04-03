@@ -32,11 +32,11 @@ public class BookSearchController implements Controller {
 			return "book/bookSearch_fail.jsp";
 		}else {
 			int totalCount = list.size();
-			String bNo = request.getParameter("bNo");
-			if (bNo == null) {
+			String pNo = request.getParameter("pNo");
+			if (pNo == null) {
 				pagingBean = new PagingBean(totalCount);
 			}else {
-				pagingBean = new PagingBean(totalCount,Integer.parseInt(bNo));
+				pagingBean = new PagingBean(totalCount,Integer.parseInt(pNo));
 			}
 			String url = "/book/bookList.jsp";
 			listVO.setBookList(list);

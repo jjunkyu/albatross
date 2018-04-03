@@ -38,6 +38,11 @@ public class HandlerMapping {
 		if (command.equals("home")) {
 			ctrl = new HomeController();
 			//회원
+		} else if (command.equals("privacyPolicy")) {
+			ctrl = new PrivacyPolicyController();
+		} else if (command.equals("termsOfUse")) {
+			ctrl = new TermsOfUseController();
+			// footer.jsp의 이용약관, 개인정보처리방침
 		} else if (command.equals("register")) {
 			ctrl = new RegisterController();
 		} else if (command.equals("registerView")) { // 레지스터 뷰

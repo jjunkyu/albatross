@@ -29,7 +29,7 @@ public class BookSearchController implements Controller {
 			list = dao.searchByTitleAndAuthor(searchStr);
 		}
 		if(list==null) {
-			return "index.jsp";
+			return "book/bookSearch_fail.jsp";
 		}else {
 			int totalCount = list.size();
 			String bNo = request.getParameter("bNo");

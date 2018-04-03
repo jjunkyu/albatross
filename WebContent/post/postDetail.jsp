@@ -35,14 +35,26 @@
 	</tbody>
 		<tr>
 			<td colspan="5" class="btnArea">
-			 <c:if test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id}">
+			 <c:choose>
+			 <%-- 일반회원 --%> 
+			 <c:when test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id}">
 			 <form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher" method="post">
 			 	<input type="hidden" name="command" value="deletePost">
 			 	<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
 			 </form>
 			 <button type="button" class="btn" onclick="deletePost()">삭제</button>
 			 <button type="button" class="btn" onclick="updatePost()">수정</button>
-			 </c:if>
+			 </c:when>
+			 <%-- 관리자 --%>
+			 <c:when test="${requestScope.pvo.memberVO.cId='1'==sessionScope.loginVO.cId=='1'}">
+				<form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher" method="post">
+			 	<input type="hidden" name="command" value="deletePost">
+			 	<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
+			 </form>
+			 <button type="button" class="btn" onclick="deletePost()">삭제</button>
+			 <button type="button" class="btn" onclick="updatePost()">수정</button>
+			 </c:when>
+			 </c:choose>
 			 </td>
 		</tr>
 </table>

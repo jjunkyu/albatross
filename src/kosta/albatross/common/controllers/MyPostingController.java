@@ -19,7 +19,7 @@ public class MyPostingController implements Controller {
 		if (session == null || memberVO == null) {
 			return REDIRECT_PREFIX + "index.jsp";
 		}
-		ArrayList<PostVO> list = PostDAO.getInstance().getMyPostin(memberVO.getId());
+		ArrayList<PostVO> list = PostDAO.getInstance().getMyPosting(memberVO.getId());
 		String url = "/member/myPosting.jsp";
 		request.setAttribute("list", list);
 		request.setAttribute("url", url);

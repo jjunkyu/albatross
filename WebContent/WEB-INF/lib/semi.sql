@@ -122,4 +122,9 @@ drop table semi_post;
 drop sequence semi_post_seq;
 ----------------------------------
 
+SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented
+FROM semi_book where title like '%해리%') b WHERE rnum BETWEEN 1 AND 10
+ORDER BY bNo DESC
 
+SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like '%해리%';

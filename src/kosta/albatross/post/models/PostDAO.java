@@ -297,7 +297,7 @@ public class PostDAO {
 	 * @return list
 	 * @throws SQLException
 	 */
-	public ArrayList<PostVO> getMyPostin(String id) throws SQLException {
+	public ArrayList<PostVO> getMyPosting(String id) throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;

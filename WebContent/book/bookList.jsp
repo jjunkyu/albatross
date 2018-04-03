@@ -35,6 +35,11 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<form action="dispatcher" method="post">
+			<span style="float: right"><input type="submit" class="btn btn-primary btn-xs" value="책등록"> </span>
+				 <input type="hidden" name="command" value="bookRegister">
+		</form>
 	</div>
 </div>
 <div class="row pagingInfo justify-content-center">

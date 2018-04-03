@@ -36,11 +36,12 @@ constraint fk_qId foreign key(qId) references question(qId)
 )
 drop table semi_member;
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('java','1','판교','송중기','java@naver.com','개발자',0);
+insert into semi_member(id,password,address,name,eMail,answer,cId,qId) values('admin','1','판교','admin','admin@naver.com','admin','1',0);
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('spring','1','성남','아이유','spring@google.com','서정우',1);
 insert into semi_member(id,password,address,name,eMail,answer,cId,qId) values('admin','1','판교','admin','admin@naver.com','admin','1',0);
 delete from semi_member where id='admin';
 select * from semi_member;
-
+delete from semi_member where id='admin';
 create table semi_book(
 bNo number primary key,
 title varchar2(100) not null,
@@ -83,7 +84,7 @@ create table semi_post(
 create sequence semi_post_seq;
 drop sequence semi_post_seq;
 drop table semi_post;
-insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'자유게시판의 제목','자유게시판 내용이 들어갑니다',sysdate,'spring');
+insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'자유게시판의 제목','자유게시판 내용이 들어갑니다',sysdate,'java');
 select * from SEMI_POST;
 
 select * from semi_book where author like '%아작%';

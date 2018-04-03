@@ -14,8 +14,8 @@
 			<div class="form-group">
 				<label for="userPassword">질문</label> 
 				<select name="question">
-					<c:forEach items="${requestScope.list }" var="questionList">
-						<option value="${questionList }">${questionList }</option>
+					<c:forEach items="${requestScope.list }" var="questionList" varStatus="qId">
+						<option value=${qId.index }>${questionList }</option>
 					</c:forEach>
 				</select>
 				 <input type="text" class="form-control" name="question_answer"

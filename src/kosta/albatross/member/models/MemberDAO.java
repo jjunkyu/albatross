@@ -152,34 +152,6 @@ public class MemberDAO {
 	}
 
 	/**
-	 * 아이디/패스워드 찾기위해서 해당메일 정보에 있는 qid값 호출메소드.
-	 * 
-	 * @param email
-	 * @return
-	 * @throws SQLException
-	 */
-	public String getMemberFindQid(String email) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String qid = null;
-		try {
-			con = dataSource.getConnection();
-			String sql = "select qid from semi_member where email=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, email);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				qid = rs.getString(1);
-			}
-		} finally {
-			closeAll();
-		}
-
-		return qid;
-	}
-
-	/**
 	 * 아이디/패스워드 찾기 메소드
 	 * 
 	 * @param email

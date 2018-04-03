@@ -33,7 +33,7 @@
 			</td>
 		</tr>
 	</tbody>
-		<tr>
+	<tr>
 			<td colspan="5" class="btnArea">
 			 <%-- 일반회원이거나 관리자일 경우--%> 
 			 <c:if test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id || sessionScope.loginVO.cId=='1'}">

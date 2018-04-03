@@ -129,6 +129,17 @@ public class BookDAO {
 
 		return list;
 	}
+	
+	public int searchByAuthorCount() throws SQLException {
+		try {
+			con = ds.getConnection();
+			String sql = "";
+			pstmt = con.prepareStatement(sql);
+		} finally {
+			closeAll();
+		}
+		return 0;
+	}
 
 	public ArrayList<BookVO> searchByTitle(String title) throws SQLException {
 		ArrayList<BookVO> list = null;

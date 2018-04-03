@@ -127,3 +127,15 @@ FROM semi_book where title like '%해리%') b WHERE rnum BETWEEN 1 AND 10
 ORDER BY bNo DESC
 
 SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like '%해리%';
+
+
+SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM(
+SELECT row_number() over(order by pNo desc) as rnum, pNo,title,hits,
+to_char(timeposted,'YYYY.MM.DD') as timeposted,id
+FROM semi_post where id = 'java') p,semi_member m 
+where p.id=m.id and rnum between 1 and 20
+order by pNo desc
+
+SELECT count(*) FROM semi_post WHERE ID = 'java';
+
+select count(*) from semi_book where title like '%해리%';

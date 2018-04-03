@@ -19,9 +19,10 @@ public class RegisterController implements Controller {
 		String email=request.getParameter("email");
 		String answer=request.getParameter("anwer");
 		String qid=request.getParameter("qid");
+		System.out.println(qid);
 		
 		MemberVO memberVO=new MemberVO(id,password,name,address,null,email,answer,qid);	
-		
+		System.out.println(memberVO.getqId());
 		MemberDAO.getInstance().register(memberVO);
 		String url = "/member/login.jsp";
 		request.setAttribute("url", url);

@@ -225,4 +225,23 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+	public String questionQuery(String qid) throws SQLException {
+		String query=null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select query from question where qid=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, qid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				query = rs.getString(1);
+			}
+		}finally {
+			closeAll();
+		}
+		return query;
+	}
 }

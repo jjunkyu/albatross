@@ -7,7 +7,7 @@
 	}
 	function updatePost() {
 		if (confirm("게시글을 수정하시겠습니까?")) {
-			location.href = "dispatcher?command=postUpdate&pNo=${requestScope.pvo.pNo}&title=${requestScope.pvo.title}&content=${requestScope.pvo.content} ";
+			location.href = "dispatcher?command=postUpdateView&pNo=${requestScope.pvo.pNo}";
 		}
 	}
 	function deletePost() {

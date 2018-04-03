@@ -3,25 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="//code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
 
-	$(document).ready(function() {
-		$("#repeatPassword,#password").keyup(function() {
-			var password=$("#password").val();
-			var repeatPassword=$("#repeatPassword").val();
-			if(password!=repeatPassword){
-				$("#checkPass").html('비밀번호가 일치하지 않습니다').css("color","red");
-				$("#registerBtn").prop("disabled", true);
-				
-			}else{
-				$("#checkPass").html('비밀번호가 일치합니다').css("color","black");
-				$("#registerBtn").prop("disabled", false);
-				
-			}
-		});
-		
-	});
-</script>
 <main class="container-fluid">
 	<div class="row justify-content-md-center">
 		<div class="col-sm-9">
@@ -44,14 +26,7 @@
 					<input type="password" id="password" name="password" required="required" value="${sessionScope.loginVO.password}">
 					</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-6">패스워드 확인 : </label>
-				<div class="col-sm-9">
-				<input type="password" id="repeatPassword" name="repeatPassword" required="required">
-				</div>
-				<span id="checkPass" style="color:red;font-weight:bold;font-size:smaller" >
-				</span>
-			</div> 
+			
 			<div class="form-group">
 				<label class="control-label col-sm-6">이름 : </label>
 				<div class="col-sm-9">
@@ -71,14 +46,14 @@
 				</div>
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">${sessionScope.pidQuery}:</label>
+				<label class="control-label col-sm-6">${requestScope.pidQuery}:</label>
 				<div class="col-sm-6">
-				<input type="text" name="anwer" required="required" value="${sessionScope.loginVO.answer}"> 
+				<input type="text" name="answer" required="required" value="${sessionScope.loginVO.answer}"> 
 				</div>
 			</div> 
 			<div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
-                        <button id="updateBtn" type="submit" class="btn btn-primary btn-block" disabled="disabled">수정 완료</button>
+                        <button id="updateBtn" type="submit" class="btn btn-primary btn-block">수정 완료</button>
                     </div>
                 </div>
 		</form>

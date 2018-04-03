@@ -1,14 +1,14 @@
 package kosta.albatross.member.models;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
 import kosta.albatross.common.models.DataSourceManager;
-
-import java.sql.Connection;
 
 public class MemberDAO {
 	private static MemberDAO instance = new MemberDAO();
@@ -100,4 +100,70 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+
+	public ArrayList<String> getMemberFindView() throws SQLException {
+		ArrayList<String>list = new ArrayList<String>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select query from question";
+			pstmt = con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		} finally {
+			closeAll();
+		}
+		
+		return list;
+	}
+
+	public String getMemberFindQid(String email) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String qid=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select qid from semi_member where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				qid=rs.getString(1);
+			}
+		} finally {
+			closeAll();
+		}
+		
+		return qid;
+	}
+
+	public MemberVO getMemberFind(String email, String answer, String qid) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		MemberVO mvo = null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select id , password from semi_member where email=? and answer=? and qid=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, answer);
+			pstmt.setString(3, qid);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				mvo=new MemberVO(rs.getString(1),rs.getString(2),null,null,null);
+			}
+		} finally {
+			closeAll();
+		}
+		
+		return mvo;
+	}
+	
 }

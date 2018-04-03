@@ -9,6 +9,8 @@ import kosta.albatross.member.controllers.LoginController;
 import kosta.albatross.member.controllers.LogoutController;
 import kosta.albatross.member.controllers.RegisterController;
 import kosta.albatross.member.controllers.RegisterViewController;
+import kosta.albatross.member.controllers.memberFindController;
+import kosta.albatross.member.controllers.memberFindViewController;
 import kosta.albatross.post.controllers.PostListController;
 import kosta.albatross.post.controllers.PostWriteViewController;
 import kosta.albatross.post.controllers.PostWriteController;
@@ -72,6 +74,10 @@ public class HandlerMapping {
 			ctrl = new RegisterViewController();
 		} else if (command.equals("postWrite")) {
 			ctrl = new PostWriteController();
+		}else if (command.equals("memberFindView")) {
+			ctrl = new memberFindViewController();
+		}else if (command.equals("memberFind")) {
+			ctrl = new memberFindController();
 		}
 		return ctrl;
 	}

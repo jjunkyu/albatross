@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<main class="container-fluid">
+<main class="container">
 <div class="row">
 	<div class="col-sm-12">
 		<table class="table">
@@ -35,6 +35,12 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<c:if test="${sessionScope.loginVO.cId=='1'}">
+		<form action="dispatcher" method="post">
+			<span style="float: right"><input type="submit" class="btn btn-primary btn-xs" value="책등록"> </span>
+				 <input type="hidden" name="command" value="bookRegisterView">
+		</form>
+		</c:if>
 	</div>
 </div>
 <div class="row pagingInfo justify-content-center">

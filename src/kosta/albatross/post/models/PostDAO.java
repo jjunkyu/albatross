@@ -151,6 +151,24 @@ public class PostDAO {
 		return count;
 	}
 
+	public int getTotalPostCountbyId(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			con = dataSource.getConnection();
+			String sql = "SELECT count(*) FROM semi_post WHERE ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next())
+				count = rs.getInt(1);
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return count;
+	}
 	/**
 	 * 게시글의 번호로 상세정보를 반환받는 메소드
 	 * 
@@ -284,4 +302,48 @@ public class PostDAO {
 		}
 		return pvo;
 	}
+	/**
+	 * myAccount 에서 log in 한 사람이 자유게시판에서 쓴 글의 목록을 보여주는 메서드
+	 * 목록에는 작성자 id, 글번호, 글 제목을 보여준다
+	 * 목록은 ArrayList<PostVO> 의 list 란 변수로 받아온다
+	 * sql 문은
+	 *  SELECT pNo, id, title
+		FROM SEMI_POST
+		WHERE id = 'java'
+	 * @param id 
+		
+	 * @return list
+	 * @throws SQLException
+	 */
+	public ArrayList<PostVO> getMyPostin(String id) throws SQLException {
+		ArrayList<PostVO> list = new ArrayList<PostVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append(" SELECT pNo, id, title ");
+			sql.append(" FROM SEMI_POST ");
+			sql.append(" WHERE id = ? ");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PostVO vo = new PostVO();
+				vo.setpNo(rs.getInt(1));
+				vo.setTitle(rs.getString(3));
+				MemberVO mvo = new MemberVO();
+				mvo.setId(rs.getString(2));
+				vo.setMemberVO(mvo);
+				list.add(vo);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
+
+	
 }

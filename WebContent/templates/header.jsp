@@ -19,7 +19,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="dispatcher?command=logout">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="dispatcher?command=rentList">내 계정</a></li>
+						href="dispatcher?command=myAccount">내 계정</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

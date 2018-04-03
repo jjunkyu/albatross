@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 import kosta.albatross.common.models.DataSourceManager;
 import kosta.albatross.common.models.PagingBean;
 
-
 public class BookDAO {
 
 	private static BookDAO instance = new BookDAO();
@@ -44,12 +43,13 @@ public class BookDAO {
 
 	public ArrayList<BookVO> getBookList(PagingBean pagingBean) throws SQLException {
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
-			BookVO vo = null;
+		BookVO vo = null;
 		try {
 			con = ds.getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
-			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append(
+					"FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented ");
 			sql.append("FROM semi_book) b WHERE rnum BETWEEN ? AND ? ");
 			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());
@@ -57,19 +57,19 @@ public class BookDAO {
 			pstmt.setInt(2, pagingBean.getEndRowNumber());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-						vo = new BookVO();
-						int rented = 0;
-						vo.setbNo(rs.getInt(1));
-						vo.setTitle(rs.getString(2));
-						vo.setAuthor(rs.getString(3));
-						vo.setContent(rs.getString(4));
-						vo.setPublisher(rs.getString(5));
-						rented = rs.getInt(6);
-						if(rented==0)
-							vo.setRented(false);
-						else
-							vo.setRented(true);
-						list.add(vo);
+				vo = new BookVO();
+				int rented = 0;
+				vo.setbNo(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setAuthor(rs.getString(3));
+				vo.setContent(rs.getString(4));
+				vo.setPublisher(rs.getString(5));
+				rented = rs.getInt(6);
+				if (rented == 0)
+					vo.setRented(false);
+				else
+					vo.setRented(true);
+				list.add(vo);
 			}
 		} finally {
 			closeAll();
@@ -94,13 +94,13 @@ public class BookDAO {
 				bvo.setContent(rs.getString(4));
 				bvo.setPublisher(rs.getString(5));
 				rented = rs.getInt(6);
-				if(rented==0)
+				if (rented == 0)
 					bvo.setRented(false);
 				else
 					bvo.setRented(true);
 			}
 			return bvo;
-		}finally {
+		} finally {
 			closeAll();
 		}
 	}
@@ -154,7 +154,7 @@ public class BookDAO {
 
 		return list;
 	}
-	
+
 	public ArrayList<BookVO> searchByTitleAndAuthor(String pattern) throws SQLException {
 		ArrayList<BookVO> list = null;
 		StringBuilder sql = new StringBuilder();
@@ -169,7 +169,7 @@ public class BookDAO {
 			pstmt.setString(2, "%" + pattern + "%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if(list == null) {
+				if (list == null) {
 					list = new ArrayList<>();
 				}
 				list.add(new BookVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
@@ -180,7 +180,7 @@ public class BookDAO {
 		} finally {
 			closeAll();
 		}
-		
+
 		return list;
 	}
 
@@ -198,16 +198,28 @@ public class BookDAO {
 		}
 		return count;
 	}
-	
-	public void changeOfRented(int bNo,String isRented) throws SQLException {
+
+	public void changeOfRented(int bNo, String isRented) throws SQLException {
 		try {
 			con = ds.getConnection();
-			if(isRented.equals("false"))
+			if (isRented.equals("false"))
 				sql = "update semi_book set isRented = 1 where bNo = ?";
 			else
 				sql = "update semi_book set isRented = 0 where bNo = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,bNo);
+			pstmt.setInt(1, bNo);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll();
+		}
+	}
+
+	public void deleteBook(int bNo) throws SQLException {
+		try {
+			con = ds.getConnection();
+			sql = "delete from semi_book where bNo = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
 			pstmt.executeUpdate();
 		} finally {
 			closeAll();

@@ -1,5 +1,6 @@
 package kosta.albatross.common.controllers;
 
+import kosta.albatross.book.controllers.BookDeleteController;
 import kosta.albatross.book.controllers.BookDetailController;
 import kosta.albatross.book.controllers.BookListController;
 import kosta.albatross.book.controllers.BookSearchController;
@@ -72,6 +73,8 @@ public class HandlerMapping {
 			ctrl = new RegisterViewController();
 		} else if (command.equals("postWrite")) {
 			ctrl = new PostWriteController();
+		} else if (command.equals("deleteBook")) {
+			ctrl = new BookDeleteController();
 		}
 		return ctrl;
 	}

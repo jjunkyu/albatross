@@ -83,7 +83,7 @@ create table semi_post(
 create sequence semi_post_seq;
 drop sequence semi_post_seq;
 drop table semi_post;
-insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'자유게시판의 제목','자유게시판 내용이 들어갑니다',sysdate,'spring');
+insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'자유게시판의 제목','자유게시판 내용이 들어갑니다',sysdate,'java');
 select * from SEMI_POST;
 
 select * from semi_book where author like '%아작%';

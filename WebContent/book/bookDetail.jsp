@@ -17,6 +17,11 @@ function rentBook(){
 		}
 	}
 }
+function deleteBook(){
+		if(confirm("책을 삭제하시겠습니까?")){
+			document.deleteForm.submit();
+		}
+}
 </script>
 <div class="row">
 	<div class="col-sm-12">
@@ -41,9 +46,24 @@ function rentBook(){
 						<pre>${bookVO.content}</pre>
 					</td>
 				</tr>
+				<c:choose>
+				<tr>
+					<%-- admin : delete book button --%>
+					<c:when test="${sessionScope.loginVO.cId == '1'}">
+					<td colspan="5" class="btnArea">
+					
+						<form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher">
+						<input type="hidden" name="command" value="deleteBook">
+						<input type="hidden" name="bNo" value="${bookVO.bNo}">
+						</form>
+						<button type="button" class="btn" onclick="deleteBook()">삭제</button>
+					</td>
+					</c:when>
+				</tr>
+					<c:otherwise>
 				<tr>
 					<td colspan="5" class="btnArea">
-						<form name="rentForm" action="dispatcher">
+						<form name="rentForm" action="${pageContext.request.contextPath}/dispatcher">
 						<input type="hidden" name="command" value="rentBook">
 						<input type="hidden" name="bNo" value="${bookVO.bNo}">
 						<input type="hidden" name="isRented" value="${bookVO.rented}">
@@ -51,7 +71,8 @@ function rentBook(){
 						<button type="button" class="btn" onclick="rentBook()">대여</button>
 					</td>
 				</tr>
-				
+					</c:otherwise>
+				</c:choose>
 			</tbody>
 		</table>
 	</div>

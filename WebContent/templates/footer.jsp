@@ -4,8 +4,8 @@
     <div class="row">
         <nav class="internal-links">
             <ul class="nav">
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/topic/termsOfUse.jsp">이용약관</a></li>
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/topic/privacyPolicy.jsp">개인정보처리방침</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/dispatcher?command=privacyPolicy">이용약관</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/dispatcher?command=termsOfUse">개인정보처리방침</a></li>
             </ul>
         </nav>
     </div>

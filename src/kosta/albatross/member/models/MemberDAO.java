@@ -1,14 +1,15 @@
 package kosta.albatross.member.models;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
 import kosta.albatross.common.models.DataSourceManager;
-
-import java.sql.Connection;
+import kosta.albatross.rent.models.RentVO;
 
 public class MemberDAO {
 	private static MemberDAO instance = new MemberDAO();
@@ -78,17 +79,50 @@ public class MemberDAO {
 		PreparedStatement pstmt=null;
 		try{
 			con=dataSource.getConnection();
-			String sql="insert into semi_member(id,password,name,address) values(?,?,?,?)";
+			
+			String sql="insert into semi_member(id,password,address,name,eMail,answer,qId) values(?,?,?,?,?,?,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getId());
 			pstmt.setString(2, memberVO.getPassword());
-			pstmt.setString(3, memberVO.getName());
-			pstmt.setString(4, memberVO.getAddress());
+			pstmt.setString(3, memberVO.getAddress());
+			pstmt.setString(4, memberVO.getName());
+			pstmt.setString(5, memberVO.getEmail());
+			pstmt.setString(6, memberVO.getAnswer());
+			pstmt.setString(7, memberVO.getqId());
 			pstmt.executeUpdate();
 		}finally{
 			closeAll();
 		}
 	}
+	/**
+	 * 회원가입 시 질문지 목록 받아오는 메서드
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<String> questionList() throws SQLException{
+		ArrayList<String> list = new ArrayList<>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select query from question";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}finally {
+			closeAll();
+		}
+		return list;
+	}
+	/**
+	 * 회원가입 시 아이디 중복확인하는 메소드
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean idCheck(String id) throws SQLException{
 		boolean flag=false;
 		Connection con=null;
@@ -99,6 +133,90 @@ public class MemberDAO {
 			String sql="select count(*) from semi_member where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			if(rs.next()&&(rs.getInt(1)>0))
+			flag=true;			
+		}finally{
+			closeAll();
+		}
+		return flag;
+	}
+
+/**
+ * 아이디/패스워드 찾기위해서 해당메일 정보에 있는 qid값 호출메소드.
+ * @param email
+ * @return
+ * @throws SQLException
+ */
+	public String getMemberFindQid(String email) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String qid=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select qid from semi_member where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				qid=rs.getString(1);
+			}
+		} finally {
+			closeAll();
+		}
+		
+		return qid;
+	}
+	
+/**
+ *아이디/패스워드 찾기 메소드
+ * @param email
+ * @param answer
+ * @param qid
+ * @return
+ * @throws SQLException
+ */
+	public MemberVO getMemberFind(String email, String answer, String qid) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		MemberVO mvo = null;
+		try {
+			con=dataSource.getConnection();
+			String sql="select id , password from semi_member where email=? and answer=? and qid=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, answer);
+			pstmt.setString(3, qid);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				mvo=new MemberVO(rs.getString(1),rs.getString(2),null,null,null);
+			}
+		} finally {
+			closeAll();
+		}
+		
+		return mvo;
+	}
+	
+	/**
+	 * 회원가입시 이메일 중복검사 메서드
+	 * @param email
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean emailCheck(String email) throws SQLException{
+		boolean flag=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=dataSource.getConnection();
+			String sql="select count(*) from semi_member where eMail=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,email);
 			rs=pstmt.executeQuery();
 			if(rs.next()&&(rs.getInt(1)>0))
 			flag=true;			

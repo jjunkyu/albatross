@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+function memberfind(){
+	location.href='dispatcher?command=memberFindView';
+}
+</script>
+
+
 <main class="container-fluid">
 	<div class="row justify-content-md-center">
 		<div class="col-sm-3">
@@ -23,7 +30,10 @@
 					</c:choose>
 				</div>
 				<button type="submit" class="btn btn-primary">login</button>
+			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기</button>
+				
 			</form>
+				
 		
 		</div>
 	</div>

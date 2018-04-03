@@ -21,22 +21,18 @@ public class MyPostingController implements Controller {
 		if (session == null || memberVO == null) {
 			return REDIRECT_PREFIX + "index.jsp";
 		}
-		String pno = request.getParameter("pageNo");
+		String pNo = request.getParameter("pageNo");
 		PagingBean pagingBean = null;
 		int totalCount = PostDAO.getInstance().getTotalPostCountbyId(memberVO.getId());
-		if (pno == null) {
+		if (pNo == null) {
 			pagingBean = new PagingBean(totalCount);
 		} else {
-			pagingBean = new PagingBean(totalCount, Integer.parseInt(pno));
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pNo));
 		}
 		//paging
-		ArrayList<PostVO> plist = PostDAO.getInstance().getPostList(pagingBean);
-		ListVO listVO = new ListVO(plist, pagingBean);
-		
-		ArrayList<PostVO> list = PostDAO.getInstance().getMyPostin(memberVO.getId());
+		ArrayList<PostVO> list = PostDAO.getInstance().getMyPosting(memberVO.getId(),pagingBean);
+		ListVO listVO = new ListVO(list, pagingBean);
 		String url = "/member/myPosting.jsp";
-		request.setAttribute("list", list);
-		request.setAttribute("plist", plist);
 		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", url);
 		request.setAttribute("page", "page-myAccount-myPosting");

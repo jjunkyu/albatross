@@ -11,15 +11,19 @@ public class BookRegisterController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String bNo = request.getParameter("bNo");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String author = request.getParameter("author");
 		String publisher = request.getParameter("publisher");
-		BookVO vo = new BookVO(Integer.parseInt(bNo),title,content,author,publisher);
+		BookVO vo = new BookVO();
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setAuthor(author);
+		vo.setPublisher(publisher);
 		BookDAO.getInstance().bookRegister(vo);
-		String url = "/book/bookRegister.jsp";
+		String url = "/book/bookDetail.jsp";
 		request.setAttribute("url", url);
+		request.setAttribute("bookVO", vo);
 		request.setAttribute("page", "library-page");
 		return TEMPLATE_PATH + "home.jsp";
 	}

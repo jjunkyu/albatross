@@ -226,22 +226,33 @@ public class BookDAO {
 		}
 	}
 	/**
-	 * 
+	 *  책 등록 메소드
+	 *  
 	 * @param vo
 	 * @throws SQLException
 	 */
-	public void bookRegister(BookVO vo) throws SQLException {
+	public BookVO bookRegister(BookVO vo) throws SQLException {
+		BookVO BVO = null;
 		try {
 			con = ds.getConnection();
-			sql = "SELECT INTO semi_book(bNo,title,content,author,publisher) VALUES(semi_book_seq.nextval,?,?,?,?)";
-			pstmt.setInt(1, vo.getbNo());
-			pstmt.setString(2, vo.getTitle());
-			pstmt.setString(3, vo.getContent());
-			pstmt.setString(4, vo.getAuthor());
-			pstmt.setString(5, vo.getPublisher());
-			pstmt.executeUpdate();
+			sql = "INSERT INTO semi_book(bNo,title,content,author,publisher) VALUES(semi_book_seq.nextval,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getAuthor());
+			pstmt.setString(4, vo.getPublisher());
+			pstmt.executeQuery();
+			pstmt.close();
+			String sql2 = "SELECT semi_book_seq.currval FROM dual";
+			pstmt = con.prepareStatement(sql2);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				BVO = getBookDetail(rs.getInt(1));
+			}
+
 		} finally {
 			closeAll();
 		}
+		return BVO;
 	}
 }

@@ -38,7 +38,6 @@ drop table semi_member;
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('java','1','판교','송중기','java@naver.com','개발자',0);
 insert into semi_member(id,password,address,name,eMail,answer,cId,qId) values('admin','1','판교','admin','admin@naver.com','admin','1',0);
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('spring','1','성남','아이유','spring@google.com','서정우',1);
-insert into semi_member(id,password,address,name,eMail,answer,cId,qId) values('admin','1','판교','admin','admin@naver.com','admin','1',0);
 delete from semi_member where id='admin';
 select * from semi_member;
 delete from semi_member where id='admin';
@@ -115,5 +114,3 @@ drop table semi_rent_book;
 drop table semi_post;
 drop sequence semi_post_seq;
 ----------------------------------
-
-

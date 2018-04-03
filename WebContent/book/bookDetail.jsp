@@ -36,21 +36,20 @@ function deleteBook(){
 			</thead>
 			<tbody>
 				<tr>
-					<td>${bookVO.bNo}</td>
-					<td>${bookVO.title}</td>
-					<td>${bookVO.author}</td>
-					<td>${bookVO.publisher}</td>
+					<td>${requestScope.bookVO.bNo}</td>
+					<td>${requestScope.bookVO.title}</td>
+					<td>${requestScope.bookVO.author}</td>
+					<td>${requestScope.bookVO.publisher}</td>
 				</tr>
 				<tr>
 					<td colspan="5" class="content">
-						<pre>${bookVO.content}</pre>
+						<pre>${requestScope.bookVO.content}</pre>
 					</td>
 				</tr>
 				<tr>
-					<%-- admin : 책 사게 버튼만 보여주기 --%>
+					<%-- admin : 책 삭제 버튼만 보여주기 --%>
 					<c:if test="${sessionScope.loginVO.cId == '1'}">
 					<td colspan="5" class="btnArea">
-					
 						<form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher">
 						<input type="hidden" name="command" value="deleteBook">
 						<input type="hidden" name="bNo" value="${bookVO.bNo}">

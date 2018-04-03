@@ -30,7 +30,7 @@ function memberfind(){
 					</c:choose>
 				</div>
 				<button type="submit" class="btn btn-primary">login</button>
-			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기</button>
+			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기 </button>
 				
 			</form>
 				

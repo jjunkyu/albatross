@@ -44,7 +44,7 @@ public class MemberDAO {
 	 * @throws SQLException
 	 */
 	public MemberVO login(String id, String password) throws SQLException {
-		MemberVO memberVO = null;
+		MemberVO vo = null;
 		try {
 			con=dataSource.getConnection();
 			sql="select * from semi_member where id=? and password=?";
@@ -53,13 +53,20 @@ public class MemberDAO {
 			pstmt.setString(2, password);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				return new MemberVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
-			} 
-			
+				vo= new MemberVO();
+						vo.setId(rs.getString(1));
+						vo.setPassword(rs.getString(2));
+						vo.setAddress(rs.getString(3));
+						vo.setName(rs.getString(4));
+						vo.setEmail(rs.getString(5));
+						vo.setAnswer(rs.getString(6));
+						vo.setcId(rs.getString(7));
+						vo.setqId(rs.getString(8));
+					} 
 		}finally {
 			closeAll();
 		}
-		return memberVO;
+		return vo;
 	}
 	/**
 	 * 회원가입 메서드

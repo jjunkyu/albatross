@@ -213,4 +213,23 @@ public class BookDAO {
 			closeAll();
 		}
 	}
+	/**
+	 * 
+	 * @param vo
+	 * @throws SQLException
+	 */
+	public void bookRegister(BookVO vo) throws SQLException {
+		try {
+			con = ds.getConnection();
+			sql = "SELECT INTO semi_book(bNo,title,content,author,publisher) VALUES(semi_book_seq.nextval,?,?,?,?)";
+			pstmt.setInt(1, vo.getbNo());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getContent());
+			pstmt.setString(4, vo.getAuthor());
+			pstmt.setString(5, vo.getPublisher());
+			pstmt.executeUpdate();
+		} finally {
+			closeAll();
+		}
+	}
 }

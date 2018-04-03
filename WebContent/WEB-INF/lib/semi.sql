@@ -4,6 +4,7 @@ cName varchar2(100) not null
 )
 drop table UserCategory;
 insert into UserCategory(cId,cName) values(0,'일반회원');
+insert into UserCategory(cId,cName) values(1,'관리자');
 select * from UserCategory;
 
 create table question(
@@ -35,9 +36,10 @@ constraint fk_qId foreign key(qId) references question(qId)
 )
 drop table semi_member;
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('java','1','판교','송중기','java@naver.com','개발자',0);
+insert into semi_member(id,password,address,name,eMail,answer,cId,qId) values('admin','1','판교','admin','admin@naver.com','admin','1',0);
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('spring','1','성남','아이유','spring@google.com','서정우',1);
 select * from semi_member;
-
+delete from semi_member where id='admin';
 create table semi_book(
 bNo number primary key,
 title varchar2(100) not null,

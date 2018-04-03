@@ -7,7 +7,7 @@
 			<h2><a href="dispatcher?command=rentList">내 대여 목록</a></h2>
 		</div>
 		<div class="col-sm-12 col-md-6">
-			<h2><a href = "dispatcher?command=">내가 쓴 글</a></h2>
+			<h2><a href = "dispatcher?command=myPosting">내가 쓴 글</a></h2>
 		</div>
 		<div class="col-sm-12 col-md-6">
 			<h2><a href = "dispatcher?command=">회원 정보 수정</a></h2>

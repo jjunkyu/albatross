@@ -84,6 +84,8 @@ public class HandlerMapping {
 			ctrl = new MyAccountController();
 		} else if (command.equals("deleteBook")) {
 			ctrl = new BookDeleteController();
+		} else if (command.equals("myPosting")) {
+			ctrl = new MyPostingController();
 		}
 		return ctrl;
 	}

@@ -108,6 +108,10 @@ SELECT bNo, title
 FROM SEMI_BOOK
 WHERE title LIKE '%의%' OR AUTHOR LIKE '%의%';
 
+SELECT pNo, id, title
+FROM SEMI_POST
+WHERE id = 'java'
+
 --  드랍순서 : 밑에서 부터 차례대로-----
 drop table UserCategory;
 drop table semi_member;

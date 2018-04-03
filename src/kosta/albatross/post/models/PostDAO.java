@@ -151,6 +151,24 @@ public class PostDAO {
 		return count;
 	}
 
+	public int getTotalPostCountbyId(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			con = dataSource.getConnection();
+			String sql = "SELECT count(*) FROM semi_post WHERE ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next())
+				count = rs.getInt(1);
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return count;
+	}
 	/**
 	 * 게시글의 번호로 상세정보를 반환받는 메소드
 	 * 

@@ -55,8 +55,10 @@ imagePath varchar2(100)
 create sequence semi_book_seq;
 drop table semi_book
 drop sequence semi_book_seq;
+insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터2','롤링','해리포터라는 마법사가 커가는 이야기2','영국출판사');
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터','롤링','해리포터라는 마법사가 커가는 이야기','영국출판사');
 select *from SEMI_BOOK;
+delete from semi_book where bNo = 2
 
 create table semi_rent_book(
 id varchar2(100) not null,

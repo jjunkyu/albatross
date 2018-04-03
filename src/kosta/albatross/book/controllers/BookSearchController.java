@@ -29,7 +29,7 @@ public class BookSearchController implements Controller {
 			list = dao.searchByTitleAndAuthor(searchStr);
 		}
 		if(list==null) {
-			return "index.jsp";
+			return "book/bookSearch_fail.jsp";
 		}else {
 			int totalCount = list.size();
 			String bNo = request.getParameter("bNo");
@@ -38,7 +38,7 @@ public class BookSearchController implements Controller {
 			}else {
 				pagingBean = new PagingBean(totalCount,Integer.parseInt(bNo));
 			}
-			String url = "/book/bookListView.jsp";
+			String url = "/book/bookList.jsp";
 			listVO.setBookList(list);
 			listVO.setPagingBean(pagingBean);
 			request.setAttribute("listVO", listVO);

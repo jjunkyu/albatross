@@ -16,13 +16,10 @@ public class PostUpdateViewController implements Controller {
 		if (session == null || session.getAttribute("loginVO") == null) {
 			return "REDIRECT_PREFIX+index.jsp";
 		}
-		PostVO postVO = new PostVO();
-		postVO.setpNo(Integer.parseInt(request.getParameter("pNo")));
-		postVO.setTitle(request.getParameter("title"));
-		postVO.setContent(request.getParameter("content"));
-		String url = "/post/postDetail.jsp";
-		PostVO pvo = PostDAO.getInstance().getPostUpdate(postVO);
-		request.setAttribute("pvo", pvo);
+		int pNo = Integer.parseInt(request.getParameter("pNo"));
+		PostVO PostVO = PostDAO.getInstance().getPostDetail(pNo);
+		String url = "/post/postUpdate.jsp";
+		request.setAttribute("PostVO", PostVO);
 		request.setAttribute("url", url);
 		request.setAttribute("page", "post-update");
 		return TEMPLATE_PATH + "home.jsp";		

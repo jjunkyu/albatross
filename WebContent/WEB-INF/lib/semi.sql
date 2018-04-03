@@ -4,6 +4,7 @@ cName varchar2(100) not null
 )
 drop table UserCategory;
 insert into UserCategory(cId,cName) values(0,'일반회원');
+insert into UserCategory(cId,cName) values(1,'관리자');
 select * from UserCategory;
 
 create table question(
@@ -35,9 +36,11 @@ constraint fk_qId foreign key(qId) references question(qId)
 )
 drop table semi_member;
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('java','1','판교','송중기','java@naver.com','개발자',0);
+insert into semi_member(id,password,address,name,eMail,answer,cId,qId) values('admin','1','판교','admin','admin@naver.com','admin','1',0);
 insert into semi_member(id,password,address,name,eMail,answer,qId) values('spring','1','성남','아이유','spring@google.com','서정우',1);
+delete from semi_member where id='admin';
 select * from semi_member;
-
+delete from semi_member where id='admin';
 create table semi_book(
 bNo number primary key,
 title varchar2(100) not null,
@@ -51,8 +54,10 @@ imagePath varchar2(100)
 create sequence semi_book_seq;
 drop table semi_book
 drop sequence semi_book_seq;
+insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터2','롤링','해리포터라는 마법사가 커가는 이야기2','영국출판사');
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터','롤링','해리포터라는 마법사가 커가는 이야기','영국출판사');
 select *from SEMI_BOOK;
+delete from semi_book where bNo = 2
 
 create table semi_rent_book(
 id varchar2(100) not null,
@@ -81,7 +86,7 @@ create sequence semi_post_seq;
 drop sequence semi_post_seq;
 drop table semi_post;
 insert into semi_post(pNo,title,content,timeposted,id) values(semi_post_seq.nextval,'자유게시판의 제목','자유게시판 내용이 들어갑니다',sysdate,'java');
-
+select * from SEMI_POST;
 
 select * from semi_book where author like '%아작%';
 select pNo,title,content,to_char(timeposted, 'yyyy.mm.dd') from SEMI_POST
@@ -102,6 +107,10 @@ SELECT bNo, title
 FROM SEMI_BOOK
 WHERE title LIKE '%의%' OR AUTHOR LIKE '%의%';
 
+SELECT pNo, id, title
+FROM SEMI_POST
+WHERE id = 'java'
+
 --  드랍순서 : 밑에서 부터 차례대로-----
 drop table UserCategory;
 drop table semi_member;
@@ -111,5 +120,3 @@ drop table semi_rent_book;
 drop table semi_post;
 drop sequence semi_post_seq;
 ----------------------------------
-
-

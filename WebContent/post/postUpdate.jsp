@@ -4,8 +4,8 @@
 <main class="container-fluid">
 <div class="row justify-content-md-center">
 	<form action="dispatcher" method="post">
-		<input type="hidden" name="command" value="postUpdateView">
-		<input type="hidden" name="pNo" value="${requestScope.PostVO.pNo }">
+		<input type="hidden" name="command" value="postUpdate">
+		<input type="hidden" name="pNo" value="${requestScope.PostVO.pNo}">
 		
 		<table class="table">
 			<tr>

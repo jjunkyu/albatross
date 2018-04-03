@@ -46,10 +46,9 @@ function deleteBook(){
 						<pre>${bookVO.content}</pre>
 					</td>
 				</tr>
-				<c:choose>
 				<tr>
-					<%-- admin : delete book button --%>
-					<c:when test="${sessionScope.loginVO.cId == '1'}">
+					<%-- admin : 책 사게 버튼만 보여주기 --%>
+					<c:if test="${sessionScope.loginVO.cId == '1'}">
 					<td colspan="5" class="btnArea">
 					
 						<form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher">
@@ -58,9 +57,9 @@ function deleteBook(){
 						</form>
 						<button type="button" class="btn" onclick="deleteBook()">삭제</button>
 					</td>
-					</c:when>
+					</c:if>
 				</tr>
-					<c:otherwise>
+				<%-- 일반 회원 : 대여 버튼만 보여주기 --%>
 				<tr>
 					<td colspan="5" class="btnArea">
 						<form name="rentForm" action="${pageContext.request.contextPath}/dispatcher">
@@ -71,8 +70,6 @@ function deleteBook(){
 						<button type="button" class="btn" onclick="rentBook()">대여</button>
 					</td>
 				</tr>
-					</c:otherwise>
-				</c:choose>
 			</tbody>
 		</table>
 	</div>

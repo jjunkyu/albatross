@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.albatross.book.models.BookDAO;
 import kosta.albatross.book.models.BookVO;
 import kosta.albatross.common.controllers.Controller;
-import kosta.albatross.member.models.MemberDAO;
-import kosta.albatross.member.models.MemberVO;
 
 public class BookDetailController implements Controller {
 

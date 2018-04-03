@@ -17,7 +17,7 @@ public class PostUpdateViewController implements Controller {
 			return "REDIRECT_PREFIX+index.jsp";
 		}
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
-		PostVO pvo = PostDAO.getInstance().getPostDetail(pNo);
+		PostVO PostVO = PostDAO.getInstance().getPostDetail(pNo);
 		String url = "/post/postUpdate.jsp";
 		request.setAttribute("PostVO", PostVO);
 		request.setAttribute("url", url);

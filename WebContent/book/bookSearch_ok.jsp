@@ -48,13 +48,13 @@
 	<ul class="pagination">
 		<c:if test="${pb.previousPageGroup}">
 			<li class="page-item"><a class="page-link"
-				href="dispatcher?command=bookSearch&bNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+				href="dispatcher?command=${requsetScope.command}&pNo=${pb.startPageOfPageGroup-1}&value=${requestScope.command}">&laquo;</a></li>
 		</c:if>
 		<c:forEach begin="${pb.startPageOfPageGroup}"
 			end="${pb.endPageOfPageGroup}" var="pop">
 			<c:choose>
 				<c:when test="${pb.nowPage != pop}">
-					<li class="page-item"><a class="page-link" href="dispatcher?command=bookSearch&bNo=${pop}">${pop}</a></li>
+					<li class="page-item"><a class="page-link" href="dispatcher?command=${requestScope.command}&pNo=${pop}&value=${requestScope.value}">${pop}</a></li>
 				</c:when>
 				<c:otherwise>
 					<li class="page-item active"><a class="page-link" href="#">${pop}</a></li>
@@ -63,7 +63,7 @@
 		</c:forEach>
 		<c:if test="${pb.nextPageGroup}">
 			<li class="page-item"><a class="page-link"
-				href="dispatcher?command=bookSearch&bNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+				href="dispatcher?command=${requestScope.command}&pNo=${pb.endPageOfPageGroup+1}&value=${requestScope.value}">&raquo;</a></li>
 		</c:if>
 	</ul>
 </div>

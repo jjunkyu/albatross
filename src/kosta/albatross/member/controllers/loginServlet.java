@@ -3,12 +3,14 @@ package kosta.albatross.member.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kosta.albatross.member.models.MemberDAO;
 import kosta.albatross.member.models.MemberVO;
@@ -37,14 +39,19 @@ public class loginServlet extends HttpServlet {
 		
 		String command = request.getParameter("checkAjaxlogin");
 		if(command.equals("logincheck")){
-			String id = request.getParameter("id");
-			String password = request.getParameter("password");
+			String id = request.getParameter("userID");
+			String password = request.getParameter("userPassword");
+			HttpSession session = request.getSession();
 			try {
 				MemberVO loginVO = MemberDAO.getInstance().login(id, password);
-				if(loginVO == null){
-					out.print("fail"); //로그인실패
+				System.out.println(loginVO);
+				if(loginVO != null){
+					out.print("ok"); //로그인성공
+					session.setAttribute("loginVO", loginVO);
+					session.setAttribute("pNoList", new ArrayList<Integer>());
 				}else{
-					out.print("ok");// 사용불가
+					out.print("fail");
+					System.out.println("fail");
 				}	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

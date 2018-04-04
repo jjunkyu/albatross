@@ -13,11 +13,11 @@ $(document).ready(function() {
 			url:"LoginServlet",
 			data:$("#loginForm").serialize(),
 			success:function(data){
-				if(data=='ok'){
-					alert(1);
+				if(data=="ok"){
+					location.href="redirect:index.jsp";
 				}else{
-					$("#checkPW").text("아이디 또는 비밀번호를 다시 확인하세요.").css("color","red","font-weight","bold","font-size","smaller");
-					$("#userPassword").val("");
+					$("#checkPW").text('아이디 또는 비밀번호를 다시 확인하세요.');
+					$("#userPassword").val('');
 				}
 			}
 		});
@@ -27,7 +27,7 @@ $(document).ready(function() {
 <main class="container-fluid">
 	<div class="row justify-content-md-center">
 		<div class="col-sm-3">
-			<form action="dispatcher?command=loginCheck" method="post" id="loginForm" >
+			<form  id="loginForm" >
 			<input type="hidden" name="checkAjaxlogin" value="logincheck">
 				<div class="form-group">
 					<label for="userID">UserID</label> 
@@ -39,13 +39,8 @@ $(document).ready(function() {
 					<input type="password"
 						class="form-control" name="userPassword" id="userPassword" aria-describedby="checkPW"
 						placeholder="Enter Password" required="required">
-					<c:choose>
-						<c:when test="${sessionScope.failLogin==false}">
-						<span id="checkPW" >
-						
+						<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red" >
 						</span>
-						</c:when>
-					</c:choose>
 				</div>
 				<button type="submit" class="btn btn-primary" id="loginBts">login</button>
 			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기 </button>

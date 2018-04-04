@@ -68,7 +68,7 @@ function returnBook(){
 					<li class="page-item"><a class="page-link" href="dispatcher?command=rentList&pNo=${pop}">${pop}</a></li>
 				</c:when>
 				<c:otherwise>
-					<li class="page-item active"><a class="page-link" href="#">${pop}</a></li>
+					<li class="page-item active"><a class="page-link" href="javascript:;">${pop}</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

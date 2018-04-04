@@ -44,14 +44,12 @@ public class loginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			try {
 				MemberVO loginVO = MemberDAO.getInstance().login(id, password);
-				System.out.println(loginVO);
 				if(loginVO != null){
 					out.print("ok"); //로그인성공
 					session.setAttribute("loginVO", loginVO);
 					session.setAttribute("pNoList", new ArrayList<Integer>());
 				}else{
 					out.print("fail");
-					System.out.println("fail");
 				}	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

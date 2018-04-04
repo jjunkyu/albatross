@@ -14,9 +14,9 @@ $(document).ready(function() {
 			data:$("#loginForm").serialize(),
 			success:function(data){
 				if(data=="ok"){
-					location.href="redirect:index.jsp";
+					location.href="index.jsp";
 				}else{
-					$("#checkPW").text('아이디 또는 비밀번호를 다시 확인하세요.');
+					$("#checkPW").html('아이디 또는 비밀번호를 다시 확인하세요.');
 					$("#userPassword").val('');
 				}
 			}
@@ -44,8 +44,7 @@ $(document).ready(function() {
 					<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red" >
 					</span>
 				</div>
-				
-				<button type="submit" class="btn btn-primary" id="loginBts">login</button>
+				<button type="button" class="btn btn-primary" id="loginBts">login</button>
 			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기 </button>
 			</form>
 		</div>

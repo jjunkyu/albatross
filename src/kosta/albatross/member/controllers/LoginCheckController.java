@@ -24,9 +24,8 @@ public class LoginCheckController implements Controller {
 			session.setAttribute("pNoList", new ArrayList<Integer>());
 			return REDIRECT_PREFIX + "index.jsp";
 		}else {
-			String logincheck=null;
 			String url ="/member/login.jsp";
-			session.setAttribute("failLogin", logincheck);
+			session.setAttribute("failLogin", "false");
 			request.setAttribute("url", url);
 			request.setAttribute("page", "login-check");
 			return TEMPLATE_PATH + "home.jsp";

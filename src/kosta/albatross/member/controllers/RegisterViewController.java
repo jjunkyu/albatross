@@ -16,7 +16,7 @@ public class RegisterViewController implements Controller {
 		ArrayList<String> questionList = MemberDAO.getInstance().questionList();
 		request.setAttribute("questionList", questionList);
 		request.setAttribute("url", url);
-		request.setAttribute("page", "registerView");
+		request.setAttribute("page", "register-view");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 

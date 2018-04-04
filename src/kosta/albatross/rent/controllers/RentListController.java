@@ -24,7 +24,7 @@ public class RentListController implements Controller {
 			String url = "/rent/rentList.jsp";
 			request.setAttribute("rentList", rentList);
 			request.setAttribute("url",url);
-			request.setAttribute("page", "rentList");
+			request.setAttribute("page", "rent-list");
 			return TEMPLATE_PATH + "home.jsp";
 		}
 	}

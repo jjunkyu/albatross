@@ -17,7 +17,7 @@ public class MemberFindViewController implements Controller {
 		String url = "/member/memberFindView.jsp";
 		request.setAttribute("list", list);
 		request.setAttribute("url", url);
-		request.setAttribute("page", "member-Find-View");
+		request.setAttribute("page", "member-find-view");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 }

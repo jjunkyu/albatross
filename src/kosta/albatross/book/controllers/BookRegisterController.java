@@ -25,7 +25,7 @@ public class BookRegisterController implements Controller {
 		vo.setContent(content);
 		vo.setAuthor(author);
 		vo.setPublisher(publisher);
-		BookDAO.getInstance().bookRegister(vo);
-		return REDIRECT_PREFIX + "book/bookRegister_ok.jsp";
+		BookVO resultVO = BookDAO.getInstance().bookRegister(vo);
+		return REDIRECT_PREFIX + "dispatcher?command=bookDetail&bNo="+resultVO.getbNo();
 	}
 }

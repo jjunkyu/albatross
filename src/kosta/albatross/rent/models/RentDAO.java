@@ -180,4 +180,21 @@ public class RentDAO {
 			closeAll(rs, pstmt, con);
 		}
 	}
+	
+	public boolean isRentBook(int bNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int date = 0;
+		try {
+			con = (Connection) DataSourceManager.getInstance().getDataSource();
+			String sql = "SELECT sysdate-rentdate FROM SEMI_RENT_BOOK WHERE bNo = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			rs = pstmt.executeQuery();
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return false;
+	}
 }

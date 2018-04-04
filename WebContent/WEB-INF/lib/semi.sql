@@ -149,3 +149,5 @@ ORDER BY bNo DESC;
 select count(*) from semi_book where title like '%해리%';
 
 select id , password from semi_member where email='skch0122@naver.com' and answer='요리사' and qid='1';
+
+select *from semi_rent_book;

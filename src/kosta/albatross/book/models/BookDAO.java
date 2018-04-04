@@ -14,38 +14,67 @@ import kosta.albatross.common.models.PagingBean;
 public class BookDAO {
 
 	private static BookDAO instance = new BookDAO();
-	private Connection con;
-	private String sql;
-	private ResultSet rs;
-	private DataSource ds;
-	private PreparedStatement pstmt;
+	private DataSource dataSource;
 
 	private BookDAO() {
-		ds = DataSourceManager.getInstance().getDataSource();
+		dataSource = DataSourceManager.getInstance().getDataSource();
 	}
 
 	public static BookDAO getInstance() {
 		return instance;
 	}
 
-	private void closeAll() {
-		try {
-			if (con != null)
-				con.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (rs != null)
+	public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) {
+		if (rs != null)
+			try {
 				rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 
+	public void closeAll(PreparedStatement pstmt, Connection con) {
+
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	/**
+	 * 책 리스트를 뽑는 메서드
+	 * 페이징빈을 매게변수로 받아 페이징 처리도 같이 함
+	 * @param pagingBean
+	 * @return list
+	 * @throws SQLException
+	 */
 	public ArrayList<BookVO> getBookList(PagingBean pagingBean) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
 		BookVO vo = null;
 		try {
-			con = ds.getConnection();
+			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
 			sql.append(
@@ -72,16 +101,24 @@ public class BookDAO {
 				list.add(vo);
 			}
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 		return list;
 	}
-
+	/**
+	 * 책의 상세 정보를 보여주는 메서드 
+	 * @param bNo
+	 * @return bvo
+	 * @throws SQLException
+	 */
 	public BookVO getBookDetail(int bNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		BookVO bvo = null;
 		try {
-			con = ds.getConnection();
-			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where bNo = ?";
+			con = dataSource.getConnection();
+			String sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book WHERE bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
@@ -101,16 +138,24 @@ public class BookDAO {
 			}
 			return bvo;
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 	}
-
+	/**
+	 * 작가로 책을 검색해주는 메서드
+	 * @param author
+	 * @return list
+	 * @throws SQLException
+	 */
 	public ArrayList<BookVO> searchByAuthor(String author) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		ArrayList<BookVO> list = null;
 
 		try {
-			con = ds.getConnection();
-			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where author like ?";
+			con = dataSource.getConnection();
+			String sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book WHERE author like ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + author + "%");
 			rs = pstmt.executeQuery();
@@ -124,18 +169,26 @@ public class BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 
 		return list;
 	}
-
+	/**
+	 * 제목으로 책을 검색하는 메서드
+	 * @param title
+	 * @return list
+	 * @throws SQLException
+	 */
 	public ArrayList<BookVO> searchByTitle(String title) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		ArrayList<BookVO> list = null;
 
 		try {
-			con = ds.getConnection();
-			sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like ?";
+			con = dataSource.getConnection();
+			String sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book WHERE title like ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + title + "%");
 			rs = pstmt.executeQuery();
@@ -149,17 +202,26 @@ public class BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 
 		return list;
 	}
-
+	/**
+	 * 저자와 책 제목으로 책을 찾는 메서드
+	 * 
+	 * @param pattern
+	 * @return list
+	 * @throws SQLException
+	 */
 	public ArrayList<BookVO> searchByTitleAndAuthor(String pattern) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		ArrayList<BookVO> list = null;
 		StringBuilder sql = new StringBuilder();
 		try {
-			con = ds.getConnection();
+			con = dataSource.getConnection();
 			sql.append(" SELECT bNo, title, author, content, publisher, isRented ");
 			sql.append(" FROM semi_book ");
 			sql.append(" WHERE title LIKE ? ");
@@ -178,39 +240,56 @@ public class BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 
 		return list;
 	}
-
+	/**
+	 * 책의 총 권수를 찾는 메서드
+	 * @return count
+	 * @throws SQLException
+	 */
 	public int getTotalBookCount() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		int count = 0;
 		try {
-			con = ds.getConnection();
+			con = dataSource.getConnection();
 			String sql = "SELECT count(*) FROM semi_book";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next())
 				count = rs.getInt(1);
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 		return count;
 	}
-
+	/**
+	 * 책의 상태변화 즉 대여가능 상태인지 아닌지 확인하는 메서드
+	 * @param bNo
+	 * @param isRented
+	 * @throws SQLException
+	 */
 	public void changeOfRented(int bNo, String isRented) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
-			if (isRented.equals("false"))
-				sql = "update semi_book set isRented = 1 where bNo = ?";
-			else
-				sql = "update semi_book set isRented = 0 where bNo = ?";
-			pstmt = con.prepareStatement(sql);
+			con = dataSource.getConnection();
+			if (isRented.equals("false")) {
+				String sql = "UPDATE semi_book SET isRented = 1 WHERE bNo = ?";
+				pstmt = con.prepareStatement(sql);
+			}else {
+				String sql = "UPDATE semi_book SET isRented = 0 WHERE bNo = ?";
+				pstmt = con.prepareStatement(sql);
+			}
 			pstmt.setInt(1, bNo);
 			pstmt.executeUpdate();
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 	}
 	/**
@@ -220,14 +299,16 @@ public class BookDAO {
 	 * @throws SQLException
 	 */
 	public void deleteBook(int bNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
-			sql = "DELETE FROM SEMI_BOOK WHERE bNo = ?";
+			con = dataSource.getConnection();
+			String sql = "DELETE FROM SEMI_BOOK WHERE bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
 			pstmt.executeQuery();
 		} finally {
-			closeAll();
+			closeAll(pstmt, con);
 		}
 	}
 	/**
@@ -237,10 +318,13 @@ public class BookDAO {
 	 * @throws SQLException
 	 */
 	public BookVO bookRegister(BookVO vo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		BookVO BVO = null;
 		try {
-			con = ds.getConnection();
-			sql = "INSERT INTO semi_book(bNo,title,content,author,publisher) VALUES(semi_book_seq.nextval,?,?,?,?)";
+			con = dataSource.getConnection();
+			String sql = "INSERT INTO semi_book(bNo,title,content,author,publisher) VALUES(semi_book_seq.nextval,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
@@ -256,7 +340,7 @@ public class BookDAO {
 			}
 
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 		return BVO;
 	}

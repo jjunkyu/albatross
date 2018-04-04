@@ -154,3 +154,9 @@ select count(*) from semi_rent_book where bNo=35 and returndate is null;
 
 select *from SEMI_RENT_BOOK;
 select *from semi_member;
+
+SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC)AS rnum,bNo,title,author,content,publisher,isRented
+FROM semi_book) b,semi_rent_book rb WHERE rb.id = 'java'  AND b.bNo = rb.bNo AND rnum BETWEEN 1 AND 10
+ORDER BY bNo DESC 
+

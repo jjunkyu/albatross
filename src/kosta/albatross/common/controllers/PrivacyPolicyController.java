@@ -9,7 +9,7 @@ public class PrivacyPolicyController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = "/topic/privacyPolicy.jsp";
 		request.setAttribute("url", url);
-		request.setAttribute("page", "privacyPolicy.jsp");
+		request.setAttribute("page", "privacy-policy");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 

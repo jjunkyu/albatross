@@ -13,36 +13,68 @@ import kosta.albatross.common.models.DataSourceManager;
 
 
 public class RentDAO {
+	private DataSource dataSource;
 	private static RentDAO instance = new RentDAO();
-	private Connection con;
-	private String sql;
-	private ResultSet rs;
-	private DataSource ds;
-	private PreparedStatement pstmt;
 	
 	private RentDAO() {
-		ds = DataSourceManager.getInstance().getDataSource();
+		dataSource = DataSourceManager.getInstance().getDataSource();
 	}
 	
 	public static RentDAO getInstance() {
 		return instance;
 	}
 	
-	private void closeAll() {
-		try {
-			if(con != null) con.close();
-			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) {
+		if (rs != null)
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
-	
+
+	public void closeAll(PreparedStatement pstmt, Connection con) {
+
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	/**
+	 * 책을 빌린 목록을 보여주는 메서드
+	 * 
+	 * @param id
+	 * @return list
+	 * @throws SQLException
+	 */
 	public ArrayList<RentVO> rentList(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		ArrayList<RentVO> list = new ArrayList<RentVO>();
 		RentVO rentVO = null;
 		try {
-			con = ds.getConnection();
+			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append(" SELECT b.bNo,b.title,b.author,b.publisher,b.isRented, ");
 			sql.append(" to_char(rentDate,'YYYY/MM/DD HH') , to_char(returnDate,'YYYY/MM/DD HH') ");
@@ -72,41 +104,69 @@ public class RentDAO {
 			return list;
 
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 	}
-	
+	/**
+	 * 책을 빌릴때 목록에 추가하는 메서드
+	 * 
+	 * @param id
+	 * @param bNo
+	 * @throws SQLException
+	 */
 	public void addRentBook(String id,int bNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
-			sql = "insert into SEMI_RENT_BOOK(id,bNo,rentdate) values(?,?,sysdate)";
+			con = dataSource.getConnection();
+			String sql = "INSERT INTO SEMI_RENT_BOOK(id,bNo,rentdate) VALUES(?,?,sysdate)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,id);
 			pstmt.setInt(2, bNo);
 			pstmt.executeUpdate();
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 	}
-
+	/**
+	 * 빌린 책을 반납할 때 쓰는 메서드
+	 * 
+	 * @param id
+	 * @param bNo
+	 * @throws SQLException
+	 */
 	public void returnRentBook(String id,int bNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
-			sql = " UPDATE semi_rent_book SET returnDate = sysdate WHERE id = ? AND bNo = ? ";
+			con = dataSource.getConnection();
+			String sql = " UPDATE SEMI_RENT_BOOK SET returnDate = sysdate WHERE id = ? AND bNo = ? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, bNo);
 			pstmt.executeUpdate();
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 	}
-	
+	/**
+	 * 책을 빌렸는지 상태를 확인하는 메서드
+	 * true 일 경우 책을 빌린 상태
+	 * false 일 경우 책을 빌리지 않은 상태
+	 * @param bNo
+	 * @return true or false
+	 * @throws SQLException
+	 */
 	public boolean isRentLate(int bNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		int date = 0;
 		try {
 			con = (Connection) DataSourceManager.getInstance().getDataSource();
-			sql = "select sysdate-rentdate from SEMI_RENT_BOOK where bNo = ?";
+			String sql = "SELECT sysdate-rentdate FROM SEMI_RENT_BOOK WHERE bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
@@ -117,7 +177,7 @@ public class RentDAO {
 			else
 				return true;
 		} finally {
-			closeAll();
+			closeAll(rs, pstmt, con);
 		}
 	}
 }

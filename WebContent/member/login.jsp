@@ -8,7 +8,7 @@ function memberfind(){
 </script>
 
 
-<main class="container-fluid">
+<main class="container">
 	<div class="row justify-content-md-center">
 		<div class="col-sm-3">
 			<form action="dispatcher?command=loginCheck" method="post" >
@@ -30,7 +30,7 @@ function memberfind(){
 					</c:choose>
 				</div>
 				<button type="submit" class="btn btn-primary">login</button>
-			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기</button>
+			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디 /비번찾기 </button>
 				
 			</form>
 				

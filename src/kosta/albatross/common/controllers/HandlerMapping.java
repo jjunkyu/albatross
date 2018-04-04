@@ -5,7 +5,9 @@ import kosta.albatross.book.controllers.BookDetailController;
 import kosta.albatross.book.controllers.BookListController;
 import kosta.albatross.book.controllers.BookRegisterController;
 import kosta.albatross.book.controllers.BookRegisterViewController;
-import kosta.albatross.book.controllers.BookSearchController;
+import kosta.albatross.book.controllers.BookSearchByAuthorController;
+import kosta.albatross.book.controllers.BookSearchByMixController;
+import kosta.albatross.book.controllers.BookSearchByTitleController;
 import kosta.albatross.member.controllers.LoginCheckController;
 import kosta.albatross.member.controllers.LoginController;
 import kosta.albatross.member.controllers.LogoutController;
@@ -56,8 +58,12 @@ public class HandlerMapping {
 		} else if (command.equals("logout")) {// 로그아웃
 			ctrl = new LogoutController();
 			//도서관
-		} else if (command.equals("BookSearch")) {
-			ctrl = new BookSearchController();
+		} else if (command.equals("bookSearchByTitle")) {
+			ctrl = new BookSearchByTitleController();
+		} else if (command.equals("bookSearchByAuthor")) {
+			ctrl = new BookSearchByAuthorController();
+		} else if (command.equals("bookSearchByMix")) {
+			ctrl = new BookSearchByMixController();
 		} else if (command.equals("rentBook")) {
 			ctrl = new RentBookController();
 		} else if (command.equals("returnBook")) {
@@ -99,6 +105,10 @@ public class HandlerMapping {
 			ctrl = new BookDeleteController();
 		} else if (command.equals("myPosting")) {
 			ctrl = new MyPostingController();
+		}else if(command.equals("memberUpdateView")) {//회원정보수정
+			ctrl = new MemberUpdateViewController();
+		}else if(command.equals("memberUpdate")) {//회원정보수정완료 적용
+			ctrl = new MemberUpdateController();
 		}
 		return ctrl;
 	}

@@ -9,6 +9,7 @@ function returnBook(){
 	}
 }
 </script>
+<main class="container">
 <div class="row">
 	<div class="col-sm-12">
 		<h2 align="center">${sessionScope.loginVO.id}님의빌린책 목록</h2>
@@ -53,3 +54,4 @@ function returnBook(){
 		</table>
 	</div>
 </div>
+</main>

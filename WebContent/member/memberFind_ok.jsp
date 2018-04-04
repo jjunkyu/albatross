@@ -18,7 +18,7 @@ $(document).ready(function(){
 	}//if
  })//ready
 </script>
-<main class="container-fluid">
+<main class="container">
 <div class="row justify-content-md-center">
 	<div class="col-sm-3">
 			<div class="form-group">

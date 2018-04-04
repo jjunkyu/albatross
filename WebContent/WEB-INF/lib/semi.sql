@@ -122,8 +122,31 @@ drop sequence semi_post_seq;
 ----------------------------------
 
 SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
-FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC)
+AS rnum,bNo,title,author,content,publisher,isRented
 FROM semi_book where title like '%해리%') b WHERE rnum BETWEEN 1 AND 10
-ORDER BY bNo DESC
+ORDER BY bNo DESC 
 
 SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like '%해리%';
+
+
+<<<<<<< HEAD
+SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM(
+SELECT row_number() over(order by pNo desc) as bNo, title, author, content, publisher, isRented
+FROM semi_book where author like '') p,semi_member m 
+where p.id=m.id and rnum between 1 and 20
+order by pNo desc
+
+SELECT count(*) FROM semi_post WHERE ID = 'java';
+
+select count(*) from semi_book where title like '2' or author like '1';
+
+SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC)
+AS rnum,bNo,title,author,content,publisher,isRented 
+FROM semi_book where title like '%2%' or author like '%2%') b WHERE rnum BETWEEN 1 AND 10
+ORDER BY bNo DESC;
+
+select count(*) from semi_book where title like '%해리%';
+
+select id , password from semi_member where email='skch0122@naver.com' and answer='요리사' and qid='1';

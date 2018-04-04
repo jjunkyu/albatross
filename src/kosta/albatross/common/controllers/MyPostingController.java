@@ -21,7 +21,7 @@ public class MyPostingController implements Controller {
 		if (session == null || memberVO == null) {
 			return REDIRECT_PREFIX + "index.jsp";
 		}
-		String pNo = request.getParameter("pageNo");
+		String pNo = request.getParameter("pNo");
 		PagingBean pagingBean = null;
 		int totalCount = PostDAO.getInstance().getTotalPostCountbyId(memberVO.getId());
 		if (pNo == null) {

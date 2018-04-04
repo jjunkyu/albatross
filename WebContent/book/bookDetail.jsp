@@ -23,6 +23,7 @@ function deleteBook(){
 		}
 }
 </script>
+<main class="container">
 <div class="row">
 	<div class="col-sm-12">
 		<table class="table">
@@ -79,3 +80,4 @@ function deleteBook(){
 		</table>
 	</div>
 </div>
+</main>

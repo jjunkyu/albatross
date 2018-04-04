@@ -2,7 +2,6 @@ package kosta.albatross.member.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,19 +40,3 @@ public class memberId_pwCheckServlet extends HttpServlet {
 		out.close();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

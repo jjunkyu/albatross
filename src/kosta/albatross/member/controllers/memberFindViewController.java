@@ -13,9 +13,7 @@ public class memberFindViewController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ArrayList<String>list = new ArrayList<String>();
-		MemberDAO memberDAO =null;
-		list=memberDAO.getInstance().questionList();
-
+		list=MemberDAO.getInstance().questionList();
 		String url = "/member/memberFindView.jsp";
 		request.setAttribute("list", list);
 		request.setAttribute("url", url);

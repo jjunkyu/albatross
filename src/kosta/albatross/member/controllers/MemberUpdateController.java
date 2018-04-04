@@ -23,13 +23,8 @@ public class MemberUpdateController implements Controller {
 			String id = request.getParameter("id");
 			
 			MemberVO memberVO = MemberDAO.getInstance().memberUpdate(password, name, address, answer, id);
-			String query = MemberDAO.getInstance().questionQuery(memberVO.getqId());
-			request.setAttribute("pidQuery", query);
 			session.setAttribute("loginVO", memberVO);	
-			request.setAttribute("url", "/member/memberUpdate.jsp");
-			request.setAttribute("page", "member-update");
-			return TEMPLATE_PATH + "home.jsp";
+			return REDIRECT_PREFIX + "index.jsp";
 		}
 	}
-
 }

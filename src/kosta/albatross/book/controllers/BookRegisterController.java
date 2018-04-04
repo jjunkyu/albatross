@@ -5,15 +5,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Base64.Encoder;
-import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -30,6 +29,10 @@ public class BookRegisterController implements Controller {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loginVO") == null) {
+			return REDIRECT_PREFIX + "index.jsp";
+		}
 		ServletContext ctx = request.getServletContext();
 		String mode = ctx.getInitParameter("mode");
 		Encoder encoder;
@@ -41,8 +44,6 @@ public class BookRegisterController implements Controller {
 		Path movePath;
 		BookVO bookToRegister;
 		BookVO bookVO;
-		String url;
-		
 		
 		String title;
 		String content;
@@ -98,11 +99,6 @@ public class BookRegisterController implements Controller {
 		bookToRegister.setPublisher(publisher);
 		bookToRegister.setImagePath(String.format("%s/%s", RELATIVE_UPLOAD_PATH, saveFilename));
 		bookVO = BookDAO.getInstance().bookRegister(bookToRegister);
-		
-		url = "/book/bookDetail.jsp";
-		request.setAttribute("url", url);
-		request.setAttribute("bookVO", bookVO);
-		request.setAttribute("page", "book-detail");
-		return REDIRECT_PREFIX + TEMPLATE_PATH + "home.jsp";
+		return REDIRECT_PREFIX + "dispatcher?command=bookDetail&bNo=" + bookVO.getbNo();
 	}
 }

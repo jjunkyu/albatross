@@ -34,18 +34,24 @@ $(document).ready(function() {
 				<div class="form-group">
 					<label for="userID">UserID</label> 
 					<input type="text"
-						class="form-control" name="userID" placeholder="Enter ID" required="required">
+						class="form-control" name="userID" placeholder="ID를 입력해주세요" required="required">
 				</div>
 				<div class="form-group">
 					<label for="userPassword">Password</label> 
 					<input type="password"
 						class="form-control" name="userPassword" id="userPassword" aria-describedby="checkPW"
-						placeholder="Enter Password" required="required">
+						placeholder="비밀번호를 입력해주세요" required="required">
 					<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red" >
 					</span>
 				</div>
-				<button type="button" class="btn btn-primary" id="loginBts">login</button>
-			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기 </button>
+				<div class="login-btn-wrapper">
+					<button type="button" class="btn btn-primary" id="loginBts">login</button>
+				</div>
+				<div class="find-password">
+					<small>
+						<a href="dispatcher?command=memberFindView">아이디/비번찾기 </a>
+					</small>
+				</div>
 			</form>
 		</div>
 	</div>

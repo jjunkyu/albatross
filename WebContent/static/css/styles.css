@@ -10,10 +10,20 @@
 	font-weight:bold;
 }
 
+html, body {
+	width:100%;
+	height:100%;
+}
+
+#wrap {
+	width:100%;
+	height:100%;
+}
 
 body {
   font-family: barunpen, sans-serif;
   font-weight: 300;
+  color: #3c3c3c;
 }
 
 a {
@@ -26,11 +36,12 @@ a:visited, a:focus, a:active, a:hover {
 
 header {
 	position: relative;
-	padding-top: 15px;
+	padding: 35px 0;
 }
 header .logo {
 	position: absolute;
-	top: 20px;
+	top: 50%;
+	transform: translateY(-50%);
 }
 header .header-panel {
 }
@@ -54,6 +65,10 @@ header .header-links > .nav-menu {
 }
 header .header-links > .nav-menu .nav-item:last-child .nav-link {
   padding-right: 0;
+}
+
+main {
+	padding: 50px 0;
 }
 
 .home main {
@@ -91,6 +106,13 @@ nav .nav-item .nav-link {
   font-weight: 600;
 }
 
+/* TABLE */
+.table td, .table th {
+	vertical-align: middle;
+	text-align: cennter;
+}
+
+
 .pagingInfo{
 	align-content: center;
 }
@@ -100,7 +122,72 @@ form-group{
   margin-left: 50px;
   margin-right: 50px;
 }
-//register
+
+
+/* REGISTER VIEW */
+.register-view {
+	background-color:#eee;
+}
+.register-view header {
+	padding: 60px 0;
+}
+.register-view header .logo {
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.register-view .header-panel{
+	display:none;	
+}
+.register-view .header-links {
+	display:none;
+}
+.register-view footer{
+	text-align:center;
+	width: 50%;
+}
+.register-view footer .internal-links{
+	margin:0 auto;
+}
+
+.register-view .form-group {
+	padding: 5px;
+	margin-bottom: 0;
+}
+.register-view .form-group + .form-group {
+	border-top: 1px solid #eee;
+}
+.register-view .form-group:last-child {
+	border-top: none;
+}
+.register-view .form-group .form-control {
+	border: none;
+}
+.register-view .hint {
+	display:none;
+}
+.register-view .hint.invalid {
+	color: #ff7070;
+}
+.register-view .hint.valid {
+	color: #5d94cf;
+}
+.register-view .hint.active {
+	display:inline-block;
+}
+.register-view .form-group span.active, .register-view .form-group label {
+	padding-left: 0.75rem;
+}
+
+#registerForm #qid {
+	padding-left: 9px;
+	margin-bottom: 5px;
+}
+#registerForm {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+}
 registerForm {
     max-width: 530px;
     padding: 15px;
@@ -122,16 +209,43 @@ tr.book-item > td > img {
 /* Book detail */
 tbody.book-info .content > img{
 	max-width: 200px;
-	margin:20pxntdisplay: inline-block;
+	margin:20px ;
+	display: inline-block;
     padding-bottom: 5px;
-    border-bottom: 1px solid #fca4a4;
 }
 
+/* Login */
+#loginForm {
+	
+}
+
+#loginForm .find-password{
+	text-align:right;
+	opacity: 0.6;
+}
+
+#loginForm .login-btn-wrapper button{
+	width: 100%;
+}
+
+/* Privacy policy */
 .privacy-policy h4 span {
 	font-weight: bold;
-	display: inline-block;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #fca4a4;
+    display: inline-block;
+    padding-bottom: 5px;
+    position: relative;
+    border-bottom: 2px solid #e0e0e0;
+}
+.privacy-policy h4 span:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    right: -20px;
+    height: 2px;
+    background-color: #fca4a4;
+    bottom: -4px;
+    left: 20px;
 }
 .privacy-policy .content section + section {
 	margin-top: 60px;
@@ -144,14 +258,34 @@ tbody.book-info .content > img{
 /* Terms of Use */
 .terms-of-use h5 span {
 	font-weight: bold;
-	display: inline-block;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #fca4a4;
+    display: inline-block;
+    padding-bottom: 5px;
+    position: relative;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.terms-of-use h5 span:after{
+    content: '';
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    right: -20px;
+    height: 2px;
+    background-color: #fca4a4;
+    bottom: -4px;
+    left: 20px;
 }
 
 .terms-of-use section + section {
 	margin-top: 60px;
 }
+
+
+/* My Account */
+
+
+
+
 
 /* Overriding Bootstrap Styles */
 .page-link {
@@ -169,5 +303,12 @@ tbody.book-info .content > img{
 .btn-primary:hover {
 	background-color: #5689c0;
 	border-color: #5689c0;
+}
+.btn-primary.disabled, .btn-primary:disabled {
+	background-color: #587fa9;
+	border-color: #587fa9;
+}
+.btn.disabled, .btn:disabled {
+	opacity: 0.5;
 }
 

@@ -9,7 +9,7 @@ public class TermsOfUseController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = "/topic/termsOfUse.jsp";
 		request.setAttribute("url", url);
-		request.setAttribute("page", "termsOfUse.jsp");
+		request.setAttribute("page", "terms-of-use");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 

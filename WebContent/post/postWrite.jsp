@@ -22,4 +22,5 @@
 		</div>
 	</form>
 </div>
+>>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
 </main>

@@ -1,6 +1,5 @@
 package kosta.albatross.member.controllers;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,5 +23,4 @@ public class RegisterController implements Controller {
 		MemberDAO.getInstance().register(memberVO);
 		return REDIRECT_PREFIX + "dispatcher?command=login";
 	}
-
 }

@@ -26,6 +26,7 @@ a:visited, a:focus, a:active, a:hover {
 
 header {
 	position: relative;
+	padding-top: 15px;
 }
 header .logo {
 	position: absolute;
@@ -73,8 +74,8 @@ main .search-jumbotron .search-bar {
 }
 
 footer {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 footer .internal-links {
   margin-top: 10px;
@@ -111,3 +112,62 @@ registerForm .h3 {
     margin-left: 8em;
     margin-bottom: 1em;
 }
+
+
+/* Book list */
+tr.book-item > td > img {
+	max-width:100px;
+}
+
+/* Book detail */
+tbody.book-info .content > img{
+	max-width: 200px;
+	margin:20pxntdisplay: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #fca4a4;
+}
+
+.privacy-policy h4 span {
+	font-weight: bold;
+	display: inline-block;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #fca4a4;
+}
+.privacy-policy .content section + section {
+	margin-top: 60px;
+}
+
+.terms-of-use .content {
+	margin-top: 30px;
+}
+
+/* Terms of Use */
+.terms-of-use h5 span {
+	font-weight: bold;
+	display: inline-block;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #fca4a4;
+}
+
+.terms-of-use section + section {
+	margin-top: 60px;
+}
+
+/* Overriding Bootstrap Styles */
+.page-link {
+	color: #5d94cf;
+}
+.page-item.active .page-link {
+	background-color: #5d94cf;
+    border-color: #5d94cf;
+}
+
+.btn-primary {
+	background-color: #5d94cf;
+	border-color: #5d94cf;
+}
+.btn-primary:hover {
+	background-color: #5689c0;
+	border-color: #5689c0;
+}
+

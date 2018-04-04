@@ -37,7 +37,5 @@ public class MyPostingController implements Controller {
 		request.setAttribute("url", url);
 		request.setAttribute("page", "page-myAccount-myPosting");
 		return TEMPLATE_PATH + "home.jsp";
-		
 	}
-
 }

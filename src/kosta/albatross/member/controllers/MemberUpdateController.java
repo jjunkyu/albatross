@@ -27,5 +27,4 @@ public class MemberUpdateController implements Controller {
 			return REDIRECT_PREFIX + "index.jsp";
 		}
 	}
-
 }

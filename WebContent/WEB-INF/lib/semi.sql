@@ -56,7 +56,10 @@ drop sequence semi_book_seq;
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터2','롤링','해리포터라는 마법사가 커가는 이야기2','영국출판사');
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터','롤링','해리포터라는 마법사가 커가는 이야기','영국출판사');
 select *from SEMI_BOOK;
-
+<<<<<<< HEAD
+delete from semi_book where bNo = 2
+delete from semi_book;
+drop table SEMI_RENT_BOOK;
 create table semi_rent_book(
 rId number primary key,
 id varchar2(100) not null,
@@ -121,6 +124,13 @@ drop table semi_rent_book;
 drop table semi_post;
 drop sequence semi_post_seq;
 ----------------------------------
+UPDATE SEMI_BOOK s
+SET imagePath = (
+	SELECT substr(imagePath,2) newPath 
+	FROM SEMI_BOOK p WHERE s.bNo = p.bNo
+	)
+
+SELECT * FROM SEMI_BOOK;
 
 SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
 FROM(SELECT row_number() OVER(ORDER BY bNo DESC)
@@ -148,8 +158,6 @@ ORDER BY bNo DESC;
 
 select count(*) from semi_book where title like '%해리%';
 
-select id , password from semi_member where email='skch0122@naver.com' and answer='요리사' and qid='1';
-
 select count(*) from semi_rent_book where bNo=35 and returndate is null;
 
 select *from SEMI_RENT_BOOK;
@@ -162,6 +170,3 @@ as rnum, bNo,title,author,publisher
 FROM semi_book) b,semi_rent_book br 
 WHERE br.id = 'java' AND b.bNo=br.bNo AND rnum BETWEEN 1 AND 10
 ORDER BY bNo DESC
-
-select *from semi_rent_book;
-select *from semi_book;

@@ -18,7 +18,7 @@ public class HandlerMapping {
 	public Controller create(String command) {
 		Controller ctrl = null;
 		if (command.equals("home")) {
-			ctrl = new HomeController();
+			ctrl = new HomeController(); 			
 			//회원
 		} else if (command.equals("privacyPolicy")) {
 			ctrl = new PrivacyPolicyController();

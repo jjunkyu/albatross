@@ -78,8 +78,9 @@ public class BookDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
-			sql.append(" FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented,b.imagePath ");
+			sql.append(
+					"FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented,imagePath ");
 			sql.append("FROM semi_book) b WHERE rnum BETWEEN ? AND ? ");
 			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());
@@ -99,6 +100,7 @@ public class BookDAO {
 					vo.setRented(false);
 				else
 					vo.setRented(true);
+				vo.setImagePath(rs.getString(7));
 				list.add(vo);
 			}
 		} finally {
@@ -117,9 +119,10 @@ public class BookDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		BookVO bvo = null;
+		String sql;
 		try {
 			con = dataSource.getConnection();
-			String sql = "SELECT bNo, title, author, content, publisher, isRented FROM semi_book WHERE bNo = ?";
+			sql = "SELECT bNo, title, author, content, publisher, isRented, imagePath FROM semi_book where bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
@@ -136,6 +139,7 @@ public class BookDAO {
 					bvo.setRented(false);
 				else
 					bvo.setRented(true);
+				bvo.setImagePath(rs.getString(7));
 			}
 			return bvo;
 		} finally {
@@ -404,14 +408,16 @@ public class BookDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		BookVO BVO = null;
+		String sql;
 		try {
 			con = dataSource.getConnection();
-			String sql = "INSERT INTO semi_book(bNo,title,content,author,publisher) VALUES(semi_book_seq.nextval,?,?,?,?)";
+			sql = "INSERT INTO semi_book(bNo,title,content,author,publisher,imagePath) VALUES(semi_book_seq.nextval,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
 			pstmt.setString(3, vo.getAuthor());
 			pstmt.setString(4, vo.getPublisher());
+			pstmt.setString(5, vo.getImagePath());
 			pstmt.executeQuery();
 			pstmt.close();
 			String sql2 = "SELECT semi_book_seq.currval FROM dual";

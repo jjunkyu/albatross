@@ -39,8 +39,8 @@ $(document).ready(function() {
 					<input type="password"
 						class="form-control" name="userPassword" id="userPassword" aria-describedby="checkPW"
 						placeholder="Enter Password" required="required">
-						<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red" >
-						</span>
+					<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red" >
+					</span>
 				</div>
 				<button type="submit" class="btn btn-primary" id="loginBts">login</button>
 			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기 </button>

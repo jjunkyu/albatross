@@ -68,7 +68,6 @@ header .header-links > .nav-menu .nav-item:last-child .nav-link {
 }
 
 main {
-	padding: 50px 0;
 }
 
 .home main {
@@ -282,9 +281,30 @@ tbody.book-info .content > img{
 
 
 /* My Account */
-
-
-
+.my-account .box{
+	padding: 10px;
+}
+.my-account .box .box-content {
+	position:relative;
+	min-height: 300px;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	cursor:pointer;
+}
+.my-account .box .box-content:hover {
+	background-color: #ff9ecb;
+	transition: all .5s;
+}
+.my-account .box .box-content:hover a {
+	color: white;
+	transition: all .5s;
+}
+.my-account .box-content h2 {
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+}
 
 
 /* Overriding Bootstrap Styles */

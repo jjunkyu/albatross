@@ -23,6 +23,7 @@ function deleteBook(){
 		}
 }
 </script>
+<main class="container">
 <div class="row">
 	<div class="col-sm-12">
 		<table class="table">
@@ -65,9 +66,9 @@ function deleteBook(){
 							<td colspan="5" class="btnArea">
 								<form name="rentForm"
 									action="${pageContext.request.contextPath}/dispatcher">
-									<input type="hidden" name="command" value="rentBook"> <input
-										type="hidden" name="bNo" value="${bookVO.bNo}"> <input
-										type="hidden" name="isRented" value="${bookVO.rented}">
+									<input type="hidden" name="command" value="rentBook"> 
+									<input type="hidden" name="bNo" value="${bookVO.bNo}">
+									<input type="hidden" name="isRented" value="${bookVO.rented}">
 								</form>
 								<button type="button" class="btn" onclick="rentBook()">대여</button>
 							</td>
@@ -79,3 +80,4 @@ function deleteBook(){
 		</table>
 	</div>
 </div>
+</main>

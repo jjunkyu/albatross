@@ -16,7 +16,7 @@
 		}
 	}
 </script>
-
+<main class="container">
 <table class="table">
 	<thead>
 		<tr>
@@ -47,3 +47,4 @@
 			 </td>
 		</tr>
 </table>
+</main>

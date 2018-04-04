@@ -24,7 +24,9 @@ $(document).ready(function() {
 	});
 });
 </script>
-<main class="container-fluid">
+
+
+<main class="container">
 	<div class="row justify-content-md-center">
 		<div class="col-sm-3">
 			<form  id="loginForm" >
@@ -42,11 +44,10 @@ $(document).ready(function() {
 					<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red" >
 					</span>
 				</div>
+				
 				<button type="submit" class="btn btn-primary" id="loginBts">login</button>
 			<button type="button" class="btn btn-primary" onclick="memberfind()">아이디/비번찾기 </button>
-				
 			</form>
-		
 		</div>
 	</div>
 </main>

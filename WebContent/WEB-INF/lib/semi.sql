@@ -56,20 +56,21 @@ drop sequence semi_book_seq;
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터2','롤링','해리포터라는 마법사가 커가는 이야기2','영국출판사');
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터','롤링','해리포터라는 마법사가 커가는 이야기','영국출판사');
 select *from SEMI_BOOK;
-delete from semi_book where bNo = 2
 
 create table semi_rent_book(
+rId number primary key,
 id varchar2(100) not null,
 bNo number not null,
 rentDate date not null,
 returnDate date,
 constraint fk_id foreign key(id) references semi_member(id),
-constraint fk_bNo foreign key(bNo) references semi_book(bNo),
-constraint pk_rent primary key(id,bNo) --복합pk
+constraint fk_bNo foreign key(bNo) references semi_book(bNo)
 )
+create sequence semi_rent_book_seq;
 drop table semi_rent_book;
-insert into semi_rent_book(id,bNo,rentDate) values('java','1',sysdate);
+insert into semi_rent_book(rId,id,bNo,rentDate) values(semi_rent_book_seq.nextval,'java','1',sysdate);
 select *from semi_rent_book;
+delete from semi_rent_book WHERE id='java'
 
 
 create table semi_post(
@@ -121,11 +122,29 @@ drop sequence semi_post_seq;
 ----------------------------------
 
 SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
-FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC)
+AS rnum,bNo,title,author,content,publisher,isRented
 FROM semi_book where title like '%해리%') b WHERE rnum BETWEEN 1 AND 10
-ORDER BY bNo DESC
+ORDER BY bNo DESC 
 
 SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like '%해리%';
 
+SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM(
+SELECT row_number() over(order by pNo desc) as bNo, title, author, content, publisher, isRented
+FROM semi_book where author like '') p,semi_member m 
+where p.id=m.id and rnum between 1 and 20
+order by pNo desc
 
+SELECT count(*) FROM semi_post WHERE ID = 'java';
 
+select count(*) from semi_book where title like '2' or author like '1';
+
+SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented
+FROM(SELECT row_number() OVER(ORDER BY bNo DESC)
+AS rnum,bNo,title,author,content,publisher,isRented 
+FROM semi_book where title like '%2%' or author like '%2%') b WHERE rnum BETWEEN 1 AND 10
+ORDER BY bNo DESC;
+
+select count(*) from semi_book where title like '%해리%';
+
+select id , password from semi_member where email='skch0122@naver.com' and answer='요리사' and qid='1';

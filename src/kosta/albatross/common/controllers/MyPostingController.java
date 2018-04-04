@@ -24,8 +24,7 @@ public class MyPostingController implements Controller {
 		request.setAttribute("list", list);
 		request.setAttribute("url", url);
 		request.setAttribute("page", "page-myAccount-myPosting");
-		return TEMPLATE_PATH + "home.jsp";
-		
+		return TEMPLATE_PATH + "home.jsp";	
 	}
 
 }

@@ -111,3 +111,18 @@ registerForm .h3 {
     margin-left: 8em;
     margin-bottom: 1em;
 }
+
+
+/* Book list */
+tr.book-item > td > img {
+	max-width:100px;
+}
+
+/* Book detail */
+tbody.book-info .content > img{
+	max-width: 200px;
+	margin:20px;
+	float: left;
+}
+
+

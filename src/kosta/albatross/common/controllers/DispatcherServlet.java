@@ -33,7 +33,15 @@ public class DispatcherServlet extends HttpServlet {
 	}
 	
 	public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = HandlerMapping.getInstance().create(request.getParameter("command")).execute(request, response);
+		String command = null;
+		String contentType = request.getContentType();
+		if(contentType != null && contentType.toLowerCase().indexOf("multipart/form-data") > -1) {
+			command = "bookRegister";
+		} else {
+			command = request.getParameter("command");
+		}
+		
+		String url = HandlerMapping.getInstance().create(command).execute(request, response);
 		if(url.startsWith(Controller.REDIRECT_PREFIX)) {
 			response.sendRedirect(url.substring(Controller.REDIRECT_PREFIX.length()));
 		} else {

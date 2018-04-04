@@ -8,6 +8,7 @@
 			<thead>
 				<tr>
 					<th>번호</th>
+					<th>표지</th>
 					<th>제목</th>
 					<th>저자</th>
 					<th>출판사</th>
@@ -16,8 +17,9 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.listVO.bookList}" var="book">
-					<tr>
+					<tr class="book-item">
 						<td>${book.bNo}</td>
+						<td><img src="${book.imagePath}"/></td>
 						<td><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
 						<td>${book.author}</td>
 						<td>${book.publisher}</td>

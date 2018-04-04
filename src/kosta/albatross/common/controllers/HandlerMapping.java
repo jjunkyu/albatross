@@ -9,6 +9,8 @@ import kosta.albatross.book.controllers.BookSearchController;
 import kosta.albatross.member.controllers.LoginCheckController;
 import kosta.albatross.member.controllers.LoginController;
 import kosta.albatross.member.controllers.LogoutController;
+import kosta.albatross.member.controllers.MemberUpdateController;
+import kosta.albatross.member.controllers.MemberUpdateViewController;
 import kosta.albatross.member.controllers.MyAccountController;
 import kosta.albatross.member.controllers.RegisterController;
 import kosta.albatross.member.controllers.RegisterViewController;

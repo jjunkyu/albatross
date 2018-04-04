@@ -79,7 +79,8 @@
 		<div class="col-sm-9">
 
 		<form class="form-horizontal" id="registerForm" role="form" method="post"
-			name="registerForm" action="dispatcher?command=register">
+			name="registerForm" action="dispatcher">
+			<input type="hidden" name="command" value="register">
 			
 			<h3>회원가입</h3>
 			<hr>
@@ -138,7 +139,7 @@
 				</select>
 				</div>
 				<div class="col-sm-6">
-				<input type="text" name="anwer" required="required"> 
+				<input type="text" name="answer" required="required"> 
 				</div>
 			</div> 
 			<div class="form-group">

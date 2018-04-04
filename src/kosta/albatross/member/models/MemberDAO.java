@@ -12,11 +12,7 @@ import kosta.albatross.common.models.DataSourceManager;
 
 public class MemberDAO {
 	private static MemberDAO instance = new MemberDAO();
-	private Connection con;
-	private String sql;
-	private ResultSet rs;
 	private DataSource dataSource;
-	private PreparedStatement pstmt;
 
 	private MemberDAO() {
 		dataSource = DataSourceManager.getInstance().getDataSource();
@@ -26,7 +22,7 @@ public class MemberDAO {
 		return instance;
 	}
 
-	private void closeAll() {
+	private void closeAll(Connection con, PreparedStatement pstmt, ResultSet rs) {
 		try {
 			if (con != null)
 				con.close();
@@ -34,6 +30,17 @@ public class MemberDAO {
 				pstmt.close();
 			if (rs != null)
 				rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void closeAll(Connection con, PreparedStatement pstmt) {
+		try {
+			if (con != null)
+				con.close();
+			if (pstmt != null)
+				pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,9 +56,12 @@ public class MemberDAO {
 	 */
 	public MemberVO login(String id, String password) throws SQLException {
 		MemberVO vo = null;
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			sql = "select * from semi_member where id=? and password=?";
+			String sql = "SELECT * FROM SEMI_MEMBER WHERE id=? AND password=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
@@ -68,7 +78,7 @@ public class MemberDAO {
 				vo.setqId(rs.getString(8));
 			}
 		} finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 		return vo;
 	}
@@ -85,7 +95,7 @@ public class MemberDAO {
 		try {
 			con = dataSource.getConnection();
 
-			String sql = "insert into semi_member(id,password,address,name,eMail,answer,qId) values(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO SEMI_MEMBER(id,password,address,name,eMail,answer,qId) VALUES(?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getId());
 			pstmt.setString(2, memberVO.getPassword());
@@ -96,7 +106,7 @@ public class MemberDAO {
 			pstmt.setString(7, memberVO.getqId());
 			pstmt.executeUpdate();
 		} finally {
-			closeAll();
+			closeAll(con, pstmt);
 		}
 	}
 
@@ -113,14 +123,14 @@ public class MemberDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "select query from question";
+			String sql = "SELECT query FROM QUESTION";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				list.add(rs.getString(1));
 			}
 		} finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 		return list;
 	}
@@ -139,14 +149,14 @@ public class MemberDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "select count(*) from semi_member where id=?";
+			String sql = "SELECT count(*) FROM SEMI_MEMBER WHERE id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next() && (rs.getInt(1) > 0))
 				flag = true;
 		} finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 		return flag;
 	}
@@ -165,7 +175,7 @@ public class MemberDAO {
 		String qid = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "select qid from semi_member where email=?";
+			String sql = "SELECT qid FROM SEMI_MEMBER WHERE email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -173,7 +183,7 @@ public class MemberDAO {
 				qid = rs.getString(1);
 			}
 		} finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 
 		return qid;
@@ -195,7 +205,7 @@ public class MemberDAO {
 		MemberVO mvo = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "select id , password from semi_member where email=? and answer=? and qid=?";
+			String sql = "SELECT id , password FROM semi_member WHERE email=? AND answer=? AND qid=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, answer);
@@ -206,7 +216,7 @@ public class MemberDAO {
 				mvo = new MemberVO(rs.getString(1), rs.getString(2), null, null, null);
 			}
 		} finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 
 		return mvo;
@@ -226,14 +236,14 @@ public class MemberDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "select count(*) from semi_member where eMail=?";
+			String sql = "SELECT count(*) FROM SEMI_MEMBER WHERE eMail=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			if (rs.next() && (rs.getInt(1) > 0))
 				flag = true;
 		} finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 		return flag;
 	}
@@ -251,7 +261,7 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="select query from question where qid=?";
+			String sql="SELECT query FROM QUESTION WHERE qid=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, qid);
 			rs=pstmt.executeQuery();
@@ -259,7 +269,7 @@ public class MemberDAO {
 				query = rs.getString(1);
 			}
 		}finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 		return query;
 	}
@@ -280,7 +290,7 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="update semi_member set password=?,name=?,address=?,answer=? where id=?";
+			String sql="UPDATE SEMI_MEMBER SET password=?,name=?,address=?,answer=? WHERE id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, password);
 			pstmt.setString(2, name);
@@ -290,7 +300,7 @@ public class MemberDAO {
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			String sql2="select * from semi_member where id=?";
+			String sql2="SELECT * FROM SEMI_MEMBER WHERE id=?";
 			pstmt=con.prepareStatement(sql2);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
@@ -307,7 +317,7 @@ public class MemberDAO {
 			}
 		
 		}finally {
-			closeAll();
+			closeAll(con, pstmt, rs);
 		}
 		return vo;
 	}

@@ -201,7 +201,8 @@ public class RentDAO {
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				flag = true;
+				if(rs.getInt(1)!=0)
+					flag = true;
 			}
 		} finally {
 			closeAll(rs, pstmt, con);

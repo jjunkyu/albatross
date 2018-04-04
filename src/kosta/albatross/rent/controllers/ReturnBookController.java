@@ -22,7 +22,7 @@ public class ReturnBookController implements Controller {
 			String isRented = request.getParameter("isRented");
 			RentDAO.getInstance().returnRentBook(memberVO.getId(), bNo);
 			BookDAO.getInstance().changeOfRented(bNo,isRented);
-			return REDIRECT_PREFIX + "rent/return_ok.jsp";
+			return REDIRECT_PREFIX + "dispatcher?command=rentList";
 		}
 	}
 }

@@ -151,3 +151,6 @@ select count(*) from semi_book where title like '%해리%';
 select id , password from semi_member where email='skch0122@naver.com' and answer='요리사' and qid='1';
 
 select count(*) from semi_rent_book where bNo=35 and returndate is null;
+
+select *from SEMI_RENT_BOOK;
+select *from semi_member;

@@ -22,10 +22,7 @@ public class RegisterController implements Controller {
 		
 		MemberVO memberVO=new MemberVO(id,password,name,address,null,email,answer,qid);	
 		MemberDAO.getInstance().register(memberVO);
-		String url = "/member/login.jsp";
-		request.setAttribute("url", url);
-		request.setAttribute("page", "register");
-		return TEMPLATE_PATH + "home.jsp";
+		return REDIRECT_PREFIX + "dispatcher?command=login";
 	}
 
 }

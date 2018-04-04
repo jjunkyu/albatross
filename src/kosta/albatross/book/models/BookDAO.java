@@ -420,7 +420,6 @@ public class BookDAO {
 			if (rs.next()) {
 				BVO = getBookDetail(rs.getInt(1));
 			}
-
 		} finally {
 			closeAll(rs, pstmt, con);
 		}

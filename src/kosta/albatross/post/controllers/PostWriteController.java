@@ -25,10 +25,7 @@ public class PostWriteController implements Controller {
 			pVO.setContent(request.getParameter("content"));
 			pVO.setMemberVO(mVO);
 			PostVO postVO = PostDAO.getInstance().posting(pVO);
-			String url = "/post/postDetail.jsp";
-			request.setAttribute("pvo", postVO);
-			request.setAttribute("url", url);
-			return TEMPLATE_PATH + "home.jsp";
+			return REDIRECT_PREFIX + "dispatcher?command=postDetail&pNo="+postVO.getpNo();
 		}
 	}
 

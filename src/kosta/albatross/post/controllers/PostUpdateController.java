@@ -12,7 +12,6 @@ public class PostUpdateController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		HttpSession session = request.getSession();
 		if(session==null || session.getAttribute("loginVO")==null) {
 			return "index.jsp";
@@ -22,11 +21,7 @@ public class PostUpdateController implements Controller {
 			String content = request.getParameter("content");
 			PostVO pvo = PostDAO.getInstance().getPostUpdate(
 					new PostVO(pNo,pTitle,content,0,null,null) );
-			String url = "/post/postDetail.jsp";
-			request.setAttribute("pvo", pvo);
-			request.setAttribute("url", url);
-			request.setAttribute("page", "post-update-page");
-			return TEMPLATE_PATH + "home.jsp";
+			return REDIRECT_PREFIX + "dispatcher?command=postDetail&pNo=" + pvo.getpNo();
 		}
 	}
 }

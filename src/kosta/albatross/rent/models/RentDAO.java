@@ -75,11 +75,17 @@ public class RentDAO {
 			closeAll();
 		}
 	}
-	
+	/**
+	 *  책을 대여하는 메소드
+	 * 
+	 * @param id
+	 * @param bNo
+	 * @throws SQLException
+	 */
 	public void addRentBook(String id,int bNo) throws SQLException {
 		try {
 			con = ds.getConnection();
-			sql = "insert into SEMI_RENT_BOOK(id,bNo,rentdate) values(?,?,sysdate)";
+			sql = "INSERT INTO semi_rent_book(rId,id,bNo,rentdate) VALUES(semi_rent_book_seq.nextval,?,?,sysdate)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,id);
 			pstmt.setInt(2, bNo);
@@ -89,10 +95,17 @@ public class RentDAO {
 		}
 	}
 
+	/**
+	 *  대여한 책을 반납하는 메소드
+	 * 
+	 * @param id
+	 * @param bNo
+	 * @throws SQLException
+	 */
 	public void returnRentBook(String id,int bNo) throws SQLException {
 		try {
 			con = ds.getConnection();
-			sql = " UPDATE semi_rent_book SET returnDate = sysdate WHERE id = ? AND bNo = ? ";
+			sql = " UPDATE semi_rent_book SET returnDate = sysdate WHERE id = ? AND bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, bNo);

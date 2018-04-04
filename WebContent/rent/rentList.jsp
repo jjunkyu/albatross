@@ -38,6 +38,7 @@ function returnBook(){
 										<input type="hidden" name="command" value="returnBook">
 										<input type="hidden" name="bNo" value="${rentVO.bookVO.bNo}">
 										<input type="hidden" name="isRented" value="${rentVO.bookVO.rented}">
+										<input type="hidden" name="rId" value="${rentVO.rId}">
 									</form>
 									<button type="button" class="btn" onclick="returnBook()">반납</button>
 								</td>

@@ -30,7 +30,7 @@ public class BookListController implements Controller {
 		listVO.setPagingBean(pagingBean);
 		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", url);
-		request.setAttribute("page", "library-page");
+		request.setAttribute("page", "book-list");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 }

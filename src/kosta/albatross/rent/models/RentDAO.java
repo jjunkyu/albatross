@@ -107,6 +107,7 @@ public class RentDAO {
 			closeAll(rs, pstmt, con);
 		}
 	}
+
 	/**
 	 * 책을 빌릴때 목록에 추가하는 메서드
 	 * 
@@ -120,7 +121,7 @@ public class RentDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "INSERT INTO SEMI_RENT_BOOK(id,bNo,rentdate) VALUES(?,?,sysdate)";
+			String sql = "INSERT INTO semi_rent_book(rId,id,bNo,rentdate) VALUES(semi_rent_book_seq.nextval,?,?,sysdate)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,id);
 			pstmt.setInt(2, bNo);
@@ -129,6 +130,7 @@ public class RentDAO {
 			closeAll(rs, pstmt, con);
 		}
 	}
+
 	/**
 	 * 빌린 책을 반납할 때 쓰는 메서드
 	 * 
@@ -141,8 +143,8 @@ public class RentDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			con = dataSource.getConnection();
-			String sql = " UPDATE SEMI_RENT_BOOK SET returnDate = sysdate WHERE id = ? AND bNo = ? ";
+con = dataSource.getConnection();
+			String sql = " UPDATE semi_rent_book SET returnDate = sysdate WHERE id = ? AND bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, bNo);

@@ -56,20 +56,21 @@ drop sequence semi_book_seq;
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터2','롤링','해리포터라는 마법사가 커가는 이야기2','영국출판사');
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터','롤링','해리포터라는 마법사가 커가는 이야기','영국출판사');
 select *from SEMI_BOOK;
-delete from semi_book where bNo = 2
 
 create table semi_rent_book(
+rNo number primary key,
 id varchar2(100) not null,
 bNo number not null,
 rentDate date not null,
 returnDate date,
 constraint fk_id foreign key(id) references semi_member(id),
-constraint fk_bNo foreign key(bNo) references semi_book(bNo),
-constraint pk_rent primary key(id,bNo) --복합pk
+constraint fk_bNo foreign key(bNo) references semi_book(bNo)
 )
+create sequence semi_rent_book_seq;
 drop table semi_rent_book;
-insert into semi_rent_book(id,bNo,rentDate) values('java','1',sysdate);
+insert into semi_rent_book(rNo,id,bNo,rentDate) values(semi_rent_book_seq.nextval,'java','1',sysdate);
 select *from semi_rent_book;
+delete from semi_rent_book WHERE id='java'
 
 
 create table semi_post(

@@ -77,8 +77,7 @@ public class BookDAO {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
-			sql.append(
-					"FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append(" FROM(SELECT row_number() OVER(ORDER BY bNo DESC) AS rnum,bNo,title,author,content,publisher,isRented ");
 			sql.append("FROM semi_book) b WHERE rnum BETWEEN ? AND ? ");
 			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());

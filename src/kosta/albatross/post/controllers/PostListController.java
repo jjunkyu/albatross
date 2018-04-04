@@ -23,11 +23,9 @@ public class PostListController implements Controller {
 		} else {
 			pagingBean = new PagingBean(totalCount, Integer.parseInt(pno));
 		}
-		
 		ArrayList<PostVO> list = PostDAO.getInstance().getPostList(pagingBean);
 		ListVO listVO = new ListVO(list, pagingBean);
 		String url = "/post/postList.jsp";
-		request.setAttribute("list", list);
 		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", url);
 		request.setAttribute("page", "post-page");

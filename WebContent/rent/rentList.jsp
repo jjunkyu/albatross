@@ -9,6 +9,7 @@ function returnBook(){
 	}
 }
 </script>
+<main class="container">
 <div class="row">
 	<div class="col-sm-12">
 		<h2 align="center">${sessionScope.loginVO.id}님의빌린책 목록</h2>
@@ -38,6 +39,7 @@ function returnBook(){
 										<input type="hidden" name="command" value="returnBook">
 										<input type="hidden" name="bNo" value="${rentVO.bookVO.bNo}">
 										<input type="hidden" name="isRented" value="${rentVO.bookVO.rented}">
+										<input type="hidden" name="rId" value="${rentVO.rId}">
 									</form>
 									<button type="button" class="btn" onclick="returnBook()">반납</button>
 								</td>
@@ -52,3 +54,4 @@ function returnBook(){
 		</table>
 	</div>
 </div>
+</main>

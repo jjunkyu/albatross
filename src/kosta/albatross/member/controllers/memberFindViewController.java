@@ -8,16 +8,18 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.albatross.common.controllers.Controller;
 import kosta.albatross.member.models.MemberDAO;
 
-public class RegisterViewController implements Controller {
+public class memberFindViewController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/member/register.jsp";
-		ArrayList<String> questionList = MemberDAO.getInstance().questionList();
-		request.setAttribute("questionList", questionList);
+		ArrayList<String>list = new ArrayList<String>();
+		MemberDAO memberDAO =null;
+		list=memberDAO.getInstance().questionList();
+
+		String url = "/member/memberFindView.jsp";
+		request.setAttribute("list", list);
 		request.setAttribute("url", url);
-		request.setAttribute("page", "register-view");
+		request.setAttribute("page", "member-Find-View");
 		return TEMPLATE_PATH + "home.jsp";
 	}
-
 }

@@ -11,26 +11,31 @@ import kosta.albatross.common.controllers.Controller;
 import kosta.albatross.common.models.ListVO;
 import kosta.albatross.common.models.PagingBean;
 
-public class BookListController implements Controller {
+public class BookSearchByTitleController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		PagingBean pagingBean = null;
-		int totalCount = BookDAO.getInstance().getTotalBookCount();
 		String pNo = request.getParameter("pNo");
+		String searchStr = request.getParameter("value");
+		int totalCount = BookDAO.getInstance().searchByTitleCount(searchStr);
 		if (pNo == null) {
 			pagingBean = new PagingBean(totalCount);
-		}else {
-			pagingBean = new PagingBean(totalCount,Integer.parseInt(pNo));
+		} else {
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pNo));
 		}
-		ArrayList<BookVO> bookList = BookDAO.getInstance().getBookList(pagingBean);
+		ArrayList<BookVO> list = BookDAO.getInstance().searchByTitle(searchStr, pagingBean);
 		ListVO listVO = new ListVO();
-		String url = "/book/bookList.jsp";
-		listVO.setBookList(bookList);
+		if(list==null)
+			return "/book/bookSearch_fail.jsp";
+		String url = "/book/bookSearch_ok.jsp";
+		listVO.setBookList(list);
 		listVO.setPagingBean(pagingBean);
+		request.setAttribute("command","bookSearchByTitle");
+		request.setAttribute("value", searchStr);
 		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", url);
-		request.setAttribute("page", "book-list");
+		request.setAttribute("page", "bookSearch-ok");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 }

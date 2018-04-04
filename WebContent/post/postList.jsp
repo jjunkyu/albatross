@@ -18,7 +18,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.list}" var="list">
+					<c:forEach items="${requestScope.listVO.postList}" var="list">
 						<tr>
 							<td>${list.pNo}</td>
 							<td>

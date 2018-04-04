@@ -18,6 +18,23 @@ public class MemberVO {
 		super();
 	}
 	
+	
+	
+	public MemberVO(String id, String password, String name, String address, String cId, String email, String answer,
+			String qId) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.address = address;
+		this.cId = cId;
+		this.email = email;
+		this.answer = answer;
+		this.qId = qId;
+	}
+
+
+
 	public MemberVO(String id, String password, String address, String name, String cId) {
 		super();
 		this.id = id;

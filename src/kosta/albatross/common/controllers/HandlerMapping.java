@@ -5,14 +5,19 @@ import kosta.albatross.book.controllers.BookDetailController;
 import kosta.albatross.book.controllers.BookListController;
 import kosta.albatross.book.controllers.BookRegisterController;
 import kosta.albatross.book.controllers.BookRegisterViewController;
-import kosta.albatross.book.controllers.BookSearchController;
-import kosta.albatross.member.controllers.IdCheckController;
+import kosta.albatross.book.controllers.BookSearchByAuthorController;
+import kosta.albatross.book.controllers.BookSearchByMixController;
+import kosta.albatross.book.controllers.BookSearchByTitleController;
 import kosta.albatross.member.controllers.LoginCheckController;
 import kosta.albatross.member.controllers.LoginController;
 import kosta.albatross.member.controllers.LogoutController;
+import kosta.albatross.member.controllers.MemberUpdateController;
+import kosta.albatross.member.controllers.MemberUpdateViewController;
 import kosta.albatross.member.controllers.MyAccountController;
 import kosta.albatross.member.controllers.RegisterController;
 import kosta.albatross.member.controllers.RegisterViewController;
+import kosta.albatross.member.controllers.memberFindController;
+import kosta.albatross.member.controllers.memberFindViewController;
 import kosta.albatross.post.controllers.PostListController;
 import kosta.albatross.post.controllers.PostWriteViewController;
 import kosta.albatross.post.controllers.PostWriteController;
@@ -48,8 +53,6 @@ public class HandlerMapping {
 			ctrl = new RegisterController();
 		} else if (command.equals("registerView")) { // 레지스터 뷰
 			ctrl = new RegisterViewController();
-		} else if (command.equals("idcheck")) {
-			ctrl = new IdCheckController();
 		} else if (command.equals("login")) {// 로그인 페이지
 			ctrl = new LoginController();
 		} else if (command.equals("loginCheck")) {// 로그인 성공&실패
@@ -57,8 +60,12 @@ public class HandlerMapping {
 		} else if (command.equals("logout")) {// 로그아웃
 			ctrl = new LogoutController();
 			//도서관
-		} else if (command.equals("BookSearch")) {
-			ctrl = new BookSearchController();
+		} else if (command.equals("bookSearchByTitle")) {
+			ctrl = new BookSearchByTitleController();
+		} else if (command.equals("bookSearchByAuthor")) {
+			ctrl = new BookSearchByAuthorController();
+		} else if (command.equals("bookSearchByMix")) {
+			ctrl = new BookSearchByMixController();
 		} else if (command.equals("rentBook")) {
 			ctrl = new RentBookController();
 		} else if (command.equals("returnBook")) {
@@ -84,16 +91,26 @@ public class HandlerMapping {
 			ctrl = new PostUpdateViewController();
 		}else if(command.equals("deletePost")) {
 			ctrl = new PostDeleteController();
+		} else if (command.equals("register")) {
+			ctrl = new RegisterController();
 		} else if (command.equals("postWriteView")) {// 게시판글쓰기
 			ctrl = new PostWriteViewController();
 		} else if (command.equals("postWrite")) {
 			ctrl = new PostWriteController();
+		}else if (command.equals("memberFindView")) {
+			ctrl = new memberFindViewController();
+		}else if (command.equals("memberFind")) {
+			ctrl = new memberFindController();
 		} else if (command.equals("myAccount")) {
 			ctrl = new MyAccountController();
 		} else if (command.equals("deleteBook")) {
 			ctrl = new BookDeleteController();
 		} else if (command.equals("myPosting")) {
 			ctrl = new MyPostingController();
+		}else if(command.equals("memberUpdateView")) {//회원정보수정
+			ctrl = new MemberUpdateViewController();
+		}else if(command.equals("memberUpdate")) {//회원정보수정완료 적용
+			ctrl = new MemberUpdateController();
 		}
 		return ctrl;
 	}

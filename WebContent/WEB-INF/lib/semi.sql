@@ -69,7 +69,7 @@ constraint fk_bNo foreign key(bNo) references semi_book(bNo)
 create sequence semi_rent_book_seq;
 drop sequence semi_rent_book_seq;
 drop table semi_rent_book;
-insert into semi_rent_book(rNo,id,bNo,rentDate) values(semi_rent_book_seq.nextval,'java','1',sysdate);
+insert into semi_rent_book(rId,id,bNo,rentDate) values(semi_rent_book_seq.nextval,'java','1',sysdate);
 select *from semi_rent_book;
 delete from semi_rent_book WHERE id='java'
 
@@ -129,7 +129,6 @@ FROM semi_book where title like '%해리%') b WHERE rnum BETWEEN 1 AND 10
 ORDER BY bNo DESC 
 
 SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like '%해리%';
-
 
 SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM(
 SELECT row_number() over(order by pNo desc) as bNo, title, author, content, publisher, isRented

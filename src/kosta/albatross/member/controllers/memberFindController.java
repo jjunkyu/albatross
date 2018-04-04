@@ -19,7 +19,7 @@ public class memberFindController implements Controller {
 		String url = "/member/memberFind_ok.jsp";
 		request.setAttribute("mvo", mvo);
 		request.setAttribute("url", url);
-		request.setAttribute("page", "member-Find");
+		request.setAttribute("page", "member-find");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 

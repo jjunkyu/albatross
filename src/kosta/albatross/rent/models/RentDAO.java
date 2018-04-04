@@ -143,7 +143,7 @@ public class RentDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-con = dataSource.getConnection();
+			con = dataSource.getConnection();
 			String sql = " UPDATE semi_rent_book SET returnDate = sysdate WHERE id = ? AND bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -167,7 +167,7 @@ con = dataSource.getConnection();
 		ResultSet rs = null;
 		int date = 0;
 		try {
-			con = (Connection) DataSourceManager.getInstance().getDataSource();
+			con = dataSource.getConnection();
 			String sql = "SELECT sysdate-rentdate FROM SEMI_RENT_BOOK WHERE bNo = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
@@ -183,20 +183,29 @@ con = dataSource.getConnection();
 		}
 	}
 	
-	public boolean isRentBook(int bNo) throws SQLException {
+	/**
+	 * bNo에 해당하는 책이 빌려지고 있는지 확인하는 메서드
+	 * @param bNo
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean isRentingBook(int bNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int date = 0;
+		boolean flag = false;
 		try {
-			con = (Connection) DataSourceManager.getInstance().getDataSource();
-			String sql = "SELECT sysdate-rentdate FROM SEMI_RENT_BOOK WHERE bNo = ?";
+			con = dataSource.getConnection();
+			String sql = "SELECT count(*) FROM semi_rent_book WHERE bNo=? and returnDate IS NULL";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				flag = true;
+			}
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
-		return false;
+		return flag;
 	}
 }

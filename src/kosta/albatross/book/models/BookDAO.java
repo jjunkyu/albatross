@@ -10,6 +10,8 @@ import javax.sql.DataSource;
 
 import kosta.albatross.common.models.DataSourceManager;
 import kosta.albatross.common.models.PagingBean;
+import kosta.albatross.exception.NotDeleteBookException;
+import kosta.albatross.rent.models.RentDAO;
 
 public class BookDAO {
 
@@ -372,11 +374,15 @@ public class BookDAO {
 	 * 
 	 * @param bNo
 	 * @throws SQLException
+	 * @throws NotDeleteBookException 
 	 */
-	public void deleteBook(int bNo) throws SQLException {
+	public void deleteBook(int bNo) throws SQLException, NotDeleteBookException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
+			if(RentDAO.getInstance().isRentingBook(bNo)) {
+				throw new NotDeleteBookException();
+			}
 			con = dataSource.getConnection();
 			String sql = "DELETE FROM SEMI_BOOK WHERE bNo = ?";
 			pstmt = con.prepareStatement(sql);

@@ -58,7 +58,7 @@ insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.n
 select *from SEMI_BOOK;
 
 create table semi_rent_book(
-rNo number primary key,
+rId number primary key,
 id varchar2(100) not null,
 bNo number not null,
 rentDate date not null,
@@ -67,8 +67,9 @@ constraint fk_id foreign key(id) references semi_member(id),
 constraint fk_bNo foreign key(bNo) references semi_book(bNo)
 )
 create sequence semi_rent_book_seq;
+drop sequence semi_rent_book_seq;
 drop table semi_rent_book;
-insert into semi_rent_book(rNo,id,bNo,rentDate) values(semi_rent_book_seq.nextval,'java','1',sysdate);
+insert into semi_rent_book(rId,id,bNo,rentDate) values(semi_rent_book_seq.nextval,'java','1',sysdate);
 select *from semi_rent_book;
 delete from semi_rent_book WHERE id='java'
 
@@ -129,8 +130,6 @@ ORDER BY bNo DESC
 
 SELECT bNo, title, author, content, publisher, isRented FROM semi_book where title like '%해리%';
 
-
-<<<<<<< HEAD
 SELECT p.pNo,p.title,p.timeposted,p.hits,p.id,m.name FROM(
 SELECT row_number() over(order by pNo desc) as bNo, title, author, content, publisher, isRented
 FROM semi_book where author like '') p,semi_member m 

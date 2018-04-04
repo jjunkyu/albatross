@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.albatross.common.controllers.Controller;
 import kosta.albatross.member.models.MemberDAO;
 
-public class memberFindViewController implements Controller {
+public class MemberFindViewController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

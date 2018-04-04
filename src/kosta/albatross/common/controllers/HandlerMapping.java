@@ -16,8 +16,8 @@ import kosta.albatross.member.controllers.MemberUpdateViewController;
 import kosta.albatross.member.controllers.MyAccountController;
 import kosta.albatross.member.controllers.RegisterController;
 import kosta.albatross.member.controllers.RegisterViewController;
-import kosta.albatross.member.controllers.memberFindController;
-import kosta.albatross.member.controllers.memberFindViewController;
+import kosta.albatross.member.controllers.MemberFindController;
+import kosta.albatross.member.controllers.MemberFindViewController;
 import kosta.albatross.post.controllers.PostListController;
 import kosta.albatross.post.controllers.PostWriteViewController;
 import kosta.albatross.post.controllers.PostWriteController;
@@ -98,9 +98,9 @@ public class HandlerMapping {
 		} else if (command.equals("postWrite")) {
 			ctrl = new PostWriteController();
 		}else if (command.equals("memberFindView")) {
-			ctrl = new memberFindViewController();
+			ctrl = new MemberFindViewController();
 		}else if (command.equals("memberFind")) {
-			ctrl = new memberFindController();
+			ctrl = new MemberFindController();
 		} else if (command.equals("myAccount")) {
 			ctrl = new MyAccountController();
 		} else if (command.equals("deleteBook")) {

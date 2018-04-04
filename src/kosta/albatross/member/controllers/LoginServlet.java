@@ -19,13 +19,13 @@ import kosta.albatross.member.models.MemberVO;
  * Servlet implementation class CheckIdServlet
  */
 @WebServlet("/LoginServlet")
-public class loginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

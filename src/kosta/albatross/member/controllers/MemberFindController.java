@@ -7,7 +7,7 @@ import kosta.albatross.common.controllers.Controller;
 import kosta.albatross.member.models.MemberDAO;
 import kosta.albatross.member.models.MemberVO;
 
-public class memberFindController implements Controller {
+public class MemberFindController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

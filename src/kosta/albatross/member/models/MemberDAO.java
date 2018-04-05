@@ -195,7 +195,7 @@ public class MemberDAO {
 	 * @param email
 	 * @param answer
 	 * @param qid
-	 * @return
+	 * @return mvo
 	 * @throws SQLException
 	 */
 	public MemberVO getMemberFind(String email, String answer, String qid) throws SQLException {

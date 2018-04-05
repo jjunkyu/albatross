@@ -79,7 +79,7 @@ public class RentDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" SELECT br.rnum, br.id, br.rentdate, br.returndate, ");
+			sql.append(" SELECT br.id, br.rentdate, br.returndate, ");
 			sql.append(" b.bNo,b.title,b.author,b.publisher,b.isrented ");
 			sql.append(" FROM (SELECT row_number() OVER(ORDER BY rentdate DESC) ");
 			sql.append(" AS rnum, id, bNo, rentdate, returndate ");
@@ -95,17 +95,17 @@ public class RentDAO {
 				rentVO = new RentVO();
 				bookVO = new BookVO();
 				rentVO.setBookVO(bookVO);
-				rentVO.getBookVO().setbNo(rs.getInt(5));
-				rentVO.getBookVO().setTitle(rs.getString(6));
-				rentVO.getBookVO().setAuthor(rs.getString(7));
-				rentVO.getBookVO().setPublisher(rs.getString(8));
-				count = rs.getInt(9);
+				rentVO.getBookVO().setbNo(rs.getInt(4));
+				rentVO.getBookVO().setTitle(rs.getString(5));
+				rentVO.getBookVO().setAuthor(rs.getString(6));
+				rentVO.getBookVO().setPublisher(rs.getString(7));
+				count = rs.getInt(8);
 				if(count == 0)
 					rentVO.getBookVO().setRented(false);
 				else
 					rentVO.getBookVO().setRented(true);
-				rentVO.setRentDate(rs.getString(3));
-				rentVO.setReturnDate(rs.getString(4));
+				rentVO.setRentDate(rs.getString(2));
+				rentVO.setReturnDate(rs.getString(3));
 				list.add(rentVO);
 			}
 			return list;

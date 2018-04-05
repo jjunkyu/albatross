@@ -22,6 +22,10 @@ function deleteBook(){
 			document.deleteForm.submit();
 		}
 }
+
+function updateBook(){
+		document.updateForm.submit();
+}
 </script>
 <div class="container">
 	<div class="row">
@@ -45,21 +49,28 @@ function deleteBook(){
 					<tr>
 						<td colspan="5" class="content">
 							<img src="${bookVO.imagePath}" />
-							<pre>${bookVO.content}</pre>
+							${bookVO.content}
 						</td>
 					</tr>
 					<tr>
 						<c:choose>
 							<%-- admin : 책 삭제 버튼만 보여주기 --%>
 							<c:when test="${sessionScope.loginVO.cId == '1'}">
-								<td colspan="5" class="btnArea">
-	
+								<td class="btnArea">
 									<form name="deleteForm"
 										action="${pageContext.request.contextPath}/dispatcher">
 										<input type="hidden" name="command" value="deleteBook">
 										<input type="hidden" name="bNo" value="${bookVO.bNo}">
 									</form>
-									<button type="button" class="btn" onclick="deleteBook()">삭제</button>
+									<button type="button" class="btn btn-primary" onclick="deleteBook()">삭제</button>		
+								</td>
+								<td class="btnArea">
+									<form name="updateForm"
+										action="${pageContext.request.contextPath}/dispatcher">
+										<input type="hidden" name="command" value="bookUpdateView">
+										<input type="hidden" name="bNo" value="${bookVO.bNo}">
+									</form>
+									<button type="button" class="btn btn-primary" onclick="updateBook()">수정</button>
 								</td>
 							</c:when>
 							<c:otherwise>

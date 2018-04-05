@@ -16,7 +16,7 @@ public class BookRegisterViewController implements Controller {
 		}
 		String url="/book/bookRegister.jsp";
 		request.setAttribute("url", url);
-		request.setAttribute("page", "library-page");
+		request.setAttribute("page", "book-register-page");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 }

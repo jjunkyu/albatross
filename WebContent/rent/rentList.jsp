@@ -12,7 +12,7 @@ function returnBook(){
 <main class="container">
 <div class="row">
 	<div class="col-sm-12">
-		<h2 align="center">${sessionScope.loginVO.id}님의빌린책 목록</h2>
+		<h2 align="center">${sessionScope.loginVO.id}님의 빌린책 목록</h2>
 		<table class="table">
 			<thead>
 				<tr>
@@ -31,7 +31,7 @@ function returnBook(){
 						<td><a href="dispatcher?command=bookDetail&bNo=${rentVO.bookVO.bNo}">${rentVO.bookVO.title}</a></td>
 						<td>${rentVO.bookVO.author}</td>
 						<td>${rentVO.bookVO.publisher}</td>
-						<td>${rentVO.rentDate}시</td>
+						<td>${rentVO.rentDate}</td>
 						<c:choose>
 							<c:when test="${rentVO.returnDate == null}">
 								<td class="btnArea">
@@ -45,7 +45,7 @@ function returnBook(){
 								</td>
 							</c:when>
 							<c:otherwise>
-								<td>${rentVO.returnDate}시</td>
+								<td>${rentVO.returnDate}</td>
 							</c:otherwise>
 						</c:choose>
 					</tr>

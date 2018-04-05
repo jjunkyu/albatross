@@ -79,13 +79,13 @@ public class RentDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select br.rnum, br.id, br.rentdate, br.returndate, ");
-			sql.append(" b.bNo,b.title,b.author,b.publisher ");
-			sql.append(" from (SELECT row_number() over(order by rentdate desc) ");
-			sql.append(" as rnum, id, bNo, rentdate, returndate ");
-			sql.append(" from semi_rent_book) br, semi_book b ");
-			sql.append(" where br.id=? and br.bno=b.bno and rnum between ? and ? ");
-			sql.append(" order by rentdate desc ");
+			sql.append(" SELECT br.rnum, br.id, br.rentdate, br.returndate, ");
+			sql.append(" b.bNo,b.title,b.author,b.publisher,b.isrented ");
+			sql.append(" FROM (SELECT row_number() OVER(ORDER BY rentdate DESC) ");
+			sql.append(" AS rnum, id, bNo, rentdate, returndate ");
+			sql.append(" FROM semi_rent_book) br, semi_book b ");
+			sql.append(" WHERE br.id=? AND br.bno=b.bno AND rnum between ? AND ? ");
+			sql.append(" ORDER BY rentdate DESC ");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, id);
 			pstmt.setInt(2, pagingBean.getStartRowNumber());
@@ -95,17 +95,17 @@ public class RentDAO {
 				rentVO = new RentVO();
 				bookVO = new BookVO();
 				rentVO.setBookVO(bookVO);
-				rentVO.getBookVO().setbNo(rs.getInt(1));
-				rentVO.getBookVO().setTitle(rs.getString(2));
-				rentVO.getBookVO().setAuthor(rs.getString(3));
-				rentVO.getBookVO().setPublisher(rs.getString(4));
-				count = rs.getInt(5);
-				if(count==0)
+				rentVO.getBookVO().setbNo(rs.getInt(5));
+				rentVO.getBookVO().setTitle(rs.getString(6));
+				rentVO.getBookVO().setAuthor(rs.getString(7));
+				rentVO.getBookVO().setPublisher(rs.getString(8));
+				count = rs.getInt(9);
+				if(count == 0)
 					rentVO.getBookVO().setRented(false);
 				else
 					rentVO.getBookVO().setRented(true);
-				rentVO.setRentDate(rs.getString(7));
-				rentVO.setReturnDate(rs.getString(8));
+				rentVO.setRentDate(rs.getString(3));
+				rentVO.setReturnDate(rs.getString(4));
 				list.add(rentVO);
 			}
 			return list;

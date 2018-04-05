@@ -163,9 +163,9 @@ public class BookDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented,b.imagePath ");
 			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) ");
-			sql.append("AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append("AS rnum,bNo,title,author,content,publisher,isRented,imagePath ");
 			sql.append("FROM semi_book WHERE author LIKE ?) b WHERE rnum BETWEEN ? AND ? ");
 			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());
@@ -181,6 +181,7 @@ public class BookDAO {
 				bookVO.setContent(rs.getString(4));
 				bookVO.setPublisher(rs.getString(5));
 				bookVO.setRented(rs.getInt(6) == 0 ? false : true);
+				bookVO.setImagePath(rs.getString(7));
 				list.add(bookVO);
 			}
 		} catch (SQLException e) {
@@ -219,9 +220,9 @@ public class BookDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented,b.imagePath ");
 			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) ");
-			sql.append("AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append("AS rnum,bNo,title,author,content,publisher,isRented,imagePath ");
 			sql.append("FROM semi_book WHERE title LIKE ?) b WHERE rnum BETWEEN ? AND ? ");
 			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());
@@ -237,6 +238,7 @@ public class BookDAO {
 				bookVO.setContent(rs.getString(4));
 				bookVO.setPublisher(rs.getString(5));
 				bookVO.setRented(rs.getInt(6) == 0 ? false : true);
+				bookVO.setImagePath(rs.getString(7));
 				list.add(bookVO);
 			}
 		} catch (SQLException e) {
@@ -275,9 +277,9 @@ public class BookDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented ");
+			sql.append("SELECT b.bNo, b.title, b.author, b.content, b.publisher,b.isRented,b.imagePath ");
 			sql.append("FROM(SELECT row_number() OVER(ORDER BY bNo DESC) ");
-			sql.append("AS rnum,bNo,title,author,content,publisher,isRented ");
+			sql.append("AS rnum,bNo,title,author,content,publisher,isRented,imagePath ");
 			sql.append("FROM semi_book WHERE title LIKE ? or author LIKE ?) b WHERE rnum BETWEEN ? AND ? ");
 			sql.append("ORDER BY bNo DESC");
 			pstmt = con.prepareStatement(sql.toString());
@@ -294,6 +296,7 @@ public class BookDAO {
 				bookVO.setContent(rs.getString(4));
 				bookVO.setPublisher(rs.getString(5));
 				bookVO.setRented(rs.getInt(6) == 0 ? false : true);
+				bookVO.setImagePath(rs.getString(7));
 				list.add(bookVO);
 			}
 		} catch (SQLException e) {
@@ -360,7 +363,7 @@ public class BookDAO {
 		try {
 			con = dataSource.getConnection();
 			if (isRented.equals("false")) {
-				String sql = "UPDATE semi_book SET isRented = 1 WHERE bNo = ?";
+				String sql = "UPDATE semi_book SET isRented = 1, rentcount=rentcount+1 WHERE bNo = ?";
 				pstmt = con.prepareStatement(sql);
 			}else {
 				String sql = "UPDATE semi_book SET isRented = 0 WHERE bNo = ?";

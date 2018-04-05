@@ -4,24 +4,26 @@
 <main class="container">
 <div class="row">
 	<div class="col-sm-12">
-		<table class="table">
+<table class="table">
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>저자</th>
-					<th>출판사</th>
-					<th>대여상태<th>
+					<th class="book-number">번호</th>
+					<th class="book-thumb">표지</th>
+					<th class="book-title">제목</th>
+					<th class="book-author">저자</th>
+					<th class="book-publisher">출판사</th>
+					<th class="book-is-rented">대여상태<th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.listVO.bookList}" var="book">
-					<tr>
-						<td>${book.bNo}</td>
-						<td><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
-						<td>${book.author}</td>
-						<td>${book.publisher}</td>
-						<td>
+					<tr class="book-item" data-bNo="${book.bNo}">
+						<td class="book-number">${book.bNo}</td>
+						<td class="book-thumb"><img src="${book.imagePath}"/></td>
+						<td class="book-title"><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
+						<td class="book-author">${book.author}</td>
+						<td class="book-publisher">${book.publisher}</td>
+						<td class="book-is-rented">
 						<c:choose>
 							<c:when test="${book.rented==false}">
 							대여가능
@@ -34,7 +36,7 @@
 					</tr>
 				</c:forEach>
 			</tbody>
-		</table>
+		</table>	
 		<c:if test="${sessionScope.loginVO.cId=='1'}">
 		<form action="dispatcher" method="post">
 			<span style="float: right"><input type="submit" class="btn btn-primary btn-xs" value="책등록"> </span>

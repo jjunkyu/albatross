@@ -25,10 +25,10 @@ function returnBook(){
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.rentList}" var="rentVO">
+				<c:forEach items="${requestScope.listVO.rentList}" var="rentVO">
 					<tr>
 						<td>${rentVO.bookVO.bNo}</td>
-						<td>${rentVO.bookVO.title}</td>
+						<td><a href="dispatcher?command=bookDetail&bNo=${rentVO.bookVO.bNo}">${rentVO.bookVO.title}</a></td>
 						<td>${rentVO.bookVO.author}</td>
 						<td>${rentVO.bookVO.publisher}</td>
 						<td>${rentVO.rentDate}시</td>
@@ -53,5 +53,29 @@ function returnBook(){
 			</tbody>
 		</table>
 	</div>
+</div>
+<div class="row pagingInfo justify-content-center">
+	<c:set var="pb" value="${requestScope.listVO.pagingBean}"></c:set>
+	<ul class="pagination">
+		<c:if test="${pb.previousPageGroup}">
+			<li class="page-item"><a class="page-link"
+				href="dispatcher?command=rentList&pNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+		</c:if>
+		<c:forEach begin="${pb.startPageOfPageGroup}"
+			end="${pb.endPageOfPageGroup}" var="pop">
+			<c:choose>
+				<c:when test="${pb.nowPage != pop}">
+					<li class="page-item"><a class="page-link" href="dispatcher?command=rentList&pNo=${pop}">${pop}</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item active"><a class="page-link" href="javascript:;">${pop}</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${pb.nextPageGroup}">
+			<li class="page-item"><a class="page-link"
+				href="dispatcher?command=rentList&pNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+		</c:if>
+	</ul>
 </div>
 </main>

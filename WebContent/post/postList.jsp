@@ -67,7 +67,7 @@
 								<li class="page-item"><a class="page-link" href="dispatcher?command=postList&pageNo=${i}">${i}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="active page-item"><a class="page-link" href="#">${i}</a></li>
+								<li class="active page-item"><a class="page-link" href="javascript:;">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

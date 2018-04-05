@@ -22,6 +22,11 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$('#userPassword').on('keypress', function(e) {
+		if(e.which == 13) {
+			$('#loginBts').trigger('click');
+		}
+	});
 });
 </script>
 
@@ -41,8 +46,7 @@ $(document).ready(function() {
 					<input type="password"
 						class="form-control" name="userPassword" id="userPassword" aria-describedby="checkPW"
 						placeholder="비밀번호를 입력해주세요" required="required">
-					<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red" >
-					</span>
+					<span id="checkPW" style="font-weight:bold; font-size:smaller; color:red"></span>
 				</div>
 				<div class="login-btn-wrapper">
 					<button type="button" class="btn btn-primary" id="loginBts">login</button>

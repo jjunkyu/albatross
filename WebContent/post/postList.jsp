@@ -80,7 +80,7 @@
 	</div>
 </div>
 </main>
-<c:if test="${sessionScope.loginVO}">
+<c:if test="${sessionScope.loginVO != null}">
 <script type="text/javascript" src="static/js/jquery.js"></script>
 <script>
 	$(document).ready(function(){

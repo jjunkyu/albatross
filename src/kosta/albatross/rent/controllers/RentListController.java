@@ -21,7 +21,7 @@ public class RentListController implements Controller {
 		MemberVO memberVO = (MemberVO) session.getAttribute("loginVO");
 		ListVO listVO = new ListVO();
 		if (session == null || memberVO == null) {
-			return "index.jsp";
+			return REDIRECT_PREFIX +"index.jsp";
 		}
 		PagingBean pagingBean = null;
 		int totalCount = RentDAO.getInstance().getTotalRentCount(memberVO.getId());

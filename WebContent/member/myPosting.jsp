@@ -20,7 +20,7 @@
 					<c:forEach items="${requestScope.listVO.postList}" var="list">
 						<tr>
 							<td>${list.pNo}</td>
-							<td>${list.title }</td>
+							<td><a href="${pageContext.request.contextPath}/dispatcher?command=postDetail&pNo=${list.pNo}">${list.title }</a></td>
 							<td>${list.memberVO.id }</td>
 							<td>${list.timePosted}</td>
 							<td>${list.hits}</td>

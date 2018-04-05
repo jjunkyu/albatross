@@ -468,4 +468,20 @@ public class BookDAO {
 		}
 		return list;
 	}
+	
+	public void bookUpdate(BookVO bookVO) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con = dataSource.getConnection();
+			String sql="UPDATE semi_book SET content = ? WHERE bNo = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, bookVO.getContent());
+			pstmt.setInt(2, bookVO.getbNo());
+			pstmt.executeUpdate();
+			pstmt.close();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}
 }

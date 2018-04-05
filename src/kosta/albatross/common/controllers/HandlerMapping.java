@@ -1,33 +1,9 @@
 package kosta.albatross.common.controllers;
 
-import kosta.albatross.book.controllers.BookDeleteController;
-import kosta.albatross.book.controllers.BookDetailController;
-import kosta.albatross.book.controllers.BookListController;
-import kosta.albatross.book.controllers.BookRegisterController;
-import kosta.albatross.book.controllers.BookRegisterViewController;
-import kosta.albatross.book.controllers.BookSearchByAuthorController;
-import kosta.albatross.book.controllers.BookSearchByMixController;
-import kosta.albatross.book.controllers.BookSearchByTitleController;
-import kosta.albatross.member.controllers.LoginCheckController;
-import kosta.albatross.member.controllers.LoginController;
-import kosta.albatross.member.controllers.LogoutController;
-import kosta.albatross.member.controllers.MemberUpdateController;
-import kosta.albatross.member.controllers.MemberUpdateViewController;
-import kosta.albatross.member.controllers.MyAccountController;
-import kosta.albatross.member.controllers.RegisterController;
-import kosta.albatross.member.controllers.RegisterViewController;
-import kosta.albatross.member.controllers.MemberFindController;
-import kosta.albatross.member.controllers.MemberFindViewController;
-import kosta.albatross.post.controllers.PostListController;
-import kosta.albatross.post.controllers.PostWriteViewController;
-import kosta.albatross.post.controllers.PostWriteController;
-import kosta.albatross.post.controllers.PostDeleteController;
-import kosta.albatross.post.controllers.PostUpdateController;
-import kosta.albatross.post.controllers.PostUpdateViewController;
-import kosta.albatross.post.controllers.PostDetailController;
-import kosta.albatross.rent.controllers.RentBookController;
-import kosta.albatross.rent.controllers.RentListController;
-import kosta.albatross.rent.controllers.ReturnBookController;
+import kosta.albatross.book.controllers.*;
+import kosta.albatross.member.controllers.*;
+import kosta.albatross.post.controllers.*;
+import kosta.albatross.rent.controllers.*;
 
 public class HandlerMapping {
 	public static HandlerMapping instance = new HandlerMapping();
@@ -80,6 +56,10 @@ public class HandlerMapping {
 			ctrl = new RentListController();
 		} else if (command.equals("bookRegisterView")) {
 			ctrl = new BookRegisterViewController();
+		} else if (command.equals("bookUpdateView")) {
+			ctrl = new BookUpdateViewController();
+		} else if (command.equals("bookUpdate")) {
+			ctrl = new BookUpdateController();
 			//게시판
 		} else if (command.equals("postList")) {
 			ctrl = new PostListController();

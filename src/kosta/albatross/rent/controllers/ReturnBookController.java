@@ -16,7 +16,7 @@ public class ReturnBookController implements Controller {
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("loginVO");
 		if(session == null || memberVO == null) {
-			return "index.jsp";
+			return REDIRECT_PREFIX +"index.jsp";
 		}else {
 			int bNo = Integer.parseInt(request.getParameter("bNo"));
 			String isRented = request.getParameter("isRented");

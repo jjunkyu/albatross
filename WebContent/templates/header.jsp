@@ -14,6 +14,11 @@
 					<li class="nav-item"><a class="nav-link"
 						href="dispatcher?command=registerView">회원가입</a></li>
 				</c:when>
+				<c:when test="${sessionScope.loginVO.cId=='1'}">
+					<li class="nav-item"><a class="nav-link">${sessionScope.loginVO.name}님</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="dispatcher?command=logout">로그아웃</a></li>
+				</c:when>
 				<c:otherwise>
 					<li class="nav-item"><a class="nav-link">${sessionScope.loginVO.name}님</a></li>
 					<li class="nav-item"><a class="nav-link"

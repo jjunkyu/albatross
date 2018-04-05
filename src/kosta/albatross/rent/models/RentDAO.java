@@ -79,13 +79,13 @@ public class RentDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" SELECT b.bNo, b.title, b.author,b.publisher,b.isrented,rb.id,rb.rentdate,rb.returndate, ");
-			sql.append(" to_char(rentDate,'YYYY/MM/DD HH') , to_char(returnDate,'YYYY/MM/DD HH') ");
-			sql.append(
-					" FROM (SELECT row_number() over(order by bNo desc)as rnum, bNo,title,author,publisher,isrented FROM semi_book ");
-			sql.append(")b, semi_rent_book rb ");
-			sql.append(" WHERE rb.id = ? AND b.bNo=rb.bNo AND rnum BETWEEN ? AND ? ");
-			sql.append(" ORDER BY bNo DESC ");
+			sql.append(" select br.rnum, br.id, br.rentdate, br.returndate, ");
+			sql.append(" b.bNo,b.title,b.author,b.publisher ");
+			sql.append(" from (SELECT row_number() over(order by rentdate desc) ");
+			sql.append(" as rnum, id, bNo, rentdate, returndate ");
+			sql.append(" from semi_rent_book) br, semi_book b ");
+			sql.append(" where br.id=? and br.bno=b.bno and rnum between ? and ? ");
+			sql.append(" order by rentdate desc ");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, id);
 			pstmt.setInt(2, pagingBean.getStartRowNumber());

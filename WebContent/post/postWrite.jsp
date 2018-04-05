@@ -22,7 +22,6 @@
 				</td>
 			</tr>
 		</table>
-		
 	</form>
 </div>
 </main>

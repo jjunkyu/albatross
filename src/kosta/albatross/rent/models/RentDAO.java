@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import kosta.albatross.book.models.BookVO;
 import kosta.albatross.common.models.DataSourceManager;
+import kosta.albatross.common.models.PagingBean;
 
 
 public class RentDAO {
@@ -67,42 +68,47 @@ public class RentDAO {
 	 * @return list
 	 * @throws SQLException
 	 */
-	public ArrayList<RentVO> rentList(String id) throws SQLException {
+	public ArrayList<RentVO> rentList(String id, PagingBean pagingBean) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<RentVO> list = new ArrayList<RentVO>();
 		RentVO rentVO = null;
+		BookVO bookVO = null;
+		int count = 0;
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" SELECT b.bNo,b.title,b.author,b.publisher,b.isRented, ");
+			sql.append(" SELECT b.bNo, b.title, b.author,b.publisher,b.isrented,rb.id,rb.rentdate,rb.returndate, ");
 			sql.append(" to_char(rentDate,'YYYY/MM/DD HH') , to_char(returnDate,'YYYY/MM/DD HH') ");
-			sql.append(" FROM semi_book b, semi_rent_book rb ");
-			sql.append(" WHERE rb.id = ? AND b.bNo = rb.bNo ");
+			sql.append(
+					" FROM (SELECT row_number() over(order by bNo desc)as rnum, bNo,title,author,publisher,isrented FROM semi_book ");
+			sql.append(")b, semi_rent_book rb ");
+			sql.append(" WHERE rb.id = ? AND b.bNo=rb.bNo AND rnum BETWEEN ? AND ? ");
+			sql.append(" ORDER BY bNo DESC ");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, id);
+			pstmt.setInt(2, pagingBean.getStartRowNumber());
+			pstmt.setInt(3, pagingBean.getEndRowNumber());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				int isRented = 0;
 				rentVO = new RentVO();
-				rentVO.setBookVO(new BookVO());
+				bookVO = new BookVO();
+				rentVO.setBookVO(bookVO);
 				rentVO.getBookVO().setbNo(rs.getInt(1));
 				rentVO.getBookVO().setTitle(rs.getString(2));
 				rentVO.getBookVO().setAuthor(rs.getString(3));
 				rentVO.getBookVO().setPublisher(rs.getString(4));
-				isRented = rs.getInt(5);
-				rentVO.setRentDate(rs.getString(6));
-				rentVO.setReturnDate(rs.getString(7));
-				if (isRented == 0) {
+				count = rs.getInt(5);
+				if(count==0)
 					rentVO.getBookVO().setRented(false);
-				}else { 
-					 rentVO.getBookVO().setRented(true);
-				}
+				else
+					rentVO.getBookVO().setRented(true);
+				rentVO.setRentDate(rs.getString(7));
+				rentVO.setReturnDate(rs.getString(8));
 				list.add(rentVO);
 			}
 			return list;
-
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
@@ -208,5 +214,30 @@ public class RentDAO {
 			closeAll(rs, pstmt, con);
 		}
 		return flag;
+	}
+
+	/**
+	 * 총 대여된 도서 수
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getTotalRentCount(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			con = dataSource.getConnection();
+			String sql = "SELECT count(*) FROM semi_rent_book WHERE id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next())
+				count = rs.getInt(1);
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return count;
 	}
 }

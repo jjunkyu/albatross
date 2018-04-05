@@ -73,7 +73,7 @@ function deleteBook(){
 											type="hidden" name="bNo" value="${bookVO.bNo}"> <input
 											type="hidden" name="isRented" value="${bookVO.rented}">
 									</form>
-									<button type="button" class="btn" onclick="rentBook()">대여</button>
+									<button type="button" class="btn btn-primary" onclick="rentBook()">대여</button>
 								</td>
 	
 							</c:otherwise>

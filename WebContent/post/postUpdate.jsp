@@ -19,11 +19,14 @@ required="required">
 				<td><textarea cols="90" rows="15" name="content"
 						required="required" placeholder="내용을 입력하세요">${requestScope.PostVO.content}</textarea></td>
 			</tr>
+			<tr>
+				<td colspan="5">
+					<button type="submit" class="btn btn-primary" >확인</button>
+					<button type="reset" class="btn btn-primary">취소</button>				
+				</td>
+			</tr>
 		</table>
-		<div class="btnArea">
-			<button type="submit" class="btn" >확인</button>
-			<button type="reset" class="btn">취소</button>
-		</div>
+
 	</form>
 </div>
 </main>

@@ -41,8 +41,8 @@
 			 	<input type="hidden" name="command" value="deletePost">
 			 	<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
 			 </form>
-			 <button type="button" class="btn" onclick="deletePost()">삭제</button>
-			 <button type="button" class="btn" onclick="updatePost()">수정</button>
+			 <button type="button" class="btn btn-primary" onclick="deletePost()">삭제</button>
+			 <button type="button" class="btn btn-primary" onclick="updatePost()">수정</button>
 			 </c:if>
 			 </td>
 		</tr>

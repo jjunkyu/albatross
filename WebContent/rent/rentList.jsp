@@ -28,7 +28,7 @@ function returnBook(){
 				<c:forEach items="${requestScope.listVO.rentList}" var="rentVO">
 					<tr>
 						<td>${rentVO.bookVO.bNo}</td>
-						<td>${rentVO.bookVO.title}</td>
+						<td><a href="dispatcher?command=bookDetail&bNo=${rentVO.bookVO.bNo}">${rentVO.bookVO.title}</a></td>
 						<td>${rentVO.bookVO.author}</td>
 						<td>${rentVO.bookVO.publisher}</td>
 						<td>${rentVO.rentDate}시</td>

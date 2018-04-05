@@ -109,7 +109,9 @@ nav .nav-item .nav-link {
 .page.book-list .table td, 
 .page.book-list .table th,
 .page.post-page .table td,
-.page.post-page .table th {
+.page.post-page .table th,
+.page.bookSearch-ok .table td,
+.page.bookSearch-ok .table th {
 	vertical-align: middle;
 	text-align: center;
 }
@@ -211,6 +213,7 @@ registerForm .h3 {
 }
 .best-books-section h2 span {
 	position:relative;
+	border-bottom: 3px solid #eee;
 }
 .best-books-section h2 span:after {
 	position: absolute;
@@ -383,3 +386,7 @@ tbody.book-info .content > img{
 	opacity: 0.5;
 }
 
+/* Post page */
+.detail-post-page .table{
+	min-height: 300px;
+}

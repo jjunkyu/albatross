@@ -20,7 +20,7 @@
 		<h2><span>이달의 책</span></h2>
 		<ul class="main-carousel best-books">
 			<c:forEach items="${books}" var="book">
-			<li class="best-book-item carousel-cell">
+			<li class="best-book-item carousel-cell" data-bno="${book.bNo}">
 				<img src="${book.imagePath}" />
 				<div class="book-info">
 					<div class="book-title"><span>${book.title}</span></div>
@@ -39,6 +39,9 @@ $(document).ready(function() {
 	var slider = $('.main-carousel').slick({
 		infinite: true,
 		slidesToShow: 3
+	});
+	$('.best-book-item').click(function(){
+		location.href="dispatcher?command=bookDetail&bNo=" + $(this).data('bno');
 	});
 });
 </script>

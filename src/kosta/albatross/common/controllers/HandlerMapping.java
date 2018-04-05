@@ -56,6 +56,10 @@ public class HandlerMapping {
 			ctrl = new RentListController();
 		} else if (command.equals("bookRegisterView")) {
 			ctrl = new BookRegisterViewController();
+		} else if (command.equals("bookUpdateView")) {
+			ctrl = new BookUpdateViewController();
+		} else if (command.equals("bookUpdate")) {
+			ctrl = new BookUpdateController();
 			//게시판
 		} else if (command.equals("postList")) {
 			ctrl = new PostListController();

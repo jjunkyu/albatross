@@ -56,7 +56,6 @@ drop sequence semi_book_seq;
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터2','롤링','해리포터라는 마법사가 커가는 이야기2','영국출판사');
 insert into semi_book(bNo,title,author,content,publisher) values(semi_book_seq.nextval,'해리포터','롤링','해리포터라는 마법사가 커가는 이야기','영국출판사');
 select *from SEMI_BOOK;
-<<<<<<< HEAD
 delete from semi_book where bNo = 2
 delete from semi_book;
 drop table SEMI_RENT_BOOK;
@@ -183,7 +182,7 @@ from semi_rent_book) br, semi_book b
 where br.id='java' and br.bno=b.bno and rnum between 1 and 10
 order by rentdate desc
 
+update semi_book set content = 'ㅎㅇ' where bNo = 1;
 
-
-
+select *from semi_book where bNo = 1;
 

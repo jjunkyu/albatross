@@ -431,4 +431,41 @@ public class BookDAO {
 		}
 		return BVO;
 	}
+	
+	public ArrayList<BookVO> getTop5Books() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<BookVO> list = null;
+		StringBuilder sql = new StringBuilder();
+		try {
+			con = dataSource.getConnection();
+			sql.append(" SELECT sb.title, sb.author, sb.publisher, sb.imagePath ");
+			sql.append(" FROM ");
+			sql.append(" ( " );
+			sql.append(" SELECT title, author, publisher, imagepath ");
+			sql.append(" FROM SEMI_BOOK ");
+			sql.append(" ORDER BY RENTCOUNT DESC ");
+			sql.append(" ) sb ");
+			sql.append(" WHERE rownum <= 5 ");
+			sql.append(" ORDER BY rownum ");
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				if(list == null) {
+					list = new ArrayList<>();
+				}
+				BookVO bvo = new BookVO();
+				bvo.setTitle(rs.getString(1));
+				bvo.setAuthor(rs.getString(2));
+				bvo.setPublisher(rs.getString(3));
+				bvo.setImagePath(rs.getString(4));
+				list.add(bvo);
+			}
+			
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
 }

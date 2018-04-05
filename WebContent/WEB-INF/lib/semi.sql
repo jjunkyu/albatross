@@ -177,3 +177,16 @@ FROM semi_book) b,semi_rent_book rb WHERE rb.id = 'java'  AND b.bNo = rb.bNo AND
 ORDER BY bNo DESC 
 
 >>>>>>> branch 'master' of https://github.com/Jaysok/albatross.git
+
+SELECT bNo, title, author, publisher 
+FROM
+(
+	SELECT *
+	FROM SEMI_BOOK
+	ORDER BY RENTCOUNT DESC
+) sb
+WHERE rownum <= 3
+ORDER BY rownum;
+
+
+

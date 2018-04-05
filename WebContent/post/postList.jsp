@@ -19,7 +19,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${requestScope.listVO.postList}" var="list">
-						<tr>
+						<tr class="post-item" data-pNo="${list.pNo}">
 							<td>${list.pNo}</td>
 							<td>
 							<c:choose>
@@ -80,3 +80,13 @@
 	</div>
 </div>
 </main>
+<c:if test="${sessionScope.loginVO}">
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.post-item').click(function(){
+			location.href='dispatcher?command=postDetail&pNo=' + $(this).data('pno');
+		});
+	});
+</script>
+</c:if>

@@ -17,7 +17,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.listVO.bookList}" var="book">
-					<tr class="book-item">
+					<tr class="book-item" data-bNo="${book.bNo}">
 						<td class="book-number">${book.bNo}</td>
 						<td class="book-thumb"><img src="${book.imagePath}"/></td>
 						<td class="book-title"><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
@@ -70,3 +70,11 @@
 	</ul>
 </div>
 </main>
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.book-item').click(function(){
+			location.href='dispatcher?command=bookDetail&bNo=' + $(this).data('bno');
+		});
+	});
+</script>

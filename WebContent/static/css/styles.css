@@ -106,7 +106,10 @@ nav .nav-item .nav-link {
 }
 
 /* TABLE */
-.table td, .table th {
+.page.book-list .table td, 
+.page.book-list .table th,
+.page.post-page .table td,
+.page.post-page .table th {
 	vertical-align: middle;
 	text-align: center;
 }
@@ -199,10 +202,57 @@ registerForm .h3 {
     margin-bottom: 1em;
 }
 
+/* .best-books-section */
+.best-books-section {
+	margin-top: 50px;
+}
+.best-books-section h2 {
+	text-align: center;
+}
+.best-books-section h2 span {
+	position:relative;
+}
+.best-books-section h2 span:after {
+	position: absolute;
+	content: '';
+	left:15px;
+	right:-15px;
+	bottom: -5px;
+	height: 3px;
+	background-color: #ff9ecb;
+}
+.best-books-section .book-info {
+	padding: 30px;
+	text-align:center;
+}
+best-books-section .book-info > div + div {
+	margin-top: 15px;
+}
+.best-books-section .book-info .book-title{
+	font-size: 30px;
+}
+.best-books-section .book-info .book-author{
+	font-size: 18px;
+}
+.best-books-section .book-info .book-publisher {
+	font-size: 18px;
+}
 
 /* Book list */
+tr.book-item:hover {
+	background-color:#eee;
+	cursor:pointer;
+}
 tr.book-item > td > img {
 	max-width:100px;
+}
+
+/* Post List */
+tr.post-item {
+}
+tr.post-item:hover {	
+	background-color: #eee;
+	cursor:pointer;
 }
 
 /* Book detail */
@@ -278,6 +328,7 @@ tbody.book-info .content > img{
 .terms-of-use section + section {
 	margin-top: 60px;
 }
+
 
 
 /* My Account */

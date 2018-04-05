@@ -10,7 +10,11 @@
 		$("#id").keyup(function() {
 			var idValue = $(this).val();
 			if(idValue.length<4||idValue.length>10){
-				$("#checkID").html('ID는 4자 이상 10자 이하 만 가능합니다').css("color","red");
+				$("#checkID")
+					.html('ID는 4자 이상 10자 이하 만 가능합니다')
+					.removeClass('valid')
+					.addClass('invalid')
+					.addClass('active');
 				$("#registerBtn").prop("disabled", true);
 				
 			}else{
@@ -20,11 +24,19 @@
 					data:$("#registerForm").serialize(),
 					success:function(data){
 						if(data=="ok"){
-							$("#checkID").html('사용가능').css("color","black");
+							$("#checkID")
+								.html('사용가능')
+								.removeClass('invalid')
+								.addClass('valid')
+								.addClass('active');
 							$("#registerBtn").prop("disabled", false);
 						}
 						else{
-							$("#checkID").html('중복인 아이디입니다. 다시 입력해주세요').css("color","red");
+							$("#checkID")
+								.html('중복인 아이디입니다. 다시 입력해주세요')
+								.removeClass('valid')
+								.addClass('invalid')
+								.addClass('active');
 							$("#registerBtn").prop("disabled", true);
 							
 						}
@@ -36,7 +48,11 @@
 			var emailValue = $(this).val();
 			
 			if(emailValue.indexOf("@")==-1){
-				$("#checkEmail").html('이메일형식을 맞춰주세요').css("color","red");
+				$("#checkEmail")
+					.html('이메일형식을 맞춰주세요')
+					.removeClass('valid')
+					.addClass('invalid')
+					.addClass('active');
 				$("#registerBtn").prop("disabled", true);
 				
 			}else{
@@ -46,11 +62,19 @@
 					data:$("#registerForm").serialize(),
 					success:function(data){
 						if(data=="ok"){
-							$("#checkEmail").html('사용가능').css("color","black");
+							$("#checkEmail")
+								.html('사용가능')
+								.removeClass('invalid')
+								.addClass('valid')
+								.addClass('active');
 							$("#registerBtn").prop("disabled", false);
 						}
 						else{
-							$("#checkEmail").html('중복인 이메일입니다. 다시 입력해주세요').css("color","red");
+							$("#checkEmail")
+								.html('중복인 이메일입니다. 다시 입력해주세요')
+								.removeClass('valid')
+								.addClass('invalid')
+								.addClass('active');
 							$("#registerBtn").prop("disabled", true);
 							
 						}
@@ -62,11 +86,18 @@
 			var password=$("#password").val();
 			var repeatPassword=$("#repeatPassword").val();
 			if(password!=repeatPassword){
-				$("#checkPass").html('비밀번호가 일치하지 않습니다').css("color","red");
+				$("#checkPass")
+					.html('비밀번호가 일치하지 않습니다')
+					.removeClass('valid')
+					.addClass('invalid')
+					.addClass('active');
 				$("#registerBtn").prop("disabled", true);
 				
 			}else{
-				$("#checkPass").html('비밀번호가 일치합니다').css("color","black");
+				$("#checkPass")
+					.removeClass('invalid')
+					.addClass('valid')
+					.removeClass('active');
 				$("#registerBtn").prop("disabled", false);
 				
 			}
@@ -75,78 +106,51 @@
 	});
 </script>
 <main class="container">
-	<div class="row justify-content-md-center">
-		<div class="col-sm-9">
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-7">
 
 		<form class="form-horizontal" id="registerForm" role="form" method="post"
 			name="registerForm" action="dispatcher">
 			<input type="hidden" name="command" value="register">
 			
-			<h3>회원가입</h3>
-			<hr>
 			<div class="form-group">
-				<label class="col-sm-6 control-label">아이디 :</label>
-				<div class="col-sm-9">
-				<input type="text" id="id" name="id" required="required">
-				<input type="hidden" name="checkAjax" value="idcheck"><br>
-				<span id="checkID" style="font-weight:bold; font-size:smaller" >
+				<input type="text" id="id" name="id" placeholder="아이디" required="required" class="form-control">
+				<input type="hidden" name="checkAjax" value="idcheck">
+				<span class="hint" id="checkID" style="font-weight:bold; font-size:smaller" >
 				</span>
-				</div>
 			</div>
 			
 			<div class="form-group">
-				<label class="control-label col-sm-6">패스워드 :</label>
-				<div class="col-sm-9">
-					<input type="password" id="password" name="password" required="required">
-					</div>
+				<input type="password" id="password" placeholder="비밀번호" name="password" required="required" class="form-control">
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-6">패스워드 확인 : </label>
-				<div class="col-sm-9">
-				<input type="password" id="repeatPassword" name="repeatPassword" required="required">
-				</div>
-				<span id="checkPass" style="color:red;font-weight:bold;font-size:smaller" >
+				<input type="password" id="repeatPassword" placeholder="비밀번호확인" name="repeatPassword" class="form-control" required="required">
+				<span class="hint" id="checkPass" style="color:red;font-weight:bold;font-size:smaller" >
 				</span>
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">이름 : </label>
-				<div class="col-sm-9">
-				<input type="text" name="name" required="required"> 
-				</div>
+				<input type="text" name="name" class="form-control" placeholder="성명" required="required"> 
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">email : </label>
-				<div class="col-sm-9">
-				<input type="email" id="email" name="email" required="required">
-				<input type="hidden" name="checkAjax2" value="emailcheck"><br>
-				<span id="checkEmail" style="font-weight:bold;font-size:smaller" >
+				<input type="email" id="email" name="email" placeholder="이메일" class="form-control" required="required">
+				<input type="hidden" name="checkAjax2" value="emailcheck">
+				<span class="hint" id="checkEmail" style="font-weight:bold;font-size:smaller" >
 				</span>
-				</div>
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">주소 : </label>
-				<div class="col-sm-9">
-				<input type="text" name="address" required="required"> 
-				</div>
+				<input type="text" name="address" placeholder="주소" class="form-control" required="required"> 
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">질문 : </label>
-				<div class="col-sm-3">
-				<select name="qid">
+				<select name="qid" id="qid" class="form-control">
 				<c:forEach items="${requestScope.questionList}" var="list" varStatus="status">
 				<option value=${status.index}>${list}</option>
 				</c:forEach>
 				</select>
-				</div>
-				<div class="col-sm-6">
-				<input type="text" name="answer" required="required"> 
-				</div>
+				<input type="text" name="answer" class="form-control" placeholder="계정찾기 질문에 대한 답을 입력해주세요" required="required"> 
 			</div> 
 			<div class="form-group">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <input id="registerBtn" type="submit" class="btn btn-primary btn-block" value="Register" disabled="disabled">
-                    </div>
-                </div>
+                    <input id="registerBtn" type="submit" class="btn btn-primary btn-block" value="Register" disabled="disabled">
+            </div>
 		</form>
 		</div>
 	</div>

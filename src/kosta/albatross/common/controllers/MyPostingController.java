@@ -35,7 +35,7 @@ public class MyPostingController implements Controller {
 		String url = "/member/myPosting.jsp";
 		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", url);
-		request.setAttribute("page", "page-myAccount-myPosting");
+		request.setAttribute("page", "page-my-account-my-posting");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 }

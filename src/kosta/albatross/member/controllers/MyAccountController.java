@@ -11,7 +11,7 @@ public class MyAccountController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = "/member/myAccount.jsp";
 		request.setAttribute("url", url);
-		request.setAttribute("page", "myAccount");
+		request.setAttribute("page", "my-account");
 		return TEMPLATE_PATH + "home.jsp";
 	}
 

@@ -7,23 +7,23 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>표지</th>
-					<th>제목</th>
-					<th>저자</th>
-					<th>출판사</th>
-					<th>대여상태<th>
+					<th class="book-number">번호</th>
+					<th class="book-thumb">표지</th>
+					<th class="book-title">제목</th>
+					<th class="book-author">저자</th>
+					<th class="book-publisher">출판사</th>
+					<th class="book-is-rented">대여상태<th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.listVO.bookList}" var="book">
 					<tr class="book-item">
-						<td>${book.bNo}</td>
-						<td><img src="${book.imagePath}"/></td>
-						<td><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
-						<td>${book.author}</td>
-						<td>${book.publisher}</td>
-						<td>
+						<td class="book-number">${book.bNo}</td>
+						<td class="book-thumb"><img src="${book.imagePath}"/></td>
+						<td class="book-title"><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
+						<td class="book-author">${book.author}</td>
+						<td class="book-publisher">${book.publisher}</td>
+						<td class="book-is-rented">
 						<c:choose>
 							<c:when test="${book.rented==false}">
 							대여가능

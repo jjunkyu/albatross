@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SerializeServlet
  */
 @WebServlet("/memberId_pwCheckServlet")
-public class memberId_pwCheckServlet extends HttpServlet {
+public class MemberId_pwCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberId_pwCheckServlet() {
+    public MemberId_pwCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

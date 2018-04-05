@@ -74,9 +74,9 @@ public class HandlerMapping {
 		} else if (command.equals("postWrite")) {
 			ctrl = new PostWriteController();
 		}else if (command.equals("memberFindView")) {
-			ctrl = new memberFindViewController();
+			ctrl = new MemberFindViewController();
 		}else if (command.equals("memberFind")) {
-			ctrl = new memberFindController();
+			ctrl = new MemberFindController();
 		} else if (command.equals("myAccount")) {
 			ctrl = new MyAccountController();
 		} else if (command.equals("deleteBook")) {

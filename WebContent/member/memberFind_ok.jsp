@@ -19,14 +19,9 @@ $(document).ready(function(){
  })//ready
 </script>
 <main class="container">
-<div class="row justify-content-md-center">
-	<div class="col-sm-3">
-			<div class="form-group">
-			</div>
-			<div class="form-group">
+	<div class="row justify-content-md-center">
+		<div class="col-sm-3">
 			<span id="checkResult">ID : ${requestScope.mvo.id }<br>	PassWord: ${requestScope.mvo.password}</span>
-			
-			</div>
+		</div>
 	</div>
-</div>
 </main>

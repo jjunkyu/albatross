@@ -79,6 +79,5 @@ function updateBook(){
 			<span onclick="rentBook()">대여</span>		
 			</c:otherwise>
 		</c:choose>
-		</div>
 	</div>
 </main>

@@ -24,7 +24,7 @@ import kosta.albatross.common.controllers.Controller;
 public class BookRegisterController implements Controller {
 	final static String ENCODING = "UTF-8";
 	final static int SIZE_LIMIT = 1024*1024*10;
-	final static String WORKSPACE_UPLOAD_PATH = "C:\\Users\\woolj\\git\\albatross2\\WebContent\\upload";
+	final static String WORKSPACE_UPLOAD_PATH = "C:\\Users\\USER\\git\\albatross\\WebContent\\upload";
 	final static String RELATIVE_UPLOAD_PATH = "upload";
 	
 	@Override

@@ -5,13 +5,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kosta.albatross.common.controllers.Controller;
+import kosta.albatross.member.models.MemberVO;
 
 public class MyAccountController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();			
-		if(session==null) {
+		HttpSession session = request.getSession(false);
+		MemberVO memberVO = (MemberVO) session.getAttribute("loginVO");
+		if(session == null || memberVO == null) {
 			return REDIRECT_PREFIX +"index.jsp";
 		}else {
 		String url = "/member/myAccount.jsp";

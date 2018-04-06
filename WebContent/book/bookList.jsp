@@ -20,7 +20,7 @@
 					<tr class="book-item" data-bNo="${book.bNo}">
 						<td class="book-number">${book.bNo}</td>
 						<td class="book-thumb"><img src="${book.imagePath}"/></td>
-						<td class="book-title"><a href="dispatcher?command=bookDetail&bNo=${book.bNo}">${book.title}</a></td>
+						<td class="book-title">${book.title}</td>
 						<td class="book-author">${book.author}</td>
 						<td class="book-publisher">${book.publisher}</td>
 						<td class="book-is-rented">
@@ -70,11 +70,13 @@
 	</ul>
 </div>
 </main>
-<script type="text/javascript" src="static/js/jquery.js"></script>
-<script>
-	$(document).ready(function(){
-		$('.book-item').click(function(){
-			location.href='dispatcher?command=bookDetail&bNo=' + $(this).data('bno');
+<c:if test="${sessionScope.loginVO!=null}">
+	<script type="text/javascript" src="static/js/jquery.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.book-item').click(function(){
+				location.href='dispatcher?command=bookDetail&bNo=' + $(this).data('bno');
+			});
 		});
-	});
-</script>
+	</script>
+</c:if>

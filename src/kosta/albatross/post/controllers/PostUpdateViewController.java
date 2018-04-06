@@ -14,7 +14,7 @@ public class PostUpdateViewController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loginVO") == null) {
-			return "REDIRECT_PREFIX+index.jsp";
+			return "index.jsp";
 		}
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
 		PostVO PostVO = PostDAO.getInstance().getPostDetail(pNo);

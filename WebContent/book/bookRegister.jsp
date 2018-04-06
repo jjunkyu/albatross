@@ -6,28 +6,39 @@
 		<input type="hidden" name="command" value="bookRegister">
 		<table class="table">
 			<tr>
-				<td colspan="2">제목 &nbsp; <input type="text" name="title" required="required" style="width:450pt"></td>
+				<td colspan="2">
+					<label for="title">제목</label>
+					<input class="form-control" type="text" name="title" required="required">
+				</td>
 			</tr>
 			<tr>
-				<td>저자 &nbsp; <input type="text" name="author" required="required"></td>
-				<td>출판사 &nbsp; <input type="text" name="publisher" required="required"></td>
+				<td>
+					<label for="author">저자</label>
+					<input class="form-control" type="text" name="author" required="required">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="publisher">출판사</label>
+					<input class="form-control" type="text" name="publisher" required="required">
+				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="imagePath">책표지 업로드</label>
-					<input type="file" name="imagePath" required="required" />
+					<input class="form-control" type="file" name="imagePath" required="required" />
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<div><span>내용</span></div>
-					<textarea cols="90" rows="15" name="content"required="required" > </textarea>
+					<label for="content">내용</label>
+					<textarea class="form-control" cols="90" rows="15" name="content" required="required"></textarea>
 				</td>
 			</tr>
-			<tr>
+			<tr class="controls">
 				<td>
-					<span style="float: right"><button type="reset" class="btn btn-primary" >취소</button></span>
-					<span style="float: right"><button type="submit" class="btn btn-primary">확인</button></span>
+					<span><button type="reset" class="btn btn-primary" >취소</button></span>
+					<span><button type="submit" class="btn btn-primary">확인</button></span>
 				</td>
 			</tr>
 		</table>

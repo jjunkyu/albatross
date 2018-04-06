@@ -526,3 +526,26 @@ tbody.book-info .content > img{
 	background-color: #3c3c3c;
 	color: white;
 }
+
+/* Post Update Page */
+.post-update form .table td,
+.post-update form .table th {
+	border-top: none;
+}
+
+tr.controls td{
+	text-align:center;
+}
+tr.controls td > button {
+	display: inline-block;
+}
+tr.controls td > button + button {
+	margin-left: 5px;
+}
+ 
+/* Book Register */
+.book-register-page form .table td,
+.book-register-page form .table th{
+	border-top: none;
+	
+} 

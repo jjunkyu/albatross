@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <main class="container">
-<div class="row justify-content-md-center">
+	<div class="row justify-content-md-center">
 	<form action="dispatcher" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="command" value="bookRegister">
 		<table class="table">
@@ -15,7 +15,7 @@
 			<tr>
 				<td>
 					<label for="imagePath">책표지 업로드</label>
-					<input type="file" name="imagePath" />
+					<input type="file" name="imagePath" required="required" />
 				</td>
 			</tr>
 			<tr>
@@ -32,5 +32,5 @@
 			</tr>
 		</table>
 	</form>
-</div>
+	</div>
 </main>

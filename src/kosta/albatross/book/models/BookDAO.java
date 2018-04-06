@@ -443,10 +443,10 @@ public class BookDAO {
 		StringBuilder sql = new StringBuilder();
 		try {
 			con = dataSource.getConnection();
-			sql.append(" SELECT sb.title, sb.author, sb.publisher, sb.imagePath ");
+			sql.append(" SELECT sb.bNo, sb.title, sb.author, sb.publisher, sb.imagePath ");
 			sql.append(" FROM ");
 			sql.append(" ( " );
-			sql.append(" SELECT title, author, publisher, imagepath ");
+			sql.append(" SELECT bNo, title, author, publisher, imagepath ");
 			sql.append(" FROM SEMI_BOOK ");
 			sql.append(" ORDER BY RENTCOUNT DESC ");
 			sql.append(" ) sb ");
@@ -459,10 +459,11 @@ public class BookDAO {
 					list = new ArrayList<>();
 				}
 				BookVO bvo = new BookVO();
-				bvo.setTitle(rs.getString(1));
-				bvo.setAuthor(rs.getString(2));
-				bvo.setPublisher(rs.getString(3));
-				bvo.setImagePath(rs.getString(4));
+				bvo.setbNo(rs.getInt(1));
+				bvo.setTitle(rs.getString(2));
+				bvo.setAuthor(rs.getString(3));
+				bvo.setPublisher(rs.getString(4));
+				bvo.setImagePath(rs.getString(5));
 				list.add(bvo);
 			}
 			

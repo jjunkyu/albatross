@@ -109,7 +109,9 @@ nav .nav-item .nav-link {
 .page.book-list .table td, 
 .page.book-list .table th,
 .page.post-page .table td,
-.page.post-page .table th {
+.page.post-page .table th,
+.page.bookSearch-ok .table td,
+.page.bookSearch-ok .table th {
 	vertical-align: middle;
 	text-align: center;
 }
@@ -211,6 +213,7 @@ registerForm .h3 {
 }
 .best-books-section h2 span {
 	position:relative;
+	border-bottom: 3px solid #eee;
 }
 .best-books-section h2 span:after {
 	position: absolute;
@@ -221,6 +224,13 @@ registerForm .h3 {
 	height: 3px;
 	background-color: #ff9ecb;
 }
+.best-books-section .best-book-item {
+	cursor: pointer;
+}
+.best-books-section .best-book-item:hover img{
+	transform: scaleX(1.1) scaleY(1.1);
+	transition: all 0.3s;
+} 
 .best-books-section .book-info {
 	padding: 30px;
 	text-align:center;
@@ -383,3 +393,85 @@ tbody.book-info .content > img{
 	opacity: 0.5;
 }
 
+/* Post page */
+.detail-post-page .table{
+	min-height: 300px;
+}
+.post-write .table td,
+.post-write .table th {
+	border-top: none;
+}
+.post-write tr.controls button {
+	display: inline-block;
+}
+.post-write tr.controls button + button {
+	margin-left: 5px;
+}
+.post-write tr.controls {
+	text-align: center;
+}
+
+/* Book Detail Page */
+.bookDetail img {
+	width: 100%;
+}
+
+.bookDetail .title-wrapper > div,
+.bookDetail .author-wrapper > div,
+.bookDetail .publisher-wrapper > div {
+	display: inline-block;
+}
+.bookDetail .caption {
+	font-weight: bold;
+	font-size: 20px;
+}
+.bookDetail .text {
+	font-size: 20px;
+	color: #747474;
+}
+.bookDetail [class$="-wrapper"] + [class$="-wrapper"]{
+	margin-top: 20px;
+}
+
+.bookDetail .title-wrapper,
+.bookDetail .author-wrapper,
+.bookDetail .publisher-wrapper {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 15px;	
+}
+.bookDetail main {
+	position: relative;
+}
+.bookDetail .controls {
+	position: absolute;
+	right: 15px;
+	top: 0;
+	cursor: pointer;
+}
+.bookDetail .controls form {
+	display:none;
+}
+
+.bookDetail .controls span {
+    border: 1px solid #3c3c3c;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+.bookDetail .controls span:hover {
+	background-color: #3c3c3c;
+	color: white;
+}
+
+
+/* detail-post-page */
+.detail-post-page pre {
+	font-family: inherit;
+}
+
+/* member find view */
+.member-find-view form button[name="question_answer"] {
+	padding-left: 1.0rem;
+}
+.member-find-view button[type="submit"]{
+	width: 100%;
+}

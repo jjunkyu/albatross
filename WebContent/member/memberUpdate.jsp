@@ -6,7 +6,7 @@
 
 <main class="container">
 	<div class="row justify-content-md-center">
-		<div class="col-sm-9">
+		<div class="col-12 col-md-7">
 
 		<form class="form-horizontal" id="memberUpdateForm" role="form" method="post"
 			name="memberUpdateForm" action="dispatcher?command=memberUpdate">
@@ -14,48 +14,33 @@
 			<h3>회원정보 수정</h3>
 			<hr>
 			<div class="form-group">
-				<label class="col-sm-6 control-label">아이디 :</label>
-				<div class="col-sm-9">
-				<input type="text" id="id" name="id" readonly="readonly" value="${sessionScope.loginVO.id }">
-				</div>
+				<label for="id">아이디 :</label>
+				<input type="text" id="id" name="id" class="form-control" readonly="readonly" value="${sessionScope.loginVO.id }">
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="password">패스워드 :</label>
+				<input type="password" id="password" class="form-control" name="password" required="required" value="${sessionScope.loginVO.password}">
 			</div>
 			
 			<div class="form-group">
-				<label class="control-label col-sm-6">패스워드 :</label>
-				<div class="col-sm-9">
-					<input type="password" id="password" name="password" required="required" value="${sessionScope.loginVO.password}">
-					</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="control-label col-sm-6">이름 : </label>
-				<div class="col-sm-9">
-				<input type="text" name="name" required="required" value="${sessionScope.loginVO.name}"> 
-				</div>
+				<label class="control-label" for="name">이름 : </label>
+				<input type="text" name="name" class="form-control" required="required" value="${sessionScope.loginVO.name}"> 
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">email : </label>
-				<div class="col-sm-9">
-				<input type="email" id="email" name="email" readonly="readonly" value="${sessionScope.loginVO.email}">
-				</div>
+				<label class="control-label" for="email">email : </label>
+				<input type="email" id="email" name="email" class="form-control" readonly="readonly" value="${sessionScope.loginVO.email}">
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">주소 : </label>
-				<div class="col-sm-9">
-				<input type="text" name="address" required="required" value="${sessionScope.loginVO.address}"> 
-				</div>
+				<label class="control-label" for="address">주소 : </label>
+				<input type="text" name="address" required="required" class="form-control" value="${sessionScope.loginVO.address}"> 
 			</div> 
 			<div class="form-group">
-				<label class="control-label col-sm-6">${requestScope.pidQuery}:</label>
-				<div class="col-sm-6">
-				<input type="text" name="answer" required="required" value="${sessionScope.loginVO.answer}"> 
-				</div>
+				<label class="control-label" for="answer">${requestScope.pidQuery}:</label>
+				<input type="text" name="answer" class="form-control" required="required" value="${sessionScope.loginVO.answer}"> 
 			</div> 
 			<div class="form-group">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <button id="updateBtn" type="submit" class="btn btn-primary btn-block">수정 완료</button>
-                    </div>
-                </div>
+           		<button id="updateBtn" type="submit" class="btn btn-primary btn-block">수정 완료</button>
+            </div>
 		</form>
 		</div>
 	</div>

@@ -478,10 +478,13 @@ public class BookDAO {
 		PreparedStatement pstmt=null;
 		try {
 			con = dataSource.getConnection();
-			String sql="UPDATE semi_book SET content = ? WHERE bNo = ?";
+			String sql="UPDATE semi_book SET title = ?, author = ?, publisher = ?, content = ? WHERE bNo = ?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, bookVO.getContent());
-			pstmt.setInt(2, bookVO.getbNo());
+			pstmt.setString(1,  bookVO.getTitle());
+			pstmt.setString(2, bookVO.getAuthor());
+			pstmt.setString(3,  bookVO.getPublisher());
+			pstmt.setString(4,  bookVO.getContent());
+			pstmt.setInt(5,  bookVO.getbNo());
 			pstmt.executeUpdate();
 			pstmt.close();
 		}finally {

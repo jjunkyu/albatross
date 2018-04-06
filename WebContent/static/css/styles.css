@@ -475,3 +475,54 @@ tbody.book-info .content > img{
 .member-find-view button[type="submit"]{
 	width: 100%;
 }
+
+
+/* book update */
+.book-update-page img {
+	width: 100%;
+}
+
+.book-update-page .title-wrapper > div,
+.book-update-page .author-wrapper > div,
+.book-update-page .publisher-wrapper > div {
+}
+.book-update-page .caption {
+	font-weight: bold;
+	font-size: 20px;
+}
+.book-update-page .text {
+	font-size: 20px;
+	color: #747474;
+}
+.book-update-page [class$="-wrapper"] + [class$="-wrapper"]{
+	margin-top: 20px;
+}
+
+.book-update-page .title-wrapper,
+.book-update-page .author-wrapper,
+.book-update-page .publisher-wrapper {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 15px;	
+}
+.book-update-page main {
+	position: relative;
+}
+.book-update-page .controls {
+	position: absolute;
+	right: 15px;
+	top: 0;
+	cursor: pointer;
+}
+.book-update-page .controls form {
+	display:none;
+}
+
+.book-update-page .controls span {
+    border: 1px solid #3c3c3c;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+.book-update-page button[type="submit"]:hover {
+	background-color: #3c3c3c;
+	color: white;
+}

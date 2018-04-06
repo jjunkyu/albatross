@@ -14,7 +14,7 @@ public class MemberUpdateViewController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginVO")==null) {
-			return REDIRECT_PREFIX + "index.jsp";
+			return "index.jsp";
 		}else {
 			MemberVO memberVO = (MemberVO)session.getAttribute("loginVO");
 			String query = MemberDAO.getInstance().questionQuery(memberVO.getqId());

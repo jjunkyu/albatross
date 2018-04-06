@@ -14,7 +14,7 @@ public class MemberUpdateController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginVO")==null) {
-			return REDIRECT_PREFIX + "index.jsp";
+			return "index.jsp";
 		}else {
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");

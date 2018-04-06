@@ -31,9 +31,7 @@
 				<div class="content-wrapper">
 					<div class="caption content"><span>내용 : </span></div>
 					<div class="text content">
-						<textarea class="form-control" cols="90" rows="15" name="content" required="required">
-							${bookVO.content }						
-						</textarea>
+						<textarea class="form-control" cols="90" rows="15" name="content" required="required">${bookVO.content}</textarea>
 					</div>
 				</div>
 				<div class="button-wrapper">

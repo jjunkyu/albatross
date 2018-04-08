@@ -20,7 +20,6 @@
 		</div>
 	</div>
 </main>    
-<script type="text/javascript" src="static/js/jquery.js"></script>
 <script>
 	$(document).ready(function(){
 		$('.box').on('click', function(e){

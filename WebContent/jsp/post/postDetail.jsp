@@ -1,21 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
-	function sendList() {
-		location.href = "${pageContext.request.contextPath}/index.jsp";
-	}
-	function updatePost() {
-		if (confirm("게시글을 수정하시겠습니까?")) {
-			location.href = "dispatcher?command=postUpdateView&pNo=${requestScope.pvo.pNo}";
-		}
-	}
-	function deletePost() {
-		if (confirm("게시글을 삭제하시겠습니까?")) {
-			document.deleteForm.submit();
-		}
-	}
-</script>
 <main class="container">
 <table class="table">
 	<thead>
@@ -37,7 +22,7 @@
 			<td colspan="5" class="btnArea">
 			 <%-- 일반회원이거나 관리자일 경우--%> 
 			 <c:if test="${requestScope.pvo.memberVO.id==sessionScope.loginVO.id || sessionScope.loginVO.cId=='1'}">
-			 <form name="deleteForm" action="${pageContext.request.contextPath}/dispatcher" method="post">
+			 <form name="deleteForm" action="dispatcher" method="post">
 			 	<input type="hidden" name="command" value="deletePost">
 			 	<input type="hidden" name="pNo" value="${requestScope.pvo.pNo}">
 			 </form>
@@ -48,3 +33,18 @@
 		</tr>
 </table>
 </main>
+<script type="text/javascript">
+	function sendList() {
+		location.href = "index.jsp";
+	}
+	function updatePost() {
+		if (confirm("게시글을 수정하시겠습니까?")) {
+			location.href = "dispatcher?command=postUpdateView&pNo=${requestScope.pvo.pNo}";
+		}
+	}
+	function deletePost() {
+		if (confirm("게시글을 삭제하시겠습니까?")) {
+			document.deleteForm.submit();
+		}
+	}
+</script>

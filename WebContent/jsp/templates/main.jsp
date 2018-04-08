@@ -32,8 +32,6 @@
 		</ul>
 	</section>
 </main>
-<script type="text/javascript" src="static/js/jquery.js"></script>
-<script type="text/javascript" src="static/js/slick.js"></script>
 <script>
 $(document).ready(function() {
 	var slider = $('.main-carousel').slick({

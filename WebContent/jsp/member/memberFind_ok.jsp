@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="//code.jquery.com/jquery.min.js"></script>
+<main class="container">
+	<div class="row justify-content-md-center">
+		<div class="col-sm-3">
+			<span id="checkResult">ID : ${requestScope.mvo.id }<br>	PassWord: ${requestScope.mvo.password}</span>
+		</div>
+	</div>
+</main>
 <script type="text/javascript">
 var flag = ${requestScope.mvo.id==null}
 $(document).ready(function(){
@@ -18,10 +24,3 @@ $(document).ready(function(){
 	}//if
  })//ready
 </script>
-<main class="container">
-	<div class="row justify-content-md-center">
-		<div class="col-sm-3">
-			<span id="checkResult">ID : ${requestScope.mvo.id }<br>	PassWord: ${requestScope.mvo.password}</span>
-		</div>
-	</div>
-</main>

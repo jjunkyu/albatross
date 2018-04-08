@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript">
-function returnBook(){
-	if(confirm("선택한 책을 반납 하시겠습니까?")){
-		document.getElementById("returnForm").submit();
-	}
-}
-</script>
 <main class="container">
 <div class="row">
 	<div class="col-sm-12">
@@ -79,3 +72,10 @@ function returnBook(){
 	</ul>
 </div>
 </main>
+<script type="text/javascript">
+function returnBook(){
+	if(confirm("선택한 책을 반납 하시겠습니까?")){
+		document.getElementById("returnForm").submit();
+	}
+}
+</script>

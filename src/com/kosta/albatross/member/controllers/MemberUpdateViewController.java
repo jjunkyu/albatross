@@ -19,7 +19,7 @@ public class MemberUpdateViewController implements Controller {
 			MemberVO memberVO = (MemberVO)session.getAttribute("loginVO");
 			String query = MemberDAO.getInstance().questionQuery(memberVO.getqId());
 			request.setAttribute("pidQuery", query);
-			request.setAttribute("url", "/member/memberUpdate.jsp");
+			request.setAttribute("url", "../member/memberUpdate.jsp");
 			request.setAttribute("page", "member-update-view");
 			return TEMPLATE_PATH + "home.jsp";
 		}

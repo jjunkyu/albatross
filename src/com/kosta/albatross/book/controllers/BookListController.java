@@ -25,7 +25,7 @@ public class BookListController implements Controller {
 		}
 		ArrayList<BookVO> bookList = BookDAO.getInstance().getBookList(pagingBean);
 		ListVO listVO = new ListVO();
-		String url = "/book/bookList.jsp";
+		String url = "../book/bookList.jsp";
 		listVO.setBookList(bookList);
 		listVO.setPagingBean(pagingBean);
 		request.setAttribute("listVO", listVO);

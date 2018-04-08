@@ -27,8 +27,8 @@ public class BookSearchByTitleController implements Controller {
 		ArrayList<BookVO> list = BookDAO.getInstance().searchByTitle(searchStr, pagingBean);
 		ListVO listVO = new ListVO();
 		if(list==null)
-			return "/book/bookSearch_fail.jsp";
-		String url = "/book/bookSearch_ok.jsp";
+			return "../book/bookSearch_fail.jsp";
+		String url = "../book/bookSearch_ok.jsp";
 		listVO.setBookList(list);
 		listVO.setPagingBean(pagingBean);
 		request.setAttribute("command","bookSearchByTitle");

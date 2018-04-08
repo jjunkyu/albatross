@@ -22,7 +22,7 @@ public class BookDeleteController implements Controller {
 		try {
 			BookDAO.getInstance().deleteBook(bNo);
 		} catch (NotDeleteBookException e) {
-			return "book/bookDelete_fail.jsp";
+			return "../book/bookDelete_fail.jsp";
 		}
 		return REDIRECT_PREFIX + "dispatcher?command=bookList";
 	}

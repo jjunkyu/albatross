@@ -18,7 +18,7 @@ public class BookUpdateViewController implements Controller {
 		}
 		int bNo = Integer.parseInt(request.getParameter("bNo"));
 		BookVO bookVO = BookDAO.getInstance().getBookDetail(bNo);
-		String url="/book/bookUpdate.jsp";
+		String url="../book/bookUpdate.jsp";
 		request.setAttribute("url", url);
 		request.setAttribute("bookVO", bookVO);
 		request.setAttribute("page", "book-update-page");

@@ -21,7 +21,7 @@ public class BookDetailController implements Controller {
 		
 		int bNo = Integer.parseInt(request.getParameter("bNo"));
 		BookVO bookVO = BookDAO.getInstance().getBookDetail(bNo);
-		String url = "/book/bookDetail.jsp";
+		String url = "../book/bookDetail.jsp";
 		request.setAttribute("bookVO",bookVO);
 		request.setAttribute("url", url);
 		request.setAttribute("page", "bookDetail");

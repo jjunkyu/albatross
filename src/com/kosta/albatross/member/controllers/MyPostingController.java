@@ -33,7 +33,7 @@ public class MyPostingController implements Controller {
 		//paging
 		ArrayList<PostVO> list = PostDAO.getInstance().getMyPosting(memberVO.getId(),pagingBean);
 		ListVO listVO = new ListVO(list, pagingBean);
-		String url = "/member/myPosting.jsp";
+		String url = "../member/myPosting.jsp";
 		request.setAttribute("listVO", listVO);
 		request.setAttribute("url", url);
 		request.setAttribute("page", "page-my-account-my-posting");

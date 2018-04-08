@@ -12,7 +12,7 @@ public class RegisterViewController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/member/register.jsp";
+		String url = "../member/register.jsp";
 		ArrayList<String> questionList = MemberDAO.getInstance().questionList();
 		request.setAttribute("questionList", questionList);
 		request.setAttribute("url", url);

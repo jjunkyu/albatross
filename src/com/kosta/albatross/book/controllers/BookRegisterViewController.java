@@ -14,7 +14,7 @@ public class BookRegisterViewController implements Controller {
 		if (session == null || session.getAttribute("loginVO") == null) {
 			return REDIRECT_PREFIX + "index.jsp";
 		}
-		String url="/book/bookRegister.jsp";
+		String url="../book/bookRegister.jsp";
 		request.setAttribute("url", url);
 		request.setAttribute("page", "book-register-page");
 		return TEMPLATE_PATH + "home.jsp";

@@ -32,7 +32,7 @@ public class RentListController implements Controller {
 			pagingBean = new PagingBean(totalCount, Integer.parseInt(pNo));
 		}
 		ArrayList<RentVO> list = RentDAO.getInstance().rentList(memberVO.getId(), pagingBean);
-		String url = "/rent/rentList.jsp";
+		String url = "../rent/rentList.jsp";
 		listVO.setRentList(list);
 		listVO.setPagingBean(pagingBean);
 		request.setAttribute("listVO", listVO);

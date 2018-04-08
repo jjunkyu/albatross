@@ -16,7 +16,7 @@ public class PostWriteViewController implements Controller {
 		if(session == null || memberVO == null) {
 			return "index.jsp";
 		}
-		String url = "/post/postWrite.jsp";
+		String url = "../post/postWrite.jsp";
 		request.setAttribute("url", url);
 		request.setAttribute("page", "post-write");
 		return TEMPLATE_PATH + "home.jsp";

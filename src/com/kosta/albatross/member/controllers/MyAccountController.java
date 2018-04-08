@@ -16,7 +16,7 @@ public class MyAccountController implements Controller {
 		if(session == null || memberVO == null) {
 			return REDIRECT_PREFIX +"index.jsp";
 		}else {
-		String url = "/member/myAccount.jsp";
+		String url = "../member/myAccount.jsp";
 		request.setAttribute("url", url);
 		request.setAttribute("page", "my-account");
 		return TEMPLATE_PATH + "home.jsp";

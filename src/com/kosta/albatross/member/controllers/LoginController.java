@@ -14,7 +14,7 @@ public class LoginController implements Controller {
 		if (session.getAttribute("loginVO") != null) {
 			return REDIRECT_PREFIX + "index.jsp";
 		} else {
-			String url = "/member/login.jsp";
+			String url = "../member/login.jsp";
 			session.setAttribute("failLogin", "true");
 			request.setAttribute("url", url);
 			request.setAttribute("page", "login");

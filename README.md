@@ -17,9 +17,7 @@
 ## Commit Rules
 
    * Commit message + committer 
-   * Unit by Unit
-   * 
-   
+   * Unit by Unit   
 
 ## Coding Rules
    

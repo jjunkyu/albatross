@@ -1,13 +1,15 @@
 # Project Albatross
 
-## Members
 
-   * JJS
+## Members
+Participated members
+
    * GWJ
    * PJS
    * CSK
    * LJK
    * KHJ
+   * JJS
 
 ## naming conventions
 
